@@ -1,1 +1,1 @@
-#summary Unpublish review (Admin)
+#summary Submit iPad reservation
