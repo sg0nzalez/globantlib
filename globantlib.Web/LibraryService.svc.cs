@@ -7,9 +7,26 @@ using System.Text;
 
 namespace globantlib.Web
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
     public class LibraryService : ILibraryService
     {
-        
+
+        #region ILibraryService Members
+
+        public string GetLibraryContent()
+        {
+            return "<xml/>";
+        }
+
+        public string GetDevices()
+        {
+            return "<xml/>";
+        }
+
+        public string GetUsers()
+        {
+            return "<xml/>";
+        }
+
+        #endregion
     }
 }
