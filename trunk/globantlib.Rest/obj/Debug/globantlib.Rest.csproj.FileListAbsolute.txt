@@ -1,0 +1,7 @@
+C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.Rest\bin\globantlib.Rest.dll
+C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.Rest\bin\globantlib.Rest.pdb
+C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.Rest\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.Rest\obj\Debug\globantlib.Rest.dll
+C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.Rest\obj\Debug\globantlib.Rest.pdb
+C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.Rest\bin\globantlib.DataAccess.dll
+C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.Rest\bin\globantlib.DataAccess.pdb

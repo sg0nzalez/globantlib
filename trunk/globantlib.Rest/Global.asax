@@ -1,0 +1,1 @@
+<%@ Application Codebehind="Global.asax.cs" Inherits="globantlib.Rest.Global" Language="C#" %>
