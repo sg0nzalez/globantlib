@@ -1,2 +1,5 @@
 #summary The application explained
 #labels Phase-Requirements
+
+Class Diagram
+http://img707.imageshack.us/img707/9223/classdiagramh.jpg
