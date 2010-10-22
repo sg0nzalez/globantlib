@@ -23,7 +23,8 @@ namespace globantlib.Rest
         [WebGet(UriTemplate = "")]
         public List<Content> GetCollection()
         {
-            return new List<Content>(new globantlib.DataAccess.GlobantLibEntities().Contents);
+            List<Content>  t = new GlobantLibEntities().Contents.ToList<Content>();
+            return t;
         }
 
         [WebInvoke(UriTemplate = "", Method = "POST")]
