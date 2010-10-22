@@ -5,3 +5,7 @@ C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projec
 C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.Rest\obj\Debug\globantlib.Rest.pdb
 C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.Rest\bin\globantlib.DataAccess.dll
 C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.Rest\bin\globantlib.DataAccess.pdb
+C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.Rest\bin\globantlib.Domain.dll
+C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.Rest\bin\globantlib.Domain.pdb
+C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.Rest\bin\globantlib.Business.dll
+C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.Rest\bin\globantlib.Business.pdb

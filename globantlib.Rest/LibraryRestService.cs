@@ -5,7 +5,9 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Text;
-using globantlib.DataAccess;
+using globantlib.Business;
+using globantlib.Domain;
+//using globantlib.DataAccess;
 
 namespace globantlib.Rest
 {
@@ -18,25 +20,25 @@ namespace globantlib.Rest
     // NOTE: If the service is renamed, remember to update the global.asax.cs file
     public class LibraryRestService
     {
-        GlobantLibEntities libEntities;
+        LibraryManager libEntities;
 
         public LibraryRestService()
         {
-            libEntities = new GlobantLibEntities();
+            libEntities = new LibraryManager();
         }
 
-        [WebGet(UriTemplate = "")]
+        [WebGet(UriTemplate = "", ResponseFormat=WebMessageFormat.Xml)]
         public List<Content> GetCollection()
         {
-            List<Content> t = libEntities.Contents.ToList<Content>();
+            List<Content> t = libEntities.GetContents();
             return t;
         }
 
         [WebInvoke(UriTemplate = "", Method = "POST")]
         public Content Create(Content instance)
         {
-            libEntities.Contents.AddObject(instance);
-            libEntities.SaveChanges();
+            //libEntities.Contents.AddObject(instance);
+            //libEntities.SaveChanges();
             return instance;
         }
 
@@ -44,7 +46,7 @@ namespace globantlib.Rest
         public Content Get(string id)
         {
             int i = int.Parse(id);
-            return libEntities.Contents.Where<Content>(x => x.ID == i).FirstOrDefault<Content>();
+            return libEntities.GetContents().Where<Content>(x => x.ID == i).FirstOrDefault<Content>();
         }
 
         [WebInvoke(UriTemplate = "{id}", Method = "PUT")]
@@ -55,16 +57,14 @@ namespace globantlib.Rest
             var propertyNameList = stateEntry.CurrentValues.DataRecordInfo.FieldMetadata.Select(pn => pn.FieldType.Name);
             foreach (var propName in propertyNameList)
                 stateEntry.SetModifiedProperty(propName);
-            libEntities.SaveChanges();
+            //libEntities.SaveChanges();
             return null;
         }
 
         [WebInvoke(UriTemplate = "{id}", Method = "DELETE")]
         public void Delete(string id)
         {
-            int i = int.Parse(id);
-            
-
+            int i = int.Parse(id);          
 
         }
 
