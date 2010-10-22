@@ -50,7 +50,11 @@ namespace globantlib.Rest
         [WebInvoke(UriTemplate = "{id}", Method = "PUT")]
         public Content Update(string id, Content instance)
         {
-
+            libEntities.Attach(instance);
+            var stateEntry = libEntities.ObjectStateManager.GetObjectStateEntry(instance.ID);
+            var propertyNameList = stateEntry.CurrentValues.DataRecordInfo.FieldMetadata.Select(pn => pn.FieldType.Name);
+            foreach (var propName in propertyNameList)
+                stateEntry.SetModifiedProperty(propName);
             libEntities.SaveChanges();
             return null;
         }
