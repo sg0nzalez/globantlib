@@ -18,41 +18,50 @@ namespace globantlib.Rest
     // NOTE: If the service is renamed, remember to update the global.asax.cs file
     public class LibraryRestService
     {
-        // TODO: Implement the collection resource that will contain the SampleItem instances
+        GlobantLibEntities libEntities;
+
+        public LibraryRestService()
+        {
+            libEntities = new GlobantLibEntities();
+        }
 
         [WebGet(UriTemplate = "")]
         public List<Content> GetCollection()
         {
-            List<Content>  t = new GlobantLibEntities().Contents.ToList<Content>();
+            List<Content> t = libEntities.Contents.ToList<Content>();
             return t;
         }
 
         [WebInvoke(UriTemplate = "", Method = "POST")]
         public Content Create(Content instance)
         {
-            // TODO: Add the new instance of SampleItem to the collection
-            throw new NotImplementedException();
+            libEntities.Contents.AddObject(instance);
+            libEntities.SaveChanges();
+            return instance;
         }
 
         [WebGet(UriTemplate = "{id}")]
         public Content Get(string id)
         {
-            // TODO: Return the instance of SampleItem with the given id
-            throw new NotImplementedException();
+            int i = int.Parse(id);
+            return libEntities.Contents.Where<Content>(x => x.ID == i).FirstOrDefault<Content>();
         }
 
         [WebInvoke(UriTemplate = "{id}", Method = "PUT")]
         public Content Update(string id, Content instance)
         {
-            // TODO: Update the given instance of SampleItem in the collection
-            throw new NotImplementedException();
+
+            libEntities.SaveChanges();
+            return null;
         }
 
         [WebInvoke(UriTemplate = "{id}", Method = "DELETE")]
         public void Delete(string id)
         {
-            // TODO: Remove the instance of SampleItem with the given id from the collection
-            throw new NotImplementedException();
+            int i = int.Parse(id);
+            
+
+
         }
 
     }
