@@ -17,6 +17,8 @@ time, mark, audio, video {
     font-size:100%;
     vertical-align:baseline;
     background:transparent;
+    list-style:none;
+    font-family:Arial, serif;
 }
 
 body {
@@ -92,3 +94,34 @@ hr {
 input, select {
     vertical-align:middle;
 }
+
+/* *** */
+.full {
+    float:left;
+    width:100%;
+}
+.center {
+    width:960px;
+    margin:auto;
+}
+
+#header-wrap {
+    background:#e0e0e0;
+    border-bottom:1px solid #d0d0d0;
+}
+/**
+ * Contents style
+ */
+ #w-contents-list .content {
+    float:left;
+    width:100%;
+ }
+ #w-contents-list .thumbnail {
+    float:left;
+ }
+ #w-contents-list .title,
+ #w-contents-list .tagline,
+ #w-contents-list .available,
+ #w-contents-list .description {
+    padding-left:101px;
+ }

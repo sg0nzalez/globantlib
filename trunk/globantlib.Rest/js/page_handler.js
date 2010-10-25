@@ -1,23 +1,23 @@
 ﻿var PAGE_HANDLER = (function () {
 
-	function hideContentList() {}
-	function hideContentDetails() {}
-	function hideDeviceList() {}
-
 	function showContentList(page) {
-		CONTENTS.showList();
+        $('#w-contents-details').hide();
+        $('#w-contents-list').show();
+		CONTENTS.showList(page);
 	}
 	
-	function showContentDetails(content) {
-		//console.log('content details');
+	function showContentDetails(id) {
+        $('#w-contents-list').hide();
+        $('#w-contents-details').show();
+        CONTENTS.showDetails(id)
 	}
 	
 	function showDeviceList(page) {
-		//console.log('devices list');
+        DEVICES.showList(page);
 	}
 	
-	function showDeviceCalendar() {
-		//console.log('device calendar');
+	function showDeviceCalendar(id) {
+        DEVICES.showCalendar(id);
 	}
 
 	return {

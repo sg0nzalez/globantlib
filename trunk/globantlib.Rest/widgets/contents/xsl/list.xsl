@@ -5,10 +5,10 @@
 		<ul class="contents-list">
 			<xsl:for-each select="Response/ArrayOfContents/Content">
 				<li class="content">
-					<a class="thumbnail" href="#contents/details/{id}"><img src="img/{thumbnail}" /></a>
+					<a class="thumbnail" href="#contents/details/{id}"><img width="96" src="img/{thumbnail}" /></a>
 					<h2 class="title"><xsl:value-of select="title" /></h2>
 					<h3 class="tagline"><xsl:value-of select="publisher" /> <xsl:value-of select="author" /> <xsl:value-of select="released" /></h3>
-					<p>
+					<p class="available">
 						<xsl:if test="@hasDigital = 'Yes'">Available in digital</xsl:if>
 						<xsl:if test="@hasPhysical = 'Yes'">Available in print</xsl:if>
 					</p>
