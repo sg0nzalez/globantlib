@@ -34,11 +34,29 @@ namespace globantlib.Rest
             return t;
         }
 
-        [WebGet(UriTemplate = "Search?Text={text}", ResponseFormat = WebMessageFormat.Xml)]
-        public List<Content> SearchCollection(String text)
+        [IncludeXmlDeclaration]
+        [WebGet(UriTemplate = "Search?Text={text}&Page={page}", RequestFormat= WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle=WebMessageBodyStyle.Bare)]
+        public Response SearchCollection(String text, String page)
         {
-            List<Content> t = libEntities.SearchContents(0, 50, text);
-            return t;
+            int page_size = 4;
+            int actual_page, count;
+            int.TryParse(page,out actual_page);
+
+            Response resp = new Response();
+            resp.ArrayOfContents = libEntities.SearchContents(actual_page, page_size, text, out count);
+            resp.Pages = new List<Page>();
+            for (int i = 0; i < count / page_size; i++)
+            {
+                resp.Pages.Add(new Page() { number = i+1, current = false });
+            }
+
+            if (actual_page == 0)
+                actual_page = 1;
+
+            if(resp.Pages.Count > 0)
+                resp.Pages[actual_page-1].current = true;
+
+            return resp;
         }
 
         [WebInvoke(UriTemplate = "", Method = "POST")]
@@ -49,11 +67,12 @@ namespace globantlib.Rest
             return instance;
         }
 
+        [IncludeXmlDeclaration]
         [WebGet(UriTemplate = "{id}")]
         public Content Get(string id)
         {
             int i = int.Parse(id);
-            return libEntities.GetContents().Where<Content>(x => x.ID == i).FirstOrDefault<Content>();
+            return libEntities.GetContent(i);
         }
 
         [WebInvoke(UriTemplate = "{id}", Method = "PUT")]
