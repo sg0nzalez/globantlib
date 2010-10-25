@@ -188,3 +188,98 @@ div#w-contents-list .available,
 div#w-contents-list .description {
    padding-left:101px;
 }
+
+/**
+ * Devices style
+ */
+    .device_item
+    {
+	    float: left;
+	    width: 300px;
+	    border: 1px solid black;
+	    margin:5px;
+	    min-height: 300px;           
+			            
+    }
+			    
+    .device_item:hover
+    {
+	    border-width: 2px;        
+    }
+			    
+    .device_thumbnail
+    {
+	    width: 100px;
+	    height: 100px;        
+    }
+			    
+    .device_description
+    {
+	    list-style: none;       
+    }
+			    
+    .device_description li
+    {
+	    margin: 3px 0;    
+    }
+			    
+    .dispositive_attribute
+    {
+	    font-weight: bold;   
+			        
+    }
+    .dispositive_button
+    {
+			            
+    }
+ 
+/**
+ * End Devices style
+ */
+ /**
+ * Devices style
+ */
+    .device_item
+    {
+	    float: left;
+	    width: 300px;
+	    border: 1px solid black;
+	    margin:5px;
+	    min-height: 300px;           
+			            
+    }
+			    
+    .device_item:hover
+    {
+	    border-width: 2px;        
+    }
+			    
+    .device_thumbnail
+    {
+	    width: 100px;
+	    height: 100px;        
+    }
+			    
+    .device_description
+    {
+	    list-style: none;       
+    }
+			    
+    .device_description li
+    {
+	    margin: 3px 0;    
+    }
+			    
+    .dispositive_attribute
+    {
+	    font-weight: bold;   
+			        
+    }
+    .dispositive_button
+    {
+			            
+    }
+ 
+/**
+ * End Devices style
+ */
