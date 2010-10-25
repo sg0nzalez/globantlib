@@ -52,5 +52,17 @@ namespace globantlib.DataAccess
         {
             return Create(libEntities.Contents.Where<Content>(c => c.ID == id).FirstOrDefault());
         }
+
+        public List<Domain.Content> GetContent()
+        {
+            List<Domain.Content> lResult = new List<Domain.Content>();
+
+            foreach (var item in libEntities.Contents)
+            {
+                lResult.Add(Create(item));
+            }
+
+            return lResult;
+        }
     }
 }
