@@ -1,10 +1,14 @@
 ﻿var PAGE_HANDLER = (function () {
 
 	function contentList(page) {
+        $('#w-contents-details, #w-contents-download, #w-contents-calendar').hide();
+        $('#w-contents-list').show();
 		CONTENTS.showList(page);
 	}
 	
 	function contentDetails(id) {
+        $('#w-contents-search, #w-contents-list, #w-contents-download, #w-contents-calendar').hide();
+        $('#w-contents-details').show();
         CONTENTS.showDetails(id)
 	}
 	
