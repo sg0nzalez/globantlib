@@ -11,14 +11,19 @@ namespace globantlib.Business
     {
         EntityDataAccess data = new EntityDataAccess();
 
-        public List<Domain.Content> GetContents()
+        public Domain.Content GetContent(int id)
         {
-            return data.GetContent(0, 50, null);
+            return data.GetContent(id);
         }
 
-        public List<Domain.Content> SearchContents(int Page, int PageSize, String Search)
+        public List<Domain.Content> SearchContents(int Page, int PageSize, String Search, out int count)
         {
-            return data.GetContent(Page, PageSize, Search);
+            return data.GetContent(Page, PageSize, Search, out count);
+        }
+
+        public List<Domain.Content> GetContents()
+        {
+            throw new NotImplementedException();
         }
     }
 }

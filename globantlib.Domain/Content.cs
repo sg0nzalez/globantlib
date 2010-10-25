@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace globantlib.Domain
 {
-    [DataContract]
+    [DataContract(Namespace = "")]
     public class Content
     {
         [DataMember]
@@ -17,5 +18,23 @@ namespace globantlib.Domain
 
         [DataMember]
         public string Description { get; set; }
+
+        [DataMember]
+        public string Author { get; set; }
+
+        [DataMember]
+        public string Publisher { get; set; }
+
+        [DataMember]
+        public DateTime Released { get; set; }
+
+        [DataMember]
+        public int Pages { get; set; }
+
+        [DataMember]
+        public string hasDigital;
+
+        [DataMember]
+        public string hasPhysical;
     }
 }

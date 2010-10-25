@@ -20,23 +20,37 @@ namespace globantlib.DataAccess
             {
                 ID =  (int)c.ID,
                 Title = c.Title,
-                Description = c.Description
+                Description = c.Description,
+                Author = c.Author,
+                Pages = c.Pages.HasValue ? c.Pages.Value : 0 ,
+                Publisher = c.Publisher,
+                Released = c.Released.HasValue ? c.Released.Value : DateTime.MinValue,
+                hasDigital = "Yes", hasPhysical = "Yes"
             };
         }
 
-        public List<Domain.Content> GetContent(int Page, int PageSize, string TextSearch)
+        public List<Domain.Content> GetContent(int Page, int PageSize, string TextSearch, out int count)
         {
             List<Domain.Content> lResult = new List<Domain.Content>();
 
-            var query = libEntities.Contents.OrderBy("it.ID").Skip(Page).Take(PageSize)
+            var query = libEntities.Contents.OrderBy("it.ID")
                 .Where(c => c.Title.Contains(TextSearch));
 
-            foreach (var item in query)
+            count = query.Count<Content>();
+
+            var result = query.Skip(Page*PageSize).Take(PageSize);
+
+            foreach (var item in result)
             {
                 lResult.Add(Create(item));
             }
 
             return lResult;
+        }
+
+        public Domain.Content GetContent(int id)
+        {
+            return Create(libEntities.Contents.Where<Content>(c => c.ID == id).FirstOrDefault());
         }
     }
 }

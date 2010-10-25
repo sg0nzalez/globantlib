@@ -9,6 +9,5 @@ namespace globantlib.Domain
     [DataContract]
     public class DigitalContent
     {
-
     }
 }

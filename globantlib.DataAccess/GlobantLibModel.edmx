@@ -43,8 +43,12 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="Author" Type="nvarchar" MaxLength="100" />
+          <Property Name="Publisher" Type="nvarchar" MaxLength="100" />
+          <Property Name="Released" Type="date" />
+          <Property Name="Pages" Type="int" />
         </EntityType>
         <EntityType Name="Device">
           <Key>
@@ -59,8 +63,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Link" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Link" Type="nvarchar" Nullable="false" MaxLength="250" />
           <Property Name="ContentID" Type="numeric" Nullable="false" />
+          <Property Name="Format" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="Leasable">
           <Key>
@@ -87,6 +92,7 @@
           <Property Name="InventoryID" Type="int" Nullable="false" />
           <Property Name="ContentID" Type="numeric" Nullable="false" />
           <Property Name="LeasableID" Type="numeric" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -217,6 +223,10 @@
           <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Digitals" Relationship="GlobantLibModel.FK_Digital_Content" FromRole="Content" ToRole="Digital" />
           <NavigationProperty Name="Physicals" Relationship="GlobantLibModel.FK_Physical_Content" FromRole="Content" ToRole="Physical" />
+          <Property Type="String" Name="Author" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Publisher" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Released" />
+          <Property Type="Int32" Name="Pages" />
         </EntityType>
         <EntityType Name="Device">
           <Key>
@@ -235,6 +245,7 @@
           <Property Type="String" Name="Link" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Decimal" Name="ContentID" Nullable="false" Precision="18" Scale="0" />
           <NavigationProperty Name="Content" Relationship="GlobantLibModel.FK_Digital_Content" FromRole="Digital" ToRole="Content" />
+          <Property Type="String" Name="Format" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Leasable">
           <Key>
@@ -268,6 +279,7 @@
           <Property Type="Decimal" Name="LeasableID" Nullable="false" Precision="18" Scale="0" />
           <NavigationProperty Name="Content" Relationship="GlobantLibModel.FK_Physical_Content" FromRole="Physical" ToRole="Content" />
           <NavigationProperty Name="Leasable" Relationship="GlobantLibModel.FK_Physical_Leasable" FromRole="Physical" ToRole="Leasable" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -362,6 +374,10 @@
           <EntitySetMapping Name="Contents">
             <EntityTypeMapping TypeName="GlobantLibModel.Content">
               <MappingFragment StoreEntitySet="Content">
+                <ScalarProperty Name="Pages" ColumnName="Pages" />
+                <ScalarProperty Name="Released" ColumnName="Released" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -380,6 +396,7 @@
           <EntitySetMapping Name="Digitals">
             <EntityTypeMapping TypeName="GlobantLibModel.Digital">
               <MappingFragment StoreEntitySet="Digital">
+                <ScalarProperty Name="Format" ColumnName="Format" />
                 <ScalarProperty Name="ContentID" ColumnName="ContentID" />
                 <ScalarProperty Name="Link" ColumnName="Link" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -408,6 +425,7 @@
           <EntitySetMapping Name="Physicals">
             <EntityTypeMapping TypeName="GlobantLibModel.Physical">
               <MappingFragment StoreEntitySet="Physical">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="LeasableID" ColumnName="LeasableID" />
                 <ScalarProperty Name="ContentID" ColumnName="ContentID" />
                 <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
@@ -449,24 +467,24 @@
     <Diagrams>
       <Diagram Name="GlobantLibModel" ZoomLevel="100">
         <EntityTypeShape EntityType="GlobantLibModel.Content" Width="1.5" PointX="0.75" PointY="0.75" Height="1.7566536458333317" />
-        <EntityTypeShape EntityType="GlobantLibModel.Device" Width="1.5" PointX="4.5" PointY="3.5" Height="1.5923063151041674" />
-        <EntityTypeShape EntityType="GlobantLibModel.Digital" Width="1.5" PointX="0.75" PointY="3.5" Height="1.592306315104171" />
+        <EntityTypeShape EntityType="GlobantLibModel.Device" Width="1.5" PointX="4.625" PointY="4.125" Height="1.5923063151041674" />
+        <EntityTypeShape EntityType="GlobantLibModel.Digital" Width="1.5" PointX="0.75" PointY="4.375" Height="1.7566536458333335" />
         <EntityTypeShape EntityType="GlobantLibModel.Leasable" Width="1.5" PointX="3.75" PointY="0.75" Height="1.7566536460071802" />
         <EntityTypeShape EntityType="GlobantLibModel.Lease" Width="1.5" PointX="6.375" PointY="0.75" Height="2.0853483072916674" />
-        <EntityTypeShape EntityType="GlobantLibModel.Physical" Width="1.5" PointX="2.75" PointY="3.5" Height="1.921000976562496" />
-        <EntityTypeShape EntityType="GlobantLibModel.User" Width="1.5" PointX="6.375" PointY="3.5" Height="2.0853483080863953" />
+        <EntityTypeShape EntityType="GlobantLibModel.Physical" Width="1.5" PointX="2.75" PointY="4.125" Height="2.0853483072916656" />
+        <EntityTypeShape EntityType="GlobantLibModel.User" Width="1.5" PointX="6.625" PointY="4.125" Height="2.0853483080863953" />
         <AssociationConnector Association="GlobantLibModel.FK_Digital_Content" >
-          <ConnectorPoint PointX="1.5" PointY="2.5066536458333317" />
-          <ConnectorPoint PointX="1.5" PointY="3.5" />
+          <ConnectorPoint PointX="1.5" PointY="3.16404296875" />
+          <ConnectorPoint PointX="1.5" PointY="4.375" />
         </AssociationConnector>
         <AssociationConnector Association="GlobantLibModel.FK_Physical_Content" >
-          <ConnectorPoint PointX="2.25" PointY="1.6283268229166659" />
-          <ConnectorPoint PointX="3.2499995" PointY="1.6283268229166659" />
-          <ConnectorPoint PointX="3.2499995" PointY="3.5" />
+          <ConnectorPoint PointX="2.25" PointY="2.86659830737859" />
+          <ConnectorPoint PointX="3.21875" PointY="2.86659830737859" />
+          <ConnectorPoint PointX="3.21875" PointY="4.125" />
         </AssociationConnector>
         <AssociationConnector Association="GlobantLibModel.FK_Device_Leasable" >
-          <ConnectorPoint PointX="4.875" PointY="2.50665364600718" />
-          <ConnectorPoint PointX="4.875" PointY="3.5" />
+          <ConnectorPoint PointX="4.9375" PointY="2.50665364600718" />
+          <ConnectorPoint PointX="4.9375" PointY="4.125" />
         </AssociationConnector>
         <AssociationConnector Association="GlobantLibModel.FK_Lease_Leasable" >
           <ConnectorPoint PointX="5.25" PointY="1.62832682300359" />
@@ -474,11 +492,11 @@
         </AssociationConnector>
         <AssociationConnector Association="GlobantLibModel.FK_Physical_Leasable" >
           <ConnectorPoint PointX="4" PointY="2.50665364600718" />
-          <ConnectorPoint PointX="4" PointY="3.5" />
+          <ConnectorPoint PointX="4" PointY="4.125" />
         </AssociationConnector>
         <AssociationConnector Association="GlobantLibModel.FK_Lease_Users" >
-          <ConnectorPoint PointX="7.125" PointY="3.5" />
-          <ConnectorPoint PointX="7.125" PointY="2.8353483072916674" />
+          <ConnectorPoint PointX="7.25" PointY="4.125" />
+          <ConnectorPoint PointX="7.25" PointY="2.8353483072916674" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
