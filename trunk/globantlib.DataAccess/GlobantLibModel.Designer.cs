@@ -354,6 +354,102 @@ namespace globantlib.DataAccess
         private global::System.String _Description;
         partial void OnDescriptionChanging(global::System.String value);
         partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Author
+        {
+            get
+            {
+                return _Author;
+            }
+            set
+            {
+                OnAuthorChanging(value);
+                ReportPropertyChanging("Author");
+                _Author = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Author");
+                OnAuthorChanged();
+            }
+        }
+        private global::System.String _Author;
+        partial void OnAuthorChanging(global::System.String value);
+        partial void OnAuthorChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Publisher
+        {
+            get
+            {
+                return _Publisher;
+            }
+            set
+            {
+                OnPublisherChanging(value);
+                ReportPropertyChanging("Publisher");
+                _Publisher = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Publisher");
+                OnPublisherChanged();
+            }
+        }
+        private global::System.String _Publisher;
+        partial void OnPublisherChanging(global::System.String value);
+        partial void OnPublisherChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> Released
+        {
+            get
+            {
+                return _Released;
+            }
+            set
+            {
+                OnReleasedChanging(value);
+                ReportPropertyChanging("Released");
+                _Released = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Released");
+                OnReleasedChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _Released;
+        partial void OnReleasedChanging(Nullable<global::System.DateTime> value);
+        partial void OnReleasedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Pages
+        {
+            get
+            {
+                return _Pages;
+            }
+            set
+            {
+                OnPagesChanging(value);
+                ReportPropertyChanging("Pages");
+                _Pages = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Pages");
+                OnPagesChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Pages;
+        partial void OnPagesChanging(Nullable<global::System.Int32> value);
+        partial void OnPagesChanged();
 
         #endregion
     
@@ -570,12 +666,14 @@ namespace globantlib.DataAccess
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="link">Initial value of the Link property.</param>
         /// <param name="contentID">Initial value of the ContentID property.</param>
-        public static Digital CreateDigital(global::System.Decimal id, global::System.String link, global::System.Decimal contentID)
+        /// <param name="format">Initial value of the Format property.</param>
+        public static Digital CreateDigital(global::System.Decimal id, global::System.String link, global::System.Decimal contentID, global::System.String format)
         {
             Digital digital = new Digital();
             digital.ID = id;
             digital.Link = link;
             digital.ContentID = contentID;
+            digital.Format = format;
             return digital;
         }
 
@@ -656,6 +754,30 @@ namespace globantlib.DataAccess
         private global::System.Decimal _ContentID;
         partial void OnContentIDChanging(global::System.Decimal value);
         partial void OnContentIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Format
+        {
+            get
+            {
+                return _Format;
+            }
+            set
+            {
+                OnFormatChanging(value);
+                ReportPropertyChanging("Format");
+                _Format = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Format");
+                OnFormatChanged();
+            }
+        }
+        private global::System.String _Format;
+        partial void OnFormatChanging(global::System.String value);
+        partial void OnFormatChanged();
 
         #endregion
     
@@ -1107,13 +1229,15 @@ namespace globantlib.DataAccess
         /// <param name="inventoryID">Initial value of the InventoryID property.</param>
         /// <param name="contentID">Initial value of the ContentID property.</param>
         /// <param name="leasableID">Initial value of the LeasableID property.</param>
-        public static Physical CreatePhysical(global::System.Decimal id, global::System.Int32 inventoryID, global::System.Decimal contentID, global::System.Decimal leasableID)
+        /// <param name="type">Initial value of the Type property.</param>
+        public static Physical CreatePhysical(global::System.Decimal id, global::System.Int32 inventoryID, global::System.Decimal contentID, global::System.Decimal leasableID, global::System.String type)
         {
             Physical physical = new Physical();
             physical.ID = id;
             physical.InventoryID = inventoryID;
             physical.ContentID = contentID;
             physical.LeasableID = leasableID;
+            physical.Type = type;
             return physical;
         }
 
@@ -1218,6 +1342,30 @@ namespace globantlib.DataAccess
         private global::System.Decimal _LeasableID;
         partial void OnLeasableIDChanging(global::System.Decimal value);
         partial void OnLeasableIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Type
+        {
+            get
+            {
+                return _Type;
+            }
+            set
+            {
+                OnTypeChanging(value);
+                ReportPropertyChanging("Type");
+                _Type = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Type");
+                OnTypeChanged();
+            }
+        }
+        private global::System.String _Type;
+        partial void OnTypeChanging(global::System.String value);
+        partial void OnTypeChanged();
 
         #endregion
     
