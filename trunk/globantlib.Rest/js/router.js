@@ -31,6 +31,16 @@
 	contents.details = function (id) {
 		PAGE_HANDLER.contentDetails(id);
 	};
+	
+	// content download
+	contents.download = function (id) {
+		PAGE_HANDLER.contentDetails(id);
+	};
+	
+	// content calendar
+	contents.calendar = function (id) {
+		PAGE_HANDLER.contentDetails(id);
+	};
 
 	/**
 	 * Public interface
