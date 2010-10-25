@@ -8,11 +8,16 @@
         <EntityContainer Name="GlobantLibModelStoreContainer">
           <EntitySet Name="Content" EntityType="GlobantLibModel.Store.Content" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Device" EntityType="GlobantLibModel.Store.Device" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DeviceType" EntityType="GlobantLibModel.Store.DeviceType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Digital" EntityType="GlobantLibModel.Store.Digital" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Leasable" EntityType="GlobantLibModel.Store.Leasable" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Lease" EntityType="GlobantLibModel.Store.Lease" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Physical" EntityType="GlobantLibModel.Store.Physical" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Users" EntityType="GlobantLibModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Device_Device" Association="GlobantLibModel.Store.FK_Device_Device">
+            <End Role="DeviceType" EntitySet="DeviceType" />
+            <End Role="Device" EntitySet="Device" />
+          </AssociationSet>
           <AssociationSet Name="FK_Device_Leasable" Association="GlobantLibModel.Store.FK_Device_Leasable">
             <End Role="Leasable" EntitySet="Leasable" />
             <End Role="Device" EntitySet="Device" />
@@ -55,8 +60,16 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="TypeID" Type="numeric" Nullable="false" />
           <Property Name="LeasableID" Type="numeric" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeviceType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="image" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Digital">
           <Key>
@@ -105,6 +118,18 @@
           <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_Device_Device">
+          <End Role="DeviceType" Type="GlobantLibModel.Store.DeviceType" Multiplicity="1" />
+          <End Role="Device" Type="GlobantLibModel.Store.Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeviceType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Device_Leasable">
           <End Role="Leasable" Type="GlobantLibModel.Store.Leasable" Multiplicity="1" />
           <End Role="Device" Type="GlobantLibModel.Store.Device" Multiplicity="*" />
@@ -213,6 +238,11 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Lease" EntitySet="Leases" />
           </AssociationSet>
+          <EntitySet Name="DeviceTypes" EntityType="GlobantLibModel.DeviceType" />
+          <AssociationSet Name="FK_Device_Device" Association="GlobantLibModel.FK_Device_Device">
+            <End Role="DeviceType" EntitySet="DeviceTypes" />
+            <End Role="Device" EntitySet="Devices" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Content">
           <Key>
@@ -233,9 +263,10 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Decimal" Name="ID" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Decimal" Name="LeasableID" Nullable="false" Precision="18" Scale="0" />
           <NavigationProperty Name="Leasable" Relationship="GlobantLibModel.FK_Device_Leasable" FromRole="Device" ToRole="Leasable" />
+          <Property Type="Decimal" Name="TypeID" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="DeviceType" Relationship="GlobantLibModel.FK_Device_Device" FromRole="Device" ToRole="DeviceType" />
         </EntityType>
         <EntityType Name="Digital">
           <Key>
@@ -365,6 +396,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DeviceType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Decimal" Name="ID" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="image" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Devices" Relationship="GlobantLibModel.FK_Device_Device" FromRole="DeviceType" ToRole="Device" />
+        </EntityType>
+        <Association Name="FK_Device_Device">
+          <End Type="GlobantLibModel.DeviceType" Role="DeviceType" Multiplicity="1" />
+          <End Type="GlobantLibModel.Device" Role="Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeviceType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -387,8 +439,8 @@
           <EntitySetMapping Name="Devices">
             <EntityTypeMapping TypeName="GlobantLibModel.Device">
               <MappingFragment StoreEntitySet="Device">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
                 <ScalarProperty Name="LeasableID" ColumnName="LeasableID" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -445,6 +497,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DeviceTypes">
+            <EntityTypeMapping TypeName="GlobantLibModel.DeviceType">
+              <MappingFragment StoreEntitySet="DeviceType">
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -467,24 +528,24 @@
     <Diagrams>
       <Diagram Name="GlobantLibModel" ZoomLevel="100">
         <EntityTypeShape EntityType="GlobantLibModel.Content" Width="1.5" PointX="0.75" PointY="0.75" Height="1.7566536458333317" />
-        <EntityTypeShape EntityType="GlobantLibModel.Device" Width="1.5" PointX="4.625" PointY="4.125" Height="1.5923063151041674" />
-        <EntityTypeShape EntityType="GlobantLibModel.Digital" Width="1.5" PointX="0.75" PointY="4.375" Height="1.7566536458333335" />
+        <EntityTypeShape EntityType="GlobantLibModel.Device" Width="1.5" PointX="4.75" PointY="3.125" Height="1.7566536458333326" />
+        <EntityTypeShape EntityType="GlobantLibModel.Digital" Width="1.5" PointX="0.625" PointY="4.5" Height="1.7566536458333335" />
         <EntityTypeShape EntityType="GlobantLibModel.Leasable" Width="1.5" PointX="3.75" PointY="0.75" Height="1.7566536460071802" />
         <EntityTypeShape EntityType="GlobantLibModel.Lease" Width="1.5" PointX="6.375" PointY="0.75" Height="2.0853483072916674" />
-        <EntityTypeShape EntityType="GlobantLibModel.Physical" Width="1.5" PointX="2.75" PointY="4.125" Height="2.0853483072916656" />
-        <EntityTypeShape EntityType="GlobantLibModel.User" Width="1.5" PointX="6.625" PointY="4.125" Height="2.0853483080863953" />
+        <EntityTypeShape EntityType="GlobantLibModel.Physical" Width="1.5" PointX="2.75" PointY="4.5" Height="2.0853483072916656" />
+        <EntityTypeShape EntityType="GlobantLibModel.User" Width="1.5" PointX="6.875" PointY="3.25" Height="2.0853483080863953" />
         <AssociationConnector Association="GlobantLibModel.FK_Digital_Content" >
-          <ConnectorPoint PointX="1.5" PointY="3.16404296875" />
-          <ConnectorPoint PointX="1.5" PointY="4.375" />
+          <ConnectorPoint PointX="1.4375" PointY="3.16404296875" />
+          <ConnectorPoint PointX="1.4375" PointY="4.5" />
         </AssociationConnector>
         <AssociationConnector Association="GlobantLibModel.FK_Physical_Content" >
           <ConnectorPoint PointX="2.25" PointY="2.86659830737859" />
           <ConnectorPoint PointX="3.21875" PointY="2.86659830737859" />
-          <ConnectorPoint PointX="3.21875" PointY="4.125" />
+          <ConnectorPoint PointX="3.21875" PointY="4.5" />
         </AssociationConnector>
         <AssociationConnector Association="GlobantLibModel.FK_Device_Leasable" >
-          <ConnectorPoint PointX="4.9375" PointY="2.50665364600718" />
-          <ConnectorPoint PointX="4.9375" PointY="4.125" />
+          <ConnectorPoint PointX="5" PointY="2.50665364600718" />
+          <ConnectorPoint PointX="5" PointY="3.125" />
         </AssociationConnector>
         <AssociationConnector Association="GlobantLibModel.FK_Lease_Leasable" >
           <ConnectorPoint PointX="5.25" PointY="1.62832682300359" />
@@ -492,11 +553,16 @@
         </AssociationConnector>
         <AssociationConnector Association="GlobantLibModel.FK_Physical_Leasable" >
           <ConnectorPoint PointX="4" PointY="2.50665364600718" />
-          <ConnectorPoint PointX="4" PointY="4.125" />
+          <ConnectorPoint PointX="4" PointY="4.5" />
         </AssociationConnector>
         <AssociationConnector Association="GlobantLibModel.FK_Lease_Users" >
-          <ConnectorPoint PointX="7.25" PointY="4.125" />
-          <ConnectorPoint PointX="7.25" PointY="2.8353483072916674" />
+          <ConnectorPoint PointX="7.375" PointY="3.25" />
+          <ConnectorPoint PointX="7.375" PointY="2.8353483072916674" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="GlobantLibModel.DeviceType" Width="1.5" PointX="4.75" PointY="5.5" Height="1.5923063151041674" />
+        <AssociationConnector Association="GlobantLibModel.FK_Device_Device" >
+          <ConnectorPoint PointX="5.5" PointY="5.5" />
+          <ConnectorPoint PointX="5.5" PointY="4.8816536458333326" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
