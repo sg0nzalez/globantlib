@@ -1,9 +1,0 @@
-C:\Documents and Settings\federico.Bana\Desktop\Globant Open Library\svn\src\globantlib.Business\bin\Debug\globantlib.Business.dll
-C:\Documents and Settings\federico.Bana\Desktop\Globant Open Library\svn\src\globantlib.Business\bin\Debug\globantlib.Business.pdb
-C:\Documents and Settings\federico.Bana\Desktop\Globant Open Library\svn\src\globantlib.Business\bin\Debug\globantlib.DataAccess.dll
-C:\Documents and Settings\federico.Bana\Desktop\Globant Open Library\svn\src\globantlib.Business\bin\Debug\globantlib.Domain.dll
-C:\Documents and Settings\federico.Bana\Desktop\Globant Open Library\svn\src\globantlib.Business\bin\Debug\globantlib.DataAccess.pdb
-C:\Documents and Settings\federico.Bana\Desktop\Globant Open Library\svn\src\globantlib.Business\bin\Debug\globantlib.Domain.pdb
-C:\Documents and Settings\federico.Bana\Desktop\Globant Open Library\svn\src\globantlib.Business\obj\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\federico.Bana\Desktop\Globant Open Library\svn\src\globantlib.Business\obj\Debug\globantlib.Business.dll
-C:\Documents and Settings\federico.Bana\Desktop\Globant Open Library\svn\src\globantlib.Business\obj\Debug\globantlib.Business.pdb
