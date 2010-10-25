@@ -10,6 +10,9 @@ namespace globantlib.Rest
         void Application_Start(object sender, EventArgs e)
         {
             RegisterRoutes();
+
+            //this.Context.Response.ContentType = "application/xml";
+            //this.Context.Response.ContentType = "application/xhtml+xml";
         }
 
         private void RegisterRoutes()

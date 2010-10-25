@@ -2,28 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Main Page</title>
+    <link rel="stylesheet" href="css/styles.css" />
     <script src="http://code.jquery.com/jquery-1.4.3.min.js" type="text/javascript" ></script>
     <script type="text/javascript">
-//        $(document).ready(function () {
-//            $.get('/LibraryService', function (data) {
-//            var inner = "";
-
-//                $(data).find("Content").each(function() {
-//                  var marker = $(this);
-//                  inner = inner + "<tr>" + marker.find("Title").text() + "</tr>";
-//                });                     
-
-//                $('#list').html(inner);
-//            });
-//        });
+        $(document).ready(function () {
+            search("");
+        });
 
         function search(e) {
-            $.get('/LibraryService/Search?Text=' + encodeURIComponent(e) , function (data) {
-                var inner = "";
+            $.get('/LibraryService/Search?Text=' + encodeURIComponent(e), function (data) {
+                var inner = "<tr><td> Title </td><td> Description </td><td> Author </td><td> Pages </td></tr><br/>";
 
                 $(data).find("Content").each(function () {
                     var marker = $(this);
-                    inner = inner + "<p>" + marker.find("Title").text() + "</p>";                  
+                    inner = inner + "<tr>";
+                    inner = inner + "<td> " + marker.find("Title").text() + " </td>";
+                    inner = inner + "<td> " + marker.find("Description").text() + " </td>";
+                    inner = inner + "<td> " + marker.find("Author").text() + " </td>";
+                    inner = inner + "<td>" + marker.find("Pages").text() + " </td>";
+                    inner = inner + "</tr>";
                 });
 
                 $('#list').html(inner);
@@ -33,6 +30,6 @@
 </head>
 <body>
     <input onkeyup="search(this.value)" />
-    <div id="list"></div>
+    <table id="list"></table>
 </body>
 </html>
