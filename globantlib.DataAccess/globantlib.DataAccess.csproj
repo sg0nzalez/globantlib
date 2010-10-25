@@ -60,6 +60,12 @@
   <ItemGroup>
     <None Include="App.Config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\globantlib.Domain\globantlib.Domain.csproj">
+      <Project>{90E6D49B-13C7-4A63-A6D8-343042286A4E}</Project>
+      <Name>globantlib.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
