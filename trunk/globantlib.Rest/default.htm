@@ -18,7 +18,7 @@
 //        });
 
         function search(e) {
-            $.get('/LibraryService/' + e, function (data) {
+            $.get('/LibraryService/Search?Text=' + e, function (data) {
                 var inner = "";
 
                 $(data).find("Content").each(function () {
