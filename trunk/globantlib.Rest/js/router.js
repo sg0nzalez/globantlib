@@ -46,7 +46,7 @@
 	 * Public interface
 	 */
 	return {
-		"main" : contents,
+		"main" : devices,
 		"devices" : devices,
 		"contents" : contents
 	};
