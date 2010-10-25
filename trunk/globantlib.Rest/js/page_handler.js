@@ -1,17 +1,17 @@
 ﻿var PAGE_HANDLER = (function () {
 
-	function showContentList(page) {
-        $('#w-contents-details').hide();
-        $('#w-contents-list').show();
+	function contentList(page) {
 		CONTENTS.showList(page);
 	}
 	
-	function showContentDetails(id) {
-        $('#w-contents-list').hide();
-        $('#w-contents-details').show();
+	function contentDetails(id) {
         CONTENTS.showDetails(id)
 	}
 	
+    function contentDownload(id) {
+        CONTENTS.showDownload(id);
+    }
+    
 	function showDeviceList(page) {
         DEVICES.showList(page);
 	}
@@ -21,10 +21,9 @@
 	}
 
 	return {
-		"contentList" : showContentList,
-		"contentDetails" : showContentDetails,
-		"deviceList" : showDeviceList,
-		"deviceCalendar" : showDeviceCalendar
+		"contentList" : contentList,
+		"contentDetails" : contentDetails,
+        "contentDownload" : contentDownload
 	}
 
 }());

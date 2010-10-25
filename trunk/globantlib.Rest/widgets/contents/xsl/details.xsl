@@ -13,6 +13,13 @@
                 </xsl:for-each>
             </ul>
         </div>
+        <div class="contents">
+            <h1 class="title"><xsl:value-of select="Content/title" /></h1>
+            <h2 class="tagline"><xsl:value-of select="Content/publisher" /> <xsl:value-of select="Content/author" /> <xsl:value-of select="Content/released" /></h2>
+            <p class="description"><xsl:value-of select="Content/description" /></p>
+        </div>
+        <div class="reviews">
+        </div>
 	</xsl:template>
 	
 </xsl:stylesheet>

@@ -72,7 +72,7 @@
 				XML.transformDocument(xml, xsl, target);
 				target.className = '';
                 if (callback) {
-                    callback();
+                    callback(xml, xsl, target);
                 }
 			}
 		}

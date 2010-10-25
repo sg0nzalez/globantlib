@@ -34,7 +34,7 @@
 	
 	// content download
 	contents.download = function (id) {
-		PAGE_HANDLER.contentDetails(id);
+		PAGE_HANDLER.contentDownload(id);
 	};
 	
 	// content calendar

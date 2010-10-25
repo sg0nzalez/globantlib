@@ -5,6 +5,7 @@
 		<meta charset="UTF-8" />
 		<title>Contents List</title>
 		<link rel="stylesheet" href="css/styles.css" />
+		<link rel="stylesheet" href="css/jqueryui/jqueryui.css" />
 		<script src="js/modernizr.js"></script>
 	</head>
 	
@@ -26,12 +27,19 @@
 			<div id="content" class="center">
 			
 				<div id="w-contents">
-					<div id="content-left">
+					<div id="w-contents-left">
+                        <div id="w-contents-search">
+                            <form action="#" method="get"> 
+                                <input class="text" type="text" placeholder="Search Contents" />
+                                <input class="submit" type="submit" value="Search" />
+                            </form>
+                        </div>
 						<div id="w-contents-list"></div> <!-- #w-contents-list -->
 						<div id="w-contents-details"></div> <!-- #w-contents-details -->
+						<div id="w-contents-download"></div> <!-- #w-contents-details -->
 						<div id="w-contents-calendar"></div> <!-- #w-contents-calendar -->
 					</div> <!-- #content-left -->
-					<div id="content-right">
+					<div id="w-contents-right">
 						<div id="w-contents-ipad"></div> <!-- #w-contents-ipad -->
 					</div> <!-- #content-right -->
 				</div> <!-- #w-contents -->
@@ -46,12 +54,12 @@
 		
 		<div id="footer-wrap" class="full">
 			<footer id="footer" class="center">
-				<p id=""copyright>&copy; tremendo!</p> <!-- #copyright -->
+				<p id="copyright">&copy; tremendo!</p> <!-- #copyright -->
 			</footer> <!-- #footer -->
 		</div> <!-- #footer-wrap -->
 	
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
 		<script src="widgets/contents/js/contents.js"></script>
 		<script src="js/xml.js"></script>
 		<script src="js/router.js"></script>
