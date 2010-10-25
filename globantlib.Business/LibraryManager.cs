@@ -23,7 +23,7 @@ namespace globantlib.Business
 
         public List<Domain.Content> GetContents()
         {
-            throw new NotImplementedException();
+            return data.GetContent();
         }
     }
 }
