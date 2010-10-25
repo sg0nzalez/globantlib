@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
-    <Content hasPhysical="Yes" hasDigital="Yes">
+    <Content>
         <id>1</id>
         <title>Javascript: The Good Parts</title>
         <author>Douglas Crockford</author>

@@ -52,11 +52,38 @@
 		}
 		return fragment;
 	}
+    
+    /**
+     * Transform, append and run callback
+     */
+    function transformWithCallback(xml, xsl, target, callback) {
+        function loadData() {
+            xml = XML.loadDocument(xml, loadStyles);
+        }
+		function loadStyles(xhr) {
+			if (xhr.readyState === 4) {
+				xml = xml.responseXML;
+				xsl = XML.loadDocument(xsl, appendTransformed);
+			}
+		}
+		function appendTransformed(xhr) {
+			if (xhr.readyState === 4) {
+				xsl = xsl.responseXML;
+				XML.transformDocument(xml, xsl, target);
+				target.className = '';
+                if (callback) {
+                    callback();
+                }
+			}
+		}
+        loadData();
+    }
 	
 	return {
 		"createDocument" : createDocument,
 		"loadDocument" : loadDocument,
-		"transformDocument" : transformDocument
+		"transformDocument" : transformDocument,
+		"transformWithCallback" : transformWithCallback
 	}
 	
 }());
