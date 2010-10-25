@@ -48,6 +48,10 @@
       <Project>{96B5CBD9-0A78-4126-8541-A0CEBC1DBE79}</Project>
       <Name>globantlib.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\globantlib.Domain\globantlib.Domain.csproj">
+      <Project>{90E6D49B-13C7-4A63-A6D8-343042286A4E}</Project>
+      <Name>globantlib.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
