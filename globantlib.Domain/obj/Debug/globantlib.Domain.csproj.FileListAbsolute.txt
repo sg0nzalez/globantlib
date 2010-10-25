@@ -1,0 +1,5 @@
+C:\Documents and Settings\federico.Bana\Desktop\Globant Open Library\svn\src\globantlib.Domain\bin\Debug\globantlib.Domain.dll
+C:\Documents and Settings\federico.Bana\Desktop\Globant Open Library\svn\src\globantlib.Domain\bin\Debug\globantlib.Domain.pdb
+C:\Documents and Settings\federico.Bana\Desktop\Globant Open Library\svn\src\globantlib.Domain\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\federico.Bana\Desktop\Globant Open Library\svn\src\globantlib.Domain\obj\Debug\globantlib.Domain.dll
+C:\Documents and Settings\federico.Bana\Desktop\Globant Open Library\svn\src\globantlib.Domain\obj\Debug\globantlib.Domain.pdb
