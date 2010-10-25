@@ -24,6 +24,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("GlobantLibModel", "FK_Lease_Leasable", "Leasable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(globantlib.DataAccess.Leasable), "Lease", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(globantlib.DataAccess.Lease), true)]
 [assembly: EdmRelationshipAttribute("GlobantLibModel", "FK_Physical_Leasable", "Leasable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(globantlib.DataAccess.Leasable), "Physical", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(globantlib.DataAccess.Physical), true)]
 [assembly: EdmRelationshipAttribute("GlobantLibModel", "FK_Lease_Users", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(globantlib.DataAccess.User), "Lease", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(globantlib.DataAccess.Lease), true)]
+[assembly: EdmRelationshipAttribute("GlobantLibModel", "FK_Device_Device", "DeviceType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(globantlib.DataAccess.DeviceType), "Device", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(globantlib.DataAccess.Device), true)]
 
 #endregion
 
@@ -186,6 +187,22 @@ namespace globantlib.DataAccess
             }
         }
         private ObjectSet<User> _Users;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<DeviceType> DeviceTypes
+        {
+            get
+            {
+                if ((_DeviceTypes == null))
+                {
+                    _DeviceTypes = base.CreateObjectSet<DeviceType>("DeviceTypes");
+                }
+                return _DeviceTypes;
+            }
+        }
+        private ObjectSet<DeviceType> _DeviceTypes;
 
         #endregion
         #region AddTo Methods
@@ -244,6 +261,14 @@ namespace globantlib.DataAccess
         public void AddToUsers(User user)
         {
             base.AddObject("Users", user);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the DeviceTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDeviceTypes(DeviceType deviceType)
+        {
+            base.AddObject("DeviceTypes", deviceType);
         }
 
         #endregion
@@ -516,15 +541,199 @@ namespace globantlib.DataAccess
         /// Create a new Device object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        /// <param name="type">Initial value of the Type property.</param>
         /// <param name="leasableID">Initial value of the LeasableID property.</param>
-        public static Device CreateDevice(global::System.Decimal id, global::System.String type, global::System.Decimal leasableID)
+        /// <param name="typeID">Initial value of the TypeID property.</param>
+        public static Device CreateDevice(global::System.Decimal id, global::System.Decimal leasableID, global::System.Decimal typeID)
         {
             Device device = new Device();
             device.ID = id;
-            device.Type = type;
             device.LeasableID = leasableID;
+            device.TypeID = typeID;
             return device;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Decimal _ID;
+        partial void OnIDChanging(global::System.Decimal value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal LeasableID
+        {
+            get
+            {
+                return _LeasableID;
+            }
+            set
+            {
+                OnLeasableIDChanging(value);
+                ReportPropertyChanging("LeasableID");
+                _LeasableID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LeasableID");
+                OnLeasableIDChanged();
+            }
+        }
+        private global::System.Decimal _LeasableID;
+        partial void OnLeasableIDChanging(global::System.Decimal value);
+        partial void OnLeasableIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal TypeID
+        {
+            get
+            {
+                return _TypeID;
+            }
+            set
+            {
+                OnTypeIDChanging(value);
+                ReportPropertyChanging("TypeID");
+                _TypeID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TypeID");
+                OnTypeIDChanged();
+            }
+        }
+        private global::System.Decimal _TypeID;
+        partial void OnTypeIDChanging(global::System.Decimal value);
+        partial void OnTypeIDChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GlobantLibModel", "FK_Device_Leasable", "Leasable")]
+        public Leasable Leasable
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Leasable>("GlobantLibModel.FK_Device_Leasable", "Leasable").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Leasable>("GlobantLibModel.FK_Device_Leasable", "Leasable").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Leasable> LeasableReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Leasable>("GlobantLibModel.FK_Device_Leasable", "Leasable");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Leasable>("GlobantLibModel.FK_Device_Leasable", "Leasable", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GlobantLibModel", "FK_Device_Device", "DeviceType")]
+        public DeviceType DeviceType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DeviceType>("GlobantLibModel.FK_Device_Device", "DeviceType").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DeviceType>("GlobantLibModel.FK_Device_Device", "DeviceType").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<DeviceType> DeviceTypeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DeviceType>("GlobantLibModel.FK_Device_Device", "DeviceType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DeviceType>("GlobantLibModel.FK_Device_Device", "DeviceType", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GlobantLibModel", Name="DeviceType")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class DeviceType : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new DeviceType object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="type">Initial value of the Type property.</param>
+        public static DeviceType CreateDeviceType(global::System.Decimal id, global::System.String type)
+        {
+            DeviceType deviceType = new DeviceType();
+            deviceType.ID = id;
+            deviceType.Type = type;
+            return deviceType;
         }
 
         #endregion
@@ -584,26 +793,26 @@ namespace globantlib.DataAccess
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Decimal LeasableID
+        public global::System.String image
         {
             get
             {
-                return _LeasableID;
+                return _image;
             }
             set
             {
-                OnLeasableIDChanging(value);
-                ReportPropertyChanging("LeasableID");
-                _LeasableID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LeasableID");
-                OnLeasableIDChanged();
+                OnimageChanging(value);
+                ReportPropertyChanging("image");
+                _image = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("image");
+                OnimageChanged();
             }
         }
-        private global::System.Decimal _LeasableID;
-        partial void OnLeasableIDChanging(global::System.Decimal value);
-        partial void OnLeasableIDChanged();
+        private global::System.String _image;
+        partial void OnimageChanging(global::System.String value);
+        partial void OnimageChanged();
 
         #endregion
     
@@ -615,34 +824,18 @@ namespace globantlib.DataAccess
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GlobantLibModel", "FK_Device_Leasable", "Leasable")]
-        public Leasable Leasable
+        [EdmRelationshipNavigationPropertyAttribute("GlobantLibModel", "FK_Device_Device", "Device")]
+        public EntityCollection<Device> Devices
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Leasable>("GlobantLibModel.FK_Device_Leasable", "Leasable").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Leasable>("GlobantLibModel.FK_Device_Leasable", "Leasable").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Leasable> LeasableReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Leasable>("GlobantLibModel.FK_Device_Leasable", "Leasable");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Device>("GlobantLibModel.FK_Device_Device", "Device");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Leasable>("GlobantLibModel.FK_Device_Leasable", "Leasable", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Device>("GlobantLibModel.FK_Device_Device", "Device", value);
                 }
             }
         }
