@@ -32,6 +32,9 @@ namespace globantlib.Domain
         public int Pages { get; set; }
 
         [DataMember]
+        public String Thumbnail { get; set; }
+
+        [DataMember]
         public string hasDigital;
 
         [DataMember]

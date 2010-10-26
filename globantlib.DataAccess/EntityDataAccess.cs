@@ -25,6 +25,7 @@ namespace globantlib.DataAccess
                 Author = c.Author,
                 Pages = c.Pages.HasValue ? c.Pages.Value : 0 ,
                 Publisher = c.Publisher,
+                Thumbnail = "book.jpg",
                 Released = c.Released.HasValue ? c.Released.Value : DateTime.MinValue,
                 hasDigital = c.Digitals.Count > 0 ? "Yes" : "No",
                 hasPhysical = c.Physicals.Count > 0 ? "Yes" : "No", 
