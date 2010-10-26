@@ -25,7 +25,9 @@ namespace globantlib.DataAccess
                 Pages = c.Pages.HasValue ? c.Pages.Value : 0 ,
                 Publisher = c.Publisher,
                 Released = c.Released.HasValue ? c.Released.Value : DateTime.MinValue,
-                hasDigital = "Yes", hasPhysical = "Yes"
+                hasDigital = "Yes", hasPhysical = "Yes", 
+                Digitals = new List<Domain.DigitalContent>(),
+                Physicals = new List<Domain.PhysicalContent>()
             };
         }
 

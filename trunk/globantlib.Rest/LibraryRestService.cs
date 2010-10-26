@@ -41,6 +41,11 @@ namespace globantlib.Rest
             int page_size = 4;
             int actual_page, count;
             int.TryParse(page,out actual_page);
+            
+            if (actual_page == 0)
+                actual_page = 1;
+
+            actual_page -= 1;
 
             Response resp = new Response();
             resp.ArrayOfContents = libEntities.SearchContents(actual_page, page_size, text, out count);
@@ -50,11 +55,10 @@ namespace globantlib.Rest
                 resp.Pages.Add(new Page() { number = i+1, current = false });
             }
 
-            if (actual_page == 0)
-                actual_page = 1;
+            
 
             if(resp.Pages.Count > 0)
-                resp.Pages[actual_page-1].current = true;
+                resp.Pages[actual_page].current = true;
 
             return resp;
         }

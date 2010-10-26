@@ -36,5 +36,11 @@ namespace globantlib.Domain
 
         [DataMember]
         public string hasPhysical;
+
+        [DataMember]
+        public List<DigitalContent> Digitals { get; set; }
+
+        [DataMember]
+        public List<PhysicalContent> Physicals { get; set; }
     }
 }
