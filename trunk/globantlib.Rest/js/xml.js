@@ -1,5 +1,7 @@
 ﻿var XML = (function () {
 
+    var currentCall = null;
+
     /**
     * Creates an empty XML document
     */
@@ -18,21 +20,22 @@
     * Loads a document from an external source
     */
     function loadDocument(url, callback) {
-        var doc;
+        if (currentCall) {
+            currentCall.abort();
+        }
         if (window.XMLHttpRequest) {
-            doc = new XMLHttpRequest();
+            currentCall = new XMLHttpRequest();
         }
         else {
-            doc = new ActiveXObject('Microsoft.XMLHTTP');
+            currentCall = new ActiveXObject('Microsoft.XMLHTTP');
         }
-        doc.open("GET", url, !!callback);
-        doc.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        doc.setRequestHeader("Accept", "application/xml");
+        currentCall.open("GET", url, !!callback);
+        currentCall.setRequestHeader("Accept", "application/xml");
         if (callback) {
-            doc.onreadystatechange = function () { callback(doc); }
+            currentCall.onreadystatechange = function () { callback(currentCall); }
         }
-        doc.send();
-        return callback ? doc : doc.responseXML;
+        currentCall.send();
+        return callback ? currentCall : currentCall.responseXML;
     }
 
     /**

@@ -79,7 +79,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="widgets\contents\js\contents.js" />
-    <Content Include="widgets\contents\xsl\details.xsl" />
+    <Content Include="widgets\contents\xsl\details.xsl">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="widgets\contents\xsl\list.xsl" />
   </ItemGroup>
   <ItemGroup>

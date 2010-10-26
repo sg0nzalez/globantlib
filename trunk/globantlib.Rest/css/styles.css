@@ -16,7 +16,7 @@ time, mark, audio, video {
     outline:0;
     font-size:100%;
     vertical-align:baseline;
-    background:transparent; 
+    background:transparent;
     list-style:none;
     font-family:Arial, serif;
 }
@@ -96,6 +96,9 @@ input, select {
 }
 
 /* *** */
+body {
+    background:#f0f0f0;
+}
 .full {
     float:left;
     width:100%;
@@ -112,6 +115,7 @@ div#header-wrap {
 div#content-wrap {
     padding:10px 0;
     border-bottom:1px solid #e0e0e0;
+    background:#fff;
 }
 div#footer-wrap {
     font-size:11px;
@@ -123,7 +127,6 @@ a#logo {
     text-decoration:none;
     font-size:24px;
     font-weight:bold;
-    font-style:italic;
     color:#000;
     padding:10px 0;
 }
@@ -171,23 +174,84 @@ div#w-contents-search input.submit {
     float:right;
     width:100px;
 }
-div#w-contents-list {
+ul#w-contents-list {
     float:left;
     width:100%;
 }
-div#w-contents-list .content {
+ul#w-contents-list .content {
    float:left;
    width:100%;
+   margin-bottom:10px;
+   padding-bottom:10px;
+   border-bottom:1px solid #e0e0e0;
 }
-div#w-contents-list .thumbnail {
+ul#w-contents-list .thumbnail {
    float:left;
 }
-div#w-contents-list .title,
-div#w-contents-list .tagline,
-div#w-contents-list .available,
-div#w-contents-list .description {
-   padding-left:101px;
+ul#w-contents-list .title,
+ul#w-contents-list .tagline,
+ul#w-contents-list .available,
+ul#w-contents-list .description {
+   padding-left:103px;
 }
+ul#w-contents-list .title {
+    font-size:14px;
+    margin-bottom:2px;
+}
+ul#w-contents-list .title a {
+    text-decoration:none;
+    color:#333;
+}
+ul#w-contents-list .title a:hover {
+    color:#000;
+}
+ul#w-contents-list .tagline {
+    font-size:12px;
+    font-weight:normal;
+    color:#999;
+    margin-bottom:10px;
+}
+ul#w-contents-list .tagline span {
+    padding-right:20px;
+}
+ul#w-contents-list .available {
+    font-size:11px;
+    margin-bottom:10px;
+}
+ul#w-contents-list .available a {
+    padding:1px 20px;
+    background:no-repeat center left;
+    color:#666;
+    text-decoration:none;
+}
+ul#w-contents-list .available a:hover {
+    color:#000;
+}
+ul#w-contents-list .available a.physical {
+    background-image:url(images/print.png);
+}
+ul#w-contents-list .available a.digital {
+    background-image:url(images/digital.png);
+}
+ul#w-contents-list .description {
+    font-size:12px;
+    color:#505050;
+}
+p#w-contents-pagination {
+    text-align:center;
+}
+p#w-contents-pagination a,
+p#w-contents-pagination b {
+    font-size:12px;
+    text-decoration:none;
+    color:#505050;
+    padding:2px 5px;
+}
+p#w-contents-pagination a:hover {
+    background:#e0e0e0;
+    color:#000;
+}
+
 
 /**
  * Devices style

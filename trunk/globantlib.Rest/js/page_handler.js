@@ -1,10 +1,14 @@
 ﻿var PAGE_HANDLER = (function () {
 
-	function contentList(page) {
-		CONTENTS.showList(page);
+	function contentList(page, search) {
+        $('#w-contents-details, #w-contents-download, #w-contents-calendar').hide();
+        $('#w-contents-list').show();
+		CONTENTS.showList(page, search);
 	}
 	
 	function contentDetails(id) {
+        $('#w-contents-search, #w-contents-list, #w-contents-download, #w-contents-calendar').hide();
+        $('#w-contents-details').show();
         CONTENTS.showDetails(id)
 	}
 	
@@ -23,9 +27,7 @@
 	return {
 		"contentList" : contentList,
 		"contentDetails" : contentDetails,
-		"contentDownload": contentDownload,
-		"deviceList": showDeviceList,
-        "deviceCalendar": showDeviceCalendar
+        "contentDownload" : contentDownload
 	}
 
 }());

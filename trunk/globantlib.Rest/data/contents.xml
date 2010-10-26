@@ -1,63 +1,67 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-	<Pages>
-		<Page number="1"></Page>
-		<Page number="2" current="Yes"></Page>
-		<Page number="3"></Page>
-		<Page number="4"></Page>
-		<Page number="5"></Page>
-		<Page number="6"></Page>
-	</Pages>
-	<ArrayOfContents>
-		<Content hasPhysical="Yes" hasDigital="Yes">
-			<id>1</id>
-			<title>Javascript: The Good Parts</title>
-			<author>Douglas Crockford</author>
-			<publisher>O'Reilly</publisher>
-			<description>Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that's more reliable, readable, and maintainable than the language as a whole-a subset you can use to create truly extensible and efficient code.</description>
-			<thumbnail>book.jpg</thumbnail>
-			<released>May 2008</released>
-			<pages>176</pages>
-		</Content>
-		<Content>
-			<id>1</id>
-			<title>Javascript: The Good Parts</title>
-			<author>Douglas Crockford</author>
-			<publisher>O'Reilly</publisher>
-			<description>Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that's more reliable, readable, and maintainable than the language as a whole-a subset you can use to create truly extensible and efficient code.</description>
-			<thumbnail>book.jpg</thumbnail>
-			<released>May 2008</released>
-			<pages>176</pages>
-		</Content>
-		<Content hasPhysical="Yes" hasDigital="Yes">
-			<id>1</id>
-			<title>Javascript: The Good Parts</title>
-			<author>Douglas Crockford</author>
-			<publisher>O'Reilly</publisher>
-			<description>Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that's more reliable, readable, and maintainable than the language as a whole-a subset you can use to create truly extensible and efficient code.</description>
-			<thumbnail>book.jpg</thumbnail>
-			<released>May 2008</released>
-			<pages>176</pages>
-		</Content>
-		<Content hasPhysical="Yes" hasDigital="Yes">
-			<id>1</id>
-			<title>Javascript: The Good Parts</title>
-			<author>Douglas Crockford</author>
-			<publisher>O'Reilly</publisher>
-			<description>Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that's more reliable, readable, and maintainable than the language as a whole-a subset you can use to create truly extensible and efficient code.</description>
-			<thumbnail>book.jpg</thumbnail>
-			<released>May 2008</released>
-			<pages>176</pages>
-		</Content>
-		<Content hasPhysical="Yes" hasDigital="Yes">
-			<id>1</id>
-			<title>Javascript: The Good Parts</title>
-			<author>Douglas Crockford</author>
-			<publisher>O'Reilly</publisher>
-			<description>Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that's more reliable, readable, and maintainable than the language as a whole-a subset you can use to create truly extensible and efficient code.</description>
-			<thumbnail>book.jpg</thumbnail>
-			<released>May 2008</released>
-			<pages>176</pages>
-		</Content>
-	</ArrayOfContents>
+﻿<?xml version="1.0" encoding="utf-8"?>
+	<Response xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+        <Pages>
+            <Page>
+                <current>true</current>
+                <number>1</number>
+            </Page>
+            <Page>
+                <current>false</current>
+                <number>2</number>
+            </Page>
+            <Page>
+                <current>false</current>
+                <number>3</number>
+            </Page>
+            <Page>
+                <current>false</current>
+                <number>4</number>
+            </Page>
+        </Pages>
+        <ArrayOfContents>
+            <Content>
+                <Author>Me</Author>
+                <Description>The Definitive Guide </Description>
+                <ID>1</ID>
+                <Pages>245</Pages>
+                <Publisher i:nil="true"/>
+                <Released>0001-01-01T00:00:00</Released>
+                <Title>CSS</Title>
+                <hasDigital>Yes</hasDigital>
+                <hasPhysical>Yes</hasPhysical>
+            </Content>
+            <Content>
+                <Author>Someone</Author>
+                <Description>Solutions &amp; Examples</Description>
+                <ID>2</ID>
+                <Pages>54654</Pages>
+                <Publisher i:nil="true"/>
+                <Released>0001-01-01T00:00:00</Released>
+                <Title>jQuery Cookbook</Title>
+                <hasDigital>Yes</hasDigital>
+                <hasPhysical>Yes</hasPhysical>
+            </Content>
+            <Content>
+                <Author>Another Someone</Author>
+                <Description>D3</Description>
+                <ID>5</ID>
+                <Pages>256</Pages>
+                <Publisher i:nil="true"/>
+                <Released>0001-01-01T00:00:00</Released>
+                <Title>Professional WCF 4</Title>
+                <hasDigital>Yes</hasDigital>
+                <hasPhysical>Yes</hasPhysical>
+            </Content>
+            <Content>
+                <Author>Someone else</Author>
+                <Description>D4</Description>
+                <ID>7</ID>
+                <Pages>354</Pages>
+                <Publisher i:nil="true"/>
+                <Released>0001-01-01T00:00:00</Released>
+                <Title>Visual C# 2010 Recipes</Title>
+                <hasDigital>Yes</hasDigital>
+                <hasPhysical>Yes</hasPhysical>
+            </Content>
+        </ArrayOfContents>
 </Response>

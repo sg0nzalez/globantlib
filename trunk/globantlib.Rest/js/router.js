@@ -24,8 +24,8 @@
 	}; 
 	
 	// contents list page N
-	contents.list = function (page) {
-		PAGE_HANDLER.contentList(page);
+    contents.list = function (page, search) {
+	    PAGE_HANDLER.contentList(page, search);
 	};
 	
 	// content detail page

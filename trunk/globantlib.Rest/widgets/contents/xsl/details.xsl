@@ -8,7 +8,7 @@
                 <xsl:for-each select="Content/Digitals/Digital">
                     <li><a href="#contents/download/{ID}">Download <xsl:value-of select="Format" /></a></li>
                 </xsl:for-each>
-                <xsl:for-each select="Content/physicals/physical">
+                <xsl:for-each select="Content/Physicals/Physical">
                     <li><a href="#contents/calendar/{ID}">Get <xsl:value-of select="Type" /></a></li>
                 </xsl:for-each>
             </ul>
