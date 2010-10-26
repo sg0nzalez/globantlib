@@ -33,6 +33,38 @@ namespace globantlib.DataAccess
             };
         }
 
+        private Domain.DeviceType Create(DeviceType t)
+        {
+            return new Domain.DeviceType()
+            {
+                ID = (int)t.ID,
+                Type = t.Type,
+                Image = t.image
+            };
+        }
+
+        private Domain.Device Create(Device d)
+        {
+            return new Domain.Device()
+            {
+                ID = (int)d.ID,
+                LeasableID = (int)d.LeasableID,
+                TypeID = (int)d.TypeID
+            };
+        }
+
+        private Domain.Lease Create(Lease l)
+        {
+            return new Domain.Lease()
+            {
+                ID = (int)l.ID,
+                Date = l.Date,
+                Period = l.Period
+            };
+        }
+
+
+
         private Domain.DigitalContent Create(Digital item)
         {
             return new Domain.DigitalContent()
@@ -96,6 +128,28 @@ namespace globantlib.DataAccess
             return Create(libEntities.Contents.Include("Digitals").Include("Physicals").Where<Content>(c => c.ID == id).FirstOrDefault());
         }
 
+        public List<Domain.Device> GetDevicesByType(int typeID)
+        {
+            List<Domain.Device> lResult = new List<Domain.Device>();
+
+            var devices = libEntities.Devices.Where<Device>(t => t.TypeID == typeID);
+
+            foreach (var device in devices)
+            {
+                var leases = libEntities.Leases.Where<Lease>(l => l.LeasableID == device.LeasableID);
+                List<Domain.Lease> lLease = new List<Domain.Lease>();
+                foreach (var lease in leases)
+                {
+                    lLease.Add(Create(lease));
+                }
+                Domain.Device d = Create(device);
+                d.Leases = lLease;
+                lResult.Add(d);
+            }
+
+            return lResult;
+        }
+
         public List<Domain.Content> GetContent()
         {
             List<Domain.Content> lResult = new List<Domain.Content>();
@@ -107,5 +161,19 @@ namespace globantlib.DataAccess
 
             return lResult;
         }
+
+        public List<Domain.DeviceType> GetDeviceTypes()
+        {
+            List<Domain.DeviceType> lResult = new List<Domain.DeviceType>();
+
+            foreach (var item in libEntities.DeviceTypes)
+            {
+                lResult.Add(Create(item));
+            }
+
+            return lResult;
+        }
+        
+
     }
 }
