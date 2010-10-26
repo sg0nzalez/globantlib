@@ -1,24 +1,8 @@
 ﻿var CONTENTS = (function () {
 
     // currently waiting search
-    var currentSearch = null;
-
-    /**
-    * Load and show the list of contents
-    */
-    function showList(page, search) {
-        var search = search ? escape(search) : "",
-            xml = '/LibraryService/Search?Text=' + search,
-            target = document.getElementById('w-contents-left');
-        if (page) {
-            xml += '&Page=' + page;
-        }
-        showOverlay();
-        XML.transformWithCallback(xml, 'widgets/contents/xsl/list.xsl', target, function () {
-            initSearch(search);
-            hideOverlay();
-        });
-    }
+    var lastQuery = '',
+        currentSearch = null;
 
     /**
     * Shows overlay before it starts loading
@@ -43,6 +27,23 @@
     }
 
     /**
+    * Load and show the list of contents
+    */
+    function showList(page, query) {
+        var query = query ? escape(query) : "",
+            xml = '/LibraryService/Search?Text=' + query,
+            target = document.getElementById('w-contents-left');
+        if (page) {
+            xml += '&Page=' + page;
+        }
+        showOverlay();
+        XML.transformWithCallback(xml, 'widgets/contents/xsl/list.xsl', target, function () {
+            initSearch(query);
+            //hideOverlay();
+        });
+    }
+
+    /**
     * Load single content and show details
     */
     function showDetails(id) {
@@ -56,17 +57,13 @@
     * Show download popup
     */
     function showDownload(id) {
-        var xml = 'data/content1.xml?id=' + id,
-            target = document.getElementById('w-contents-download');
-        target.className = '';
-        $(target).dialog({
+        var xml = 'data/content1.xml?id=' + id;
+        $('#w-contents-download').dialog({
             modal: true,
             resizable: false,
             title: "Download Content"
         });
-        XML.transformWithCallback(xml, 'widgets/contents/xsl/download.xsl', target, function () {
-            target.className = '';
-        });
+        XML.transformWithCallback(xml, 'widgets/contents/xsl/download.xsl', target);
     }
 
     /**
@@ -74,22 +71,28 @@
     */
     function initSearch(searchStr) {
         var href,
-            search = function () { document.location.hash = 'contents/list/1/' + escape($("#w-contents-search input[type=text]").val()); };
+            search = function (e) {
+                var currentValue = $("#w-contents-search input[type=text]").val();
+                if (lastQuery !== currentValue) {
+                    lastQuery = currentValue;
+                    clearTimeout(currentSearch);
+                    currentSearch = setTimeout(function () {
+                        document.location.hash = 'contents/list/1/' + escape(lastQuery);
+                    }, 500);
+                }
+                e.preventDefault();
+            };
+        $("#w-contents-search form")
+            .submit(search);
         $("#w-contents-search input[type=text]")
-            .keyup(function () {
-                clearTimeout(currentSearch);
-                currentSearch = setTimeout(search, 500);
-            })
+            .keyup(search)
             .val(unescape(searchStr))
             .focus();
-        $("#w-contents-pagination a").each(function () {
-            href = $(this).attr('href');
-            $(this).attr('href', href + "/" + searchStr);
-        });
-        $("#w-contents-search form").submit(function (e) {
-            search();
-            e.preventDefault();
-        });
+        $("#w-contents-pagination a")
+            .each(function () {
+                href = $(this).attr('href');
+                $(this).attr('href', href + "/" + searchStr);
+            });
     }
 
     /**

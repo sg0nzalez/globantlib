@@ -82,7 +82,9 @@
     <Content Include="widgets\contents\xsl\details.xsl">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="widgets\contents\xsl\list.xsl" />
+    <Content Include="widgets\contents\xsl\list.xsl">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LibraryRestService.cs" />

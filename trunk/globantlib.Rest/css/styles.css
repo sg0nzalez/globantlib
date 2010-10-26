@@ -19,6 +19,7 @@ time, mark, audio, video {
     background:transparent;
     list-style:none;
     font-family:Arial, serif;
+    outline:0;
 }
 
 body {
