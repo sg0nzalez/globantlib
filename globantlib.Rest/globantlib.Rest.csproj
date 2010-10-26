@@ -87,6 +87,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceService.cs" />
     <Compile Include="LibraryRestService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

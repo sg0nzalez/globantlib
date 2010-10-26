@@ -1185,7 +1185,7 @@ namespace globantlib.DataAccess
         /// <param name="user">Initial value of the User property.</param>
         /// <param name="date">Initial value of the Date property.</param>
         /// <param name="period">Initial value of the Period property.</param>
-        public static Lease CreateLease(global::System.Decimal id, global::System.Decimal leasableID, global::System.Decimal user, global::System.DateTime date, global::System.DateTimeOffset period)
+        public static Lease CreateLease(global::System.Decimal id, global::System.Decimal leasableID, global::System.Decimal user, global::System.DateTime date, global::System.Int32 period)
         {
             Lease lease = new Lease();
             lease.ID = id;
@@ -1303,7 +1303,7 @@ namespace globantlib.DataAccess
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTimeOffset Period
+        public global::System.Int32 Period
         {
             get
             {
@@ -1318,8 +1318,8 @@ namespace globantlib.DataAccess
                 OnPeriodChanged();
             }
         }
-        private global::System.DateTimeOffset _Period;
-        partial void OnPeriodChanging(global::System.DateTimeOffset value);
+        private global::System.Int32 _Period;
+        partial void OnPeriodChanging(global::System.Int32 value);
         partial void OnPeriodChanged();
 
         #endregion

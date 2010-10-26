@@ -18,6 +18,7 @@ namespace globantlib.Rest
         private void RegisterRoutes()
         {
             RouteTable.Routes.Add(new ServiceRoute("LibraryService", new WebServiceHostFactory(), typeof(LibraryRestService)));
+            RouteTable.Routes.Add(new ServiceRoute("DeviceService", new WebServiceHostFactory(), typeof(DeviceService)));
         }
     }
 }

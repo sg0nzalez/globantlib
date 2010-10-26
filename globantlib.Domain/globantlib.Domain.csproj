@@ -42,7 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Content.cs" />
+    <Compile Include="Device.cs" />
+    <Compile Include="DeviceType.cs" />
     <Compile Include="DigitalContent.cs" />
+    <Compile Include="Lease.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="PhysicalContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
