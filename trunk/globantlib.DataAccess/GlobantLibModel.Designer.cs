@@ -1419,15 +1419,13 @@ namespace globantlib.DataAccess
         /// Create a new Physical object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        /// <param name="inventoryID">Initial value of the InventoryID property.</param>
         /// <param name="contentID">Initial value of the ContentID property.</param>
         /// <param name="leasableID">Initial value of the LeasableID property.</param>
         /// <param name="type">Initial value of the Type property.</param>
-        public static Physical CreatePhysical(global::System.Decimal id, global::System.Int32 inventoryID, global::System.Decimal contentID, global::System.Decimal leasableID, global::System.String type)
+        public static Physical CreatePhysical(global::System.Decimal id, global::System.Decimal contentID, global::System.Decimal leasableID, global::System.String type)
         {
             Physical physical = new Physical();
             physical.ID = id;
-            physical.InventoryID = inventoryID;
             physical.ContentID = contentID;
             physical.LeasableID = leasableID;
             physical.Type = type;
@@ -1463,30 +1461,6 @@ namespace globantlib.DataAccess
         private global::System.Decimal _ID;
         partial void OnIDChanging(global::System.Decimal value);
         partial void OnIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 InventoryID
-        {
-            get
-            {
-                return _InventoryID;
-            }
-            set
-            {
-                OnInventoryIDChanging(value);
-                ReportPropertyChanging("InventoryID");
-                _InventoryID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("InventoryID");
-                OnInventoryIDChanged();
-            }
-        }
-        private global::System.Int32 _InventoryID;
-        partial void OnInventoryIDChanging(global::System.Int32 value);
-        partial void OnInventoryIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

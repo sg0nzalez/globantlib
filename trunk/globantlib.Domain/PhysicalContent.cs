@@ -6,9 +6,13 @@ using System.Runtime.Serialization;
 
 namespace globantlib.Domain
 {
-    [DataContract]
+    [DataContract(Namespace="", Name="Physical")]
     public class PhysicalContent
     {
-        
+        [DataMember]
+        public int ID { get; set; }
+
+        [DataMember]
+        public String Type { get; set; }
     }
 }

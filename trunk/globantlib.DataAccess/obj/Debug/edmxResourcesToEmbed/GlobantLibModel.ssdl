@@ -97,7 +97,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="InventoryID" Type="int" Nullable="false" />
     <Property Name="ContentID" Type="numeric" Nullable="false" />
     <Property Name="LeasableID" Type="numeric" Nullable="false" />
     <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="50" />
