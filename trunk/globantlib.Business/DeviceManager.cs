@@ -19,8 +19,6 @@ namespace globantlib.Business
         public List<Domain.Device> GetDevicesbyType(int typeID)
         {
             return data.GetDevicesByType(typeID);
-        }
-
-        
+        }        
     }
 }

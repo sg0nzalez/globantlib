@@ -63,8 +63,6 @@ namespace globantlib.DataAccess
             };
         }
 
-
-
         private Domain.DigitalContent Create(Digital item)
         {
             return new Domain.DigitalContent()
