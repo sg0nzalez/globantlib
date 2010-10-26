@@ -6,8 +6,16 @@ using System.Runtime.Serialization;
 
 namespace globantlib.Domain
 {
-    [DataContract]
+    [DataContract(Namespace = "", Name = "Digital")]
     public class DigitalContent
     {
+        [DataMember]
+        public int ID { get; set; }
+
+        [DataMember]
+        public String Link { get; set; }
+
+        [DataMember]
+        public String Format { get; set; }
     }
 }

@@ -7,7 +7,6 @@ using System.ServiceModel.Web;
 using System.Text;
 using globantlib.Business;
 using globantlib.Domain;
-//using globantlib.DataAccess;
 
 namespace globantlib.Rest
 {

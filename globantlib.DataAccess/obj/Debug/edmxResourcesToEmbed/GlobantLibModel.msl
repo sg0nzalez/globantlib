@@ -58,7 +58,6 @@
           <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="LeasableID" ColumnName="LeasableID" />
           <ScalarProperty Name="ContentID" ColumnName="ContentID" />
-          <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
