@@ -237,3 +237,9 @@ div#w-contents-list .description {
  * End Devices style
  */
  
+ #overlay_back
+ {
+    position: absolute;
+    background: url("/img/overlay_background.png") top left repeat transparent;
+    z-index:4;    
+ }
