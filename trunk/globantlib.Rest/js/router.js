@@ -7,6 +7,7 @@
 		PAGE_HANDLER.deviceList();
 	}; 
 	
+
 	// devices list page N
 	devices.list = function (page) {
 		PAGE_HANDLER.deviceList(page);
@@ -46,7 +47,7 @@
 	 * Public interface
 	 */
 	return {
-		"main" : devices,
+		"main" : contents,
 		"devices" : devices,
 		"contents" : contents
 	};
