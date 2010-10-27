@@ -90,7 +90,7 @@
     <Property Name="LeasableID" Type="numeric" Nullable="false" />
     <Property Name="User" Type="numeric" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
-    <Property Name="Period" Type="datetimeoffset" Nullable="false" />
+    <Property Name="Period" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Physical">
     <Key>
