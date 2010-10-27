@@ -54,6 +54,7 @@
           <Property Name="Publisher" Type="nvarchar" MaxLength="100" />
           <Property Name="Released" Type="date" />
           <Property Name="Pages" Type="int" />
+          <Property Name="ISBN" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Device">
           <Key>
@@ -256,6 +257,7 @@
           <Property Type="String" Name="Publisher" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="Released" />
           <Property Type="Int32" Name="Pages" />
+          <Property Type="String" Name="ISBN" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Device">
           <Key>
@@ -424,6 +426,7 @@
           <EntitySetMapping Name="Contents">
             <EntityTypeMapping TypeName="GlobantLibModel.Content">
               <MappingFragment StoreEntitySet="Content">
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
                 <ScalarProperty Name="Pages" ColumnName="Pages" />
                 <ScalarProperty Name="Released" ColumnName="Released" />
                 <ScalarProperty Name="Publisher" ColumnName="Publisher" />

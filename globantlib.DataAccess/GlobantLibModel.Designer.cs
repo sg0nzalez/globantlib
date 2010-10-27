@@ -475,6 +475,30 @@ namespace globantlib.DataAccess
         private Nullable<global::System.Int32> _Pages;
         partial void OnPagesChanging(Nullable<global::System.Int32> value);
         partial void OnPagesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ISBN
+        {
+            get
+            {
+                return _ISBN;
+            }
+            set
+            {
+                OnISBNChanging(value);
+                ReportPropertyChanging("ISBN");
+                _ISBN = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ISBN");
+                OnISBNChanged();
+            }
+        }
+        private global::System.String _ISBN;
+        partial void OnISBNChanging(global::System.String value);
+        partial void OnISBNChanged();
 
         #endregion
     

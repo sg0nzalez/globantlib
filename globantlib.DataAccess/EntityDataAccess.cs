@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.Objects.DataClasses;
+using globantlib.DataAccess.AmazonService;
 
 namespace globantlib.DataAccess
 {
@@ -17,6 +18,7 @@ namespace globantlib.DataAccess
 
         private Domain.Content Create(Content c)
         {
+            
             return new Domain.Content()
             {
                 ID =  (int)c.ID,
@@ -25,7 +27,7 @@ namespace globantlib.DataAccess
                 Author = c.Author,
                 Pages = c.Pages.HasValue ? c.Pages.Value : 0 ,
                 Publisher = c.Publisher,
-                Thumbnail = "no-img.gif",
+                Thumbnail = c.ISBN == null ? "img/no-img.gif" : @"http://bks8.books.google.com/books?vid=ISBN" + c.ISBN + @"&printsec=frontcover&img=1&zoom=1",
                 Released = c.Released.HasValue ? c.Released.Value : DateTime.MinValue,
                 hasDigital = c.Digitals.Count > 0 ? "Yes" : "No",
                 hasPhysical = c.Physicals.Count > 0 ? "Yes" : "No", 
