@@ -15,7 +15,7 @@
         y = $('#w-contents-left').position().top;
         search_height = $("#w-contents-search").height();
         overlay_back = $("<div>").attr("id", "overlay_back").css({ "width": width, "height": height - search_height, "top": y + search_height, "left": x });
-        overlay_swirling = $("<img>").attr({ "src": "/img/loading.gif", "alt": "loading" }).css({ "width": "100px", "height": "100px", "margin-left": (width - 100) / 2, "margin-top": (height - 100) / 2 });
+        overlay_swirling = $("<img>").attr({ "src": "/globantlib.Rest/img/loading.gif", "alt": "loading" }).css({ "width": "100px", "height": "100px", "margin-left": (width - 100) / 2, "margin-top": (height - 100) / 2 });
         overlay_back.append(overlay_swirling).prependTo($('#w-contents-left'));
     }
 
@@ -31,7 +31,7 @@
     */
     function showList(page, query) {
         var query = query ? escape(query) : "",
-            xml = '/LibraryService/Search?Text=' + query,
+            xml = '/globantlib.Rest/LibraryService.mvc/Search?Text=' + query,
             target = document.getElementById('w-contents-left');
         if (page) {
             xml += '&Page=' + page;
@@ -47,7 +47,7 @@
     * Load single content and show details
     */
     function showDetails(id) {
-        var xml = '/LibraryService/' + id,
+        var xml = '/globantlib.Rest/LibraryService.mvc/' + id,
             target = document.getElementById('w-contents-left');
         target.className = 'loading';
         XML.transformWithCallback(xml, 'widgets/contents/xsl/details.xsl', target, function () {

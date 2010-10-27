@@ -11,13 +11,13 @@ namespace globantlib.Rest
         {
             RegisterRoutes();
 
-            //this.Context.Response.ContentType = "application/xml";
+            this.Context.Response.ContentType = "application/xml";
             //this.Context.Response.ContentType = "application/xhtml+xml";
         }
 
         private void RegisterRoutes()
         {
-            RouteTable.Routes.Add(new ServiceRoute("LibraryService", new WebServiceHostFactory(), typeof(LibraryRestService)));
+            RouteTable.Routes.Add(new ServiceRoute("LibraryService.mvc", new WebServiceHostFactory(), typeof(LibraryRestService)));
             RouteTable.Routes.Add(new ServiceRoute("DeviceService", new WebServiceHostFactory(), typeof(DeviceService)));
         }
     }
