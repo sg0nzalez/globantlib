@@ -61,8 +61,8 @@ namespace globantlib.DataAccess
             return new Domain.Lease()
             {
                 ID = (int)l.ID,
-                Date = l.Date,
-                Period = l.Period
+                StartDate = l.StartDate,
+                EndDate = l.EndDate
             };
         }
 

@@ -653,6 +653,30 @@ namespace globantlib.DataAccess
         private global::System.Decimal _TypeID;
         partial void OnTypeIDChanging(global::System.Decimal value);
         partial void OnTypeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
 
         #endregion
     
@@ -1207,16 +1231,16 @@ namespace globantlib.DataAccess
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="leasableID">Initial value of the LeasableID property.</param>
         /// <param name="user">Initial value of the User property.</param>
-        /// <param name="date">Initial value of the Date property.</param>
-        /// <param name="period">Initial value of the Period property.</param>
-        public static Lease CreateLease(global::System.Decimal id, global::System.Decimal leasableID, global::System.Decimal user, global::System.DateTime date, global::System.Int32 period)
+        /// <param name="startDate">Initial value of the StartDate property.</param>
+        /// <param name="endDate">Initial value of the EndDate property.</param>
+        public static Lease CreateLease(global::System.Decimal id, global::System.Decimal leasableID, global::System.Decimal user, global::System.DateTime startDate, global::System.DateTime endDate)
         {
             Lease lease = new Lease();
             lease.ID = id;
             lease.LeasableID = leasableID;
             lease.User = user;
-            lease.Date = date;
-            lease.Period = period;
+            lease.StartDate = startDate;
+            lease.EndDate = endDate;
             return lease;
         }
 
@@ -1303,48 +1327,48 @@ namespace globantlib.DataAccess
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime Date
+        public global::System.DateTime StartDate
         {
             get
             {
-                return _Date;
+                return _StartDate;
             }
             set
             {
-                OnDateChanging(value);
-                ReportPropertyChanging("Date");
-                _Date = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Date");
-                OnDateChanged();
+                OnStartDateChanging(value);
+                ReportPropertyChanging("StartDate");
+                _StartDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("StartDate");
+                OnStartDateChanged();
             }
         }
-        private global::System.DateTime _Date;
-        partial void OnDateChanging(global::System.DateTime value);
-        partial void OnDateChanged();
+        private global::System.DateTime _StartDate;
+        partial void OnStartDateChanging(global::System.DateTime value);
+        partial void OnStartDateChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 Period
+        public global::System.DateTime EndDate
         {
             get
             {
-                return _Period;
+                return _EndDate;
             }
             set
             {
-                OnPeriodChanging(value);
-                ReportPropertyChanging("Period");
-                _Period = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Period");
-                OnPeriodChanged();
+                OnEndDateChanging(value);
+                ReportPropertyChanging("EndDate");
+                _EndDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EndDate");
+                OnEndDateChanged();
             }
         }
-        private global::System.Int32 _Period;
-        partial void OnPeriodChanging(global::System.Int32 value);
-        partial void OnPeriodChanged();
+        private global::System.DateTime _EndDate;
+        partial void OnEndDateChanging(global::System.DateTime value);
+        partial void OnEndDateChanged();
 
         #endregion
     

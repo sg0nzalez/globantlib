@@ -15,10 +15,10 @@ namespace globantlib.Domain
         public int ID { get; set; }
 
         [DataMember]
-        public DateTime Date { get; set; }
+        public DateTime StartDate { get; set; }
 
         [DataMember]
-        public int Period { get; set; }
+        public DateTime EndDate { get; set; }
 
     }
 }

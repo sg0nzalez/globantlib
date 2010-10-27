@@ -63,6 +63,7 @@
           <Property Name="ID" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="TypeID" Type="numeric" Nullable="false" />
           <Property Name="LeasableID" Type="numeric" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DeviceType">
           <Key>
@@ -95,8 +96,8 @@
           <Property Name="ID" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="LeasableID" Type="numeric" Nullable="false" />
           <Property Name="User" Type="numeric" Nullable="false" />
-          <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="Period" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Physical">
           <Key>
@@ -268,6 +269,7 @@
           <NavigationProperty Name="Leasable" Relationship="GlobantLibModel.FK_Device_Leasable" FromRole="Device" ToRole="Leasable" />
           <Property Type="Decimal" Name="TypeID" Nullable="false" Precision="18" Scale="0" />
           <NavigationProperty Name="DeviceType" Relationship="GlobantLibModel.FK_Device_Device" FromRole="Device" ToRole="DeviceType" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Digital">
           <Key>
@@ -296,10 +298,10 @@
           <Property Type="Decimal" Name="ID" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Decimal" Name="LeasableID" Nullable="false" Precision="18" Scale="0" />
           <Property Type="Decimal" Name="User" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="DateTime" Name="Date" Nullable="false" />
-          <Property Type="Int32" Name="Period" Nullable="false" />
           <NavigationProperty Name="Leasable" Relationship="GlobantLibModel.FK_Lease_Leasable" FromRole="Lease" ToRole="Leasable" />
           <NavigationProperty Name="User1" Relationship="GlobantLibModel.FK_Lease_Users" FromRole="Lease" ToRole="User" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" />
+          <Property Type="DateTime" Name="EndDate" Nullable="false" />
         </EntityType>
         <EntityType Name="Physical">
           <Key>
@@ -440,6 +442,7 @@
           <EntitySetMapping Name="Devices">
             <EntityTypeMapping TypeName="GlobantLibModel.Device">
               <MappingFragment StoreEntitySet="Device">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
                 <ScalarProperty Name="LeasableID" ColumnName="LeasableID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -467,8 +470,8 @@
           <EntitySetMapping Name="Leases">
             <EntityTypeMapping TypeName="GlobantLibModel.Lease">
               <MappingFragment StoreEntitySet="Lease">
-                <ScalarProperty Name="Period" ColumnName="Period" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="User" ColumnName="User" />
                 <ScalarProperty Name="LeasableID" ColumnName="LeasableID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -531,7 +534,7 @@
         <EntityTypeShape EntityType="GlobantLibModel.Device" Width="1.5" PointX="4.75" PointY="3.125" Height="1.7566536458333326" />
         <EntityTypeShape EntityType="GlobantLibModel.Digital" Width="1.5" PointX="0.5" PointY="4.625" Height="1.7566536458333335" />
         <EntityTypeShape EntityType="GlobantLibModel.Leasable" Width="1.5" PointX="3.75" PointY="0.75" Height="1.7566536460071802" />
-        <EntityTypeShape EntityType="GlobantLibModel.Lease" Width="1.5" PointX="6.375" PointY="0.75" Height="2.0853483072916674" />
+        <EntityTypeShape EntityType="GlobantLibModel.Lease" Width="1.5" PointX="6.375" PointY="0.75" Height="2.0853483072916661" />
         <EntityTypeShape EntityType="GlobantLibModel.Physical" Width="1.5" PointX="2.875" PointY="4.5" Height="1.9210009765624996" />
         <EntityTypeShape EntityType="GlobantLibModel.User" Width="1.5" PointX="6.875" PointY="3.25" Height="2.0853483080863953" />
         <AssociationConnector Association="GlobantLibModel.FK_Digital_Content" >
@@ -557,7 +560,7 @@
         </AssociationConnector>
         <AssociationConnector Association="GlobantLibModel.FK_Lease_Users" >
           <ConnectorPoint PointX="7.375" PointY="3.25" />
-          <ConnectorPoint PointX="7.375" PointY="2.8353483072916674" />
+          <ConnectorPoint PointX="7.375" PointY="2.8353483072916661" />
         </AssociationConnector>
         <EntityTypeShape EntityType="GlobantLibModel.DeviceType" Width="1.5" PointX="4.75" PointY="5.5" Height="1.5923063151041674" />
         <AssociationConnector Association="GlobantLibModel.FK_Device_Device" >
