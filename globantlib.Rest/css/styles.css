@@ -296,43 +296,81 @@ div#w-contents-details div.thumbnail li a {
     text-decoration:none;
     color:#333;
 }
-div#w-contents-details div.reviews h2 
-{
+div#w-contents-details div.new-review{
+    padding:10px 0;
+    float:left;
+    width:100%;
+    background:#f0f0f0;
+}
+div#w-contents-details div.new-review div.field {
+    float:left;
+    width:100%;
+    margin-bottom:5px;
+}
+div#w-contents-details div.new-review div.field.submit {
+    padding-left:90px;
+    margin-bottom:0;
+}
+div#w-contents-details div.new-review div.field label {
+    float:left;
+    width:80px;
+    padding-right:10px;
+    font-size:12px;
+    text-align:right;
+    line-height:20px;
+}
+div#w-contents-details div.new-review input,
+div#w-contents-details div.new-review select,
+div#w-contents-details div.new-review textarea {
+    float:left;
+}
+input#w-contents-review-title {
+    width:630px;
+}
+textarea#w-contents-review-text {
+    width:630px;
+    height:100px;
+}
+div#w-contents-details div.reviews h2 {
     color:#333;
     margin-bottom:10px;
+    line-height:20px;
 }
-div#w-contents-details div.reviews div.head 
-{
+div#w-contents-details div.reviews h2 a {
+    font-size:12px;
+    font-weight:normal;
+    text-decoration:none;
+    color:#666;
+    display:block;
+}
+div#w-contents-details div.reviews div.head {
     float:left;
     width:180px;
 }
-div#w-contents-details div.reviews div.head img
-{
+div#w-contents-details div.reviews div.head img {
     float:left;
     width:64px;
 }
-div#w-contents-details div.reviews div.head h4 
-{
+div#w-contents-details div.reviews div.head h4 {
     padding-left:64px;
     font-size:11px;
 }
-div#w-contents-details div.reviews div.body 
-{
+div#w-contents-details div.reviews div.body {
     padding-left:190px;
 }
-div#w-contents-details div.reviews li 
-{
+div#w-contents-details div.reviews ul {
+    clear:left;
+}
+div#w-contents-details div.reviews li {
     padding-top:10px;
     margin-top:10px;
     border-top:1px solid #e0e0e0;
 }
-div#w-contents-details div.reviews h3 
-{
+div#w-contents-details div.reviews h3 {
     font-size:14px;
     margin-bottom:5px;
 }
-div#w-contents-details div.reviews p 
-{
+div#w-contents-details div.reviews p {
     font-size:12px;
     color:#666;
     line-height:15px;
