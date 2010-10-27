@@ -50,7 +50,9 @@
         var xml = '/LibraryService/' + id,
             target = document.getElementById('w-contents-left');
         target.className = 'loading';
-        XML.transformWithCallback(xml, 'widgets/contents/xsl/details.xsl', target);
+        XML.transformWithCallback(xml, 'widgets/contents/xsl/details.xsl', target, function () {
+            initReviews();
+        });
     }
 
     /**
@@ -93,6 +95,13 @@
                 href = $(this).attr('href');
                 $(this).attr('href', href + "/" + searchStr);
             });
+    }
+
+    /**
+    * Initialize reviews 
+    */
+    function initReviews() {
+        REVIEWS.init();
     }
 
     /**
