@@ -63,6 +63,7 @@
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
     <Content Include="img\book.jpg" />
+    <Content Include="img\no-img.gif" />
     <Content Include="index.html" />
     <Content Include="js\hash_reader.js" />
     <Content Include="js\jquery.rest.js" />
@@ -71,7 +72,9 @@
     <Content Include="js\page_handler.js" />
     <Content Include="js\router.js" />
     <Content Include="js\xml.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -120,12 +123,13 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>7556</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost/globantlib.Rest</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://local.localhost/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
