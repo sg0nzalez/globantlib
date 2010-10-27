@@ -10,7 +10,7 @@
             <img src="{Thumbnail}" />
             <ul>
                 <xsl:for-each select="Digitals/Digital">
-                    <li><a target="_blank" href="#contents/download/{ID}">Download <xsl:value-of select="Format" /></a></li>
+                    <li><a target="_blank" href="{Link}">Download <xsl:value-of select="Format" /></a></li>
                 </xsl:for-each>
                 <xsl:for-each select="Physicals/Physical">
                     <li><a href="#contents/calendar/{ID}">Get <xsl:value-of select="Type" /></a></li>
