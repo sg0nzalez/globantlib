@@ -46,7 +46,7 @@
           <xsl:for-each select="Review">
           <li>
             <div class="head">
-              <img src="{User/Thumbnail}" />
+              <img width="64" src="{User/Thumbnail}" />
               <h4>
                 <xsl:value-of select="User/Name"/>
               </h4>
