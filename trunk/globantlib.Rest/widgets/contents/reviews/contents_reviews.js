@@ -58,23 +58,10 @@ var CONTENTS_REVIEWS = (function () {
         data = {};
         return data;
     }
-    function loadList() {
-        var formData = gatherFormData;
-        showOverlay();
-        $.ajax({
-            "url": "data/fede.xml",
-            "type": "POST",
-            "data": formData,
-            "success": function () {
-                submitSuccess();
-            },
-            "error": function () {
-                submitError();
-            },
-            "complete": function () {
-                hideOverlay();
-            }
-        });
+    function loadList(callback) {
+        var service = '/LibraryService.mvc/Review?ContentId=' + contentId,
+            target = document.getElementById('w-contents-reviews');
+        XML.transformWithCallback(service, 'widgets/contents/reviews/list.xsl', target, callback);
     }
 
     /**
@@ -106,8 +93,23 @@ var CONTENTS_REVIEWS = (function () {
         var validation = validateReview();
         submitValidationErrors(validation.errors); // Show submit errors
         if (validation.errorCount === 0) {
-           hideForm();
-           loadList();
+            hideForm();
+            showOverlay();
+            $.ajax({
+                "url": '/LibraryService.mvc/Review?ContentId=' + contentId,
+                "type": "POST",
+                "data": gatherFormData(),
+                "success": function () {
+                    submitSuccess();
+                },
+                "error": function () {
+                    submitError();
+                },
+                "complete": function () {
+                    hideOverlay();
+                }
+            });
+            loadList();
         }
     }
 
@@ -115,7 +117,11 @@ var CONTENTS_REVIEWS = (function () {
     * Initialize widget
     */
     function initControls() {
-       $("#w-contents-new-review-show").click(function (e) {
+        $("#w-contents-new-review-form").submit(function (e) {
+            submitReview();
+            e.preventDefault();
+        });
+        $("#w-contents-new-review-show").click(function (e) {
             showForm();
             e.preventDefault();
         });
@@ -123,18 +129,11 @@ var CONTENTS_REVIEWS = (function () {
             hideForm();
             e.preventDefault();
         });
-        $("#w-contents-new-review-form").submit(function (e) {
-            submitReview();
-            e.preventDefault();
-        });
-        hideForm();
-        loadList();
     }
     function init(id) {
-        var service = 'data/reviews.xml',
-            target = document.getElementById('w-contents-reviews');
         contentId = id;
-        XML.transformWithCallback(service, 'widgets/contents/reviews/list.xsl', target, function () {
+        loadList(function () {
+            hideForm();
             initControls();
         });
     }
