@@ -1,0 +1,80 @@
+﻿ul.device_description li
+{
+    background: url("/img/list-item.png") no-repeat 0 0 transparent;
+    padding-left: 22px;   
+    font-size: 12px;
+    line-height: 18px;
+}
+
+ul.device_description
+{
+    width:200px;
+    margin: 0px auto 18px;    
+}
+
+li.first_li
+{
+    background: none !important;    
+    padding:0 !important;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.device_thumbnail
+{
+    margin: 15px 100px;
+    vertical-align:middle;
+    
+    
+}
+
+.device_name
+{
+    display: block;    
+    width: 80px;
+    margin: 10px auto;
+}
+
+.device_top, .device_bottom
+{
+    float: left;
+    width:100%; 
+    height: 50%;   
+}
+
+
+
+
+.device_name
+{
+    font-weight: bold;
+    font-size: 18px;
+        
+}
+
+.dispositive_button
+{
+     width: 70px;
+     text-align:center;
+     display: block;
+     color: White;
+     text-decoration: none;
+     font-size: 13px;
+    
+}
+
+.button_div
+{
+    width: 70px;
+    height: 30px;
+    background: url("/img/bck-btn.png") repeat-x 0 0  transparent;
+    margin: 0 0 0 110px;  
+    border: 1px solid #4F4F4F;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -border-radius: 5px;    
+}
+
+.button_div:hover
+{
+  background: url("/img/bck-btn-hover.png") repeat-x 0 0  transparent;  
+}
