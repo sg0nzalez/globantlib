@@ -18,22 +18,28 @@ namespace globantlib.DataAccess
 
         private Domain.Content Create(Content c)
         {
-            
-            return new Domain.Content()
+
+            if (c != null)
             {
-                ID =  (int)c.ID,
-                Title = c.Title,
-                Description = c.Description,
-                Author = c.Author,
-                Pages = c.Pages.HasValue ? c.Pages.Value : 0 ,
-                Publisher = c.Publisher,
-                Thumbnail = c.ISBN == null ? "img/no-img.gif" : @"http://bks8.books.google.com/books?vid=ISBN" + c.ISBN + @"&printsec=frontcover&img=1&zoom=1",
-                Released = c.Released.HasValue ? c.Released.Value : DateTime.MinValue,
-                hasDigital = c.Digitals.Count > 0 ? "Yes" : "No",
-                hasPhysical = c.Physicals.Count > 0 ? "Yes" : "No", 
-                Digitals = c.Digitals.Count > 0 ? Create(c.Digitals) : new List<Domain.DigitalContent>(),
-                Physicals = c.Physicals.Count > 0 ? Create(c.Physicals) : new List<Domain.PhysicalContent>()
-            };
+                return new Domain.Content()
+                    {
+                        ID = (int)c.ID,
+                        Title = c.Title,
+                        Description = c.Description,
+                        Author = c.Author,
+                        Pages = c.Pages.HasValue ? c.Pages.Value : 0,
+                        Publisher = c.Publisher,
+                        ISBN = c.ISBN,
+                        Thumbnail = c.ISBN == null ? "img/no-img.gif" : @"http://bks8.books.google.com/books?vid=ISBN" + c.ISBN + @"&printsec=frontcover&img=1&zoom=1",
+                        Released = c.Released.HasValue ? c.Released.Value.ToShortDateString() : "",
+                        hasDigital = c.Digitals.Count > 0 ? "Yes" : "No",
+                        hasPhysical = c.Physicals.Count > 0 ? "Yes" : "No",
+                        Digitals = c.Digitals.Count > 0 ? Create(c.Digitals) : new List<Domain.DigitalContent>(),
+                        Physicals = c.Physicals.Count > 0 ? Create(c.Physicals) : new List<Domain.PhysicalContent>()
+                    };
+            }
+            else
+                return null;
         }
 
         private Domain.DeviceType Create(DeviceType t)
