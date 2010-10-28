@@ -4,22 +4,19 @@
 
     <xsl:template match="/">
     
-        <xsl:for-each select="ArrayOfDevices/Device">
+        <xsl:for-each select="ArrayOfDeviceType/DeviceType">
           <div id="w-devices-list">
             <div class="device_item">
-              <img src="/img/{thumbnail}" alt="ipad" class="device_thumbnail"/>
+              <img src="/img/{Image}" alt="{Type}" class="device_thumbnail"/>
               <ul class="device_description">
                 <li>
-                  <span class="dispositive_attribute">Name: </span> <xsl:value-of select="name" />
+                  <span class="dispositive_attribute">Type: </span> <xsl:value-of select="Type" />
                 </li>
                 <li>
-                  <span class="dispositive_attribute">Type: </span> <xsl:value-of select="type" />
+                  <span class="dispositive_attribute">Quantity: </span> <xsl:value-of select="Quantity" />
                 </li>
                 <li>
-                  <span class="dispositive_attribute">Quantity: </span> <xsl:value-of select="quantity" />
-                </li>
-                <li>
-                  <span class="dispositive_attribute">Disponibility: </span> <xsl:value-of select="available" />
+                  <span class="dispositive_attribute">Disponibility: </span> <xsl:value-of select="Available" />
                 </li>
               </ul>
               <a class="dispositive_button" href="#devices/calendar/{type}">View Disponibility</a>

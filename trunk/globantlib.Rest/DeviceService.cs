@@ -26,6 +26,7 @@ namespace globantlib.Rest
             libEntities = new DeviceManager();
         }
 
+        [IncludeXmlDeclaration]
         [WebGet(UriTemplate = "", ResponseFormat = WebMessageFormat.Xml)]
         public List<DeviceType> GetCollection()
         {
@@ -34,17 +35,36 @@ namespace globantlib.Rest
         }
 
         [IncludeXmlDeclaration]
+        //[WebGet(UriTemplate = "View?Id={id}&Year={year}&Month={month}")]
         [WebGet(UriTemplate = "{id}")]
-        public List<Device> Get(string id)
+        public List<Device> Get(String id)
         {
             int typeID = int.Parse(id);
+            //int monthID = int.Parse(month);
+            //int yearID = int.Parse(year);
+            //List<Device> l = libEntities.GetDevicesbyType(typeID, monthID, yearID);
             List<Device> l = libEntities.GetDevicesbyType(typeID);
             return l;
         }
 
-        
-        
-        
+        [WebInvoke(UriTemplate = "", Method = "POST")]
+        public Device Create(Device instance)
+        {
+            return instance;
+        }
+
+        [WebInvoke(UriTemplate = "{id}", Method = "PUT")]
+        public Device Update(string id, Device instance)
+        {
+            return instance;
+        }
+
+        [WebInvoke(UriTemplate = "{id}", Method = "DELETE")]
+        public void Delete(string id)
+        {
+
+        }
+
         
        
     }
