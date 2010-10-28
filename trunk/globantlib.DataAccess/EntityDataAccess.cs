@@ -49,7 +49,7 @@ namespace globantlib.DataAccess
                 Type = t.Type,
                 Image = t.image,
                 Quantity = t.Devices.Count,
-                Available = ""
+                //Available = ""
             };
         }
 
