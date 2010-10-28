@@ -48,5 +48,6 @@ namespace globantlib.Domain
 
         [DataMember]
         public List<PhysicalContent> Physicals { get; set; }
+
     }
 }
