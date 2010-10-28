@@ -1,8 +1,0 @@
-C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.DataAccess\bin\Debug\globantlib.DataAccess.dll.config
-C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.DataAccess\bin\Debug\globantlib.DataAccess.dll
-C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.DataAccess\bin\Debug\globantlib.DataAccess.pdb
-C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.DataAccess\bin\Debug\globantlib.Domain.dll
-C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.DataAccess\bin\Debug\globantlib.Domain.pdb
-C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.DataAccess\obj\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.DataAccess\obj\Debug\globantlib.DataAccess.dll
-C:\Documents and Settings\gonzalo.fajardo\My Documents\Visual Studio 2010\Projects\globantlib\globantlib.DataAccess\obj\Debug\globantlib.DataAccess.pdb
