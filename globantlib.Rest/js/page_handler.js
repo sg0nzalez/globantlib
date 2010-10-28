@@ -1,36 +1,28 @@
 ﻿var PAGE_HANDLER = (function () {
 
-    function contentList(page, search) {
-        $('#w-contents-details, #w-contents-download, #w-contents-calendar, #w-devices-list').hide();
-        $('#w-contents-list').show();
-        CONTENTS.showList(page, search);
+    function contentList(page, query) {
+        CONTENTS_LOADER.show();
+        CONTENTS_LIST.init(page, query, function () {
+            CONTENTS_LIST.show();
+            CONTENTS_SEARCH.init(query);
+            CONTENTS_DETAILS.hide();
+            CONTENTS_LOADER.hide();
+        });
     }
 
     function contentDetails(id) {
-        $('#w-contents-search, #w-contents-list, #w-contents-download, #w-contents-calendar').hide();
-        $('#w-contents-details').show();
-        CONTENTS.showDetails(id)
-    }
-
-    function contentDownload(id) {
-        CONTENTS.showDownload(id);
-    }
-
-    function showDeviceList(page) {
-        $('#w-contents').hide();
-        $('#w-devices-list').show();
-        DEVICES.showList(page);
-    }
-
-    function showDeviceCalendar(id) {
-        DEVICES.showCalendar(id);
+        CONTENTS_LOADER.show();
+        CONTENTS_DETAILS.init(id, function () {
+            CONTENTS_DETAILS.show();
+            CONTENTS_SEARCH.hide();
+            CONTENTS_LIST.hide();
+            CONTENTS_LOADER.hide();
+        });
     }
 
     return {
         "contentList": contentList,
-        "contentDetails": contentDetails,
-        "contentDownload": contentDownload,
-        "deviceList": showDeviceList
+        "contentDetails": contentDetails
     }
 
 } ());
