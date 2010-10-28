@@ -5,6 +5,7 @@
 		<meta charset="UTF-8" />
 		<title>Contents List</title>
 		<link rel="stylesheet" href="/css/styles.css" />
+        <link rel="stylesheet" href="/css/mb.css" />
 		<link rel="stylesheet" href="/css/jqueryui/jqueryui.css" />
 		<script src="/js/modernizr.js"></script>
 	</head>
