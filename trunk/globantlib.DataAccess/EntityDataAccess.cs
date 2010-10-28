@@ -215,13 +215,14 @@ namespace globantlib.DataAccess
                           join r in libEntities.Reviews
                           on c.ID equals r.ContentID
                           where c.ID == id
-                          select new Domain.Review() 
+                          select new Domain.Review()
                           {
                               ID = (int)r.ID,
                               Title = r.Title,
                               Comment = r.Comment,
                               Submitted = (string)r.Submitted,
-                              Rate = r.Rate
+                              Rate = r.Rate,
+                              User = new Domain.User() { Name = r.User.FirstName, Thumbnail = "img/no-user.png" }
                           };
 
 
