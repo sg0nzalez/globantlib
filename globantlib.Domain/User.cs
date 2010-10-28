@@ -7,14 +7,12 @@ using System.Runtime.Serialization;
 namespace globantlib.Domain
 {
     [DataContract(Namespace = "")]
-    public class Error : IResponse
+    public class User
     {
-        public Error()
-        {
-            Message = "";
-        }
+        [DataMember]
+        public String Name { get; set; }
 
-        [DataMember(Order = 2)]
-        public String Message { get; set; }
+        [DataMember]
+        public String Thumbnail { get; set; }
     }
 }
