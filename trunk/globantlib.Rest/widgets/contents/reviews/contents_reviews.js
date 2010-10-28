@@ -98,22 +98,27 @@ var CONTENTS_REVIEWS = (function () {
         if (validation.errorCount === 0) {
             hideForm();
             showOverlay();
-            XML.sendAsXML();
-            /*$.ajax({
-            "url": '/LibraryService.mvc/Review?ContentId=' + contentId,
-            "type": "POST",
-            "data": gatherFormData(),
-            "success": function () {
-            submitSuccess();
-            },
-            "error": function () {
-            submitError();
-            },
-            "complete": function () {
-            hideOverlay();
-            }
+            /*XML.sendAsXML({
+                "data": gatherFormData(),
+                "type": "POST",
+                "service": '/LibraryService.mvc/Reviewddd?ContentId=',
+                "callback": function () { }
             });*/
-            loadList();
+            $.ajax({
+                "url": '/LibraryService.mvc/Review?ContentId=' + contentId,
+                "type": "POST",
+                "data": gatherFormData(),
+                "contentType": "application/xml",
+                "success": function () {
+                    submitSuccess();
+                },
+                "error": function () {
+                    submitError();
+                },
+                "complete": function () {
+                    hideOverlay();
+                }
+            });
         }
     }
 
