@@ -8,6 +8,7 @@
     <EntitySet Name="Leasable" EntityType="GlobantLibModel.Store.Leasable" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Lease" EntityType="GlobantLibModel.Store.Lease" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Physical" EntityType="GlobantLibModel.Store.Physical" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Review" EntityType="GlobantLibModel.Store.Review" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Users" EntityType="GlobantLibModel.Store.Users" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_Device_Device" Association="GlobantLibModel.Store.FK_Device_Device">
       <End Role="DeviceType" EntitySet="DeviceType" />
@@ -36,6 +37,14 @@
     <AssociationSet Name="FK_Physical_Leasable" Association="GlobantLibModel.Store.FK_Physical_Leasable">
       <End Role="Leasable" EntitySet="Leasable" />
       <End Role="Physical" EntitySet="Physical" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Review_Content" Association="GlobantLibModel.Store.FK_Review_Content">
+      <End Role="Content" EntitySet="Content" />
+      <End Role="Review" EntitySet="Review" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Review_Users" Association="GlobantLibModel.Store.FK_Review_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Review" EntitySet="Review" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Content">
@@ -102,6 +111,18 @@
     <Property Name="ContentID" Type="numeric" Nullable="false" />
     <Property Name="LeasableID" Type="numeric" Nullable="false" />
     <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ContentID" Type="numeric" Nullable="false" />
+    <Property Name="UserID" Type="numeric" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="250" />
+    <Property Name="Rate" Type="int" Nullable="false" />
+    <Property Name="Submitted" Type="nvarchar" Nullable="false" MaxLength="50" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -195,6 +216,30 @@
       </Principal>
       <Dependent Role="Physical">
         <PropertyRef Name="LeasableID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Review_Content">
+    <End Role="Content" Type="GlobantLibModel.Store.Content" Multiplicity="1" />
+    <End Role="Review" Type="GlobantLibModel.Store.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Content">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="ContentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Review_Users">
+    <End Role="Users" Type="GlobantLibModel.Store.Users" Multiplicity="1" />
+    <End Role="Review" Type="GlobantLibModel.Store.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="UserID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

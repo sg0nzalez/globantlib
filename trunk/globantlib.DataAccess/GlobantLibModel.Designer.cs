@@ -25,6 +25,8 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("GlobantLibModel", "FK_Physical_Leasable", "Leasable", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(globantlib.DataAccess.Leasable), "Physical", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(globantlib.DataAccess.Physical), true)]
 [assembly: EdmRelationshipAttribute("GlobantLibModel", "FK_Lease_Users", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(globantlib.DataAccess.User), "Lease", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(globantlib.DataAccess.Lease), true)]
 [assembly: EdmRelationshipAttribute("GlobantLibModel", "FK_Device_Device", "DeviceType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(globantlib.DataAccess.DeviceType), "Device", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(globantlib.DataAccess.Device), true)]
+[assembly: EdmRelationshipAttribute("GlobantLibModel", "FK_Review_Content", "Content", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(globantlib.DataAccess.Content), "Review", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(globantlib.DataAccess.Review), true)]
+[assembly: EdmRelationshipAttribute("GlobantLibModel", "FK_Review_Users", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(globantlib.DataAccess.User), "Review", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(globantlib.DataAccess.Review), true)]
 
 #endregion
 
@@ -203,6 +205,22 @@ namespace globantlib.DataAccess
             }
         }
         private ObjectSet<DeviceType> _DeviceTypes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Review> Reviews
+        {
+            get
+            {
+                if ((_Reviews == null))
+                {
+                    _Reviews = base.CreateObjectSet<Review>("Reviews");
+                }
+                return _Reviews;
+            }
+        }
+        private ObjectSet<Review> _Reviews;
 
         #endregion
         #region AddTo Methods
@@ -269,6 +287,14 @@ namespace globantlib.DataAccess
         public void AddToDeviceTypes(DeviceType deviceType)
         {
             base.AddObject("DeviceTypes", deviceType);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Reviews EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToReviews(Review review)
+        {
+            base.AddObject("Reviews", review);
         }
 
         #endregion
@@ -544,6 +570,28 @@ namespace globantlib.DataAccess
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Physical>("GlobantLibModel.FK_Physical_Content", "Physical", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GlobantLibModel", "FK_Review_Content", "Review")]
+        public EntityCollection<Review> Reviews
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Review>("GlobantLibModel.FK_Review_Content", "Review");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Review>("GlobantLibModel.FK_Review_Content", "Review", value);
                 }
             }
         }
@@ -1668,6 +1716,294 @@ namespace globantlib.DataAccess
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GlobantLibModel", Name="Review")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Review : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Review object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="contentID">Initial value of the ContentID property.</param>
+        /// <param name="userID">Initial value of the UserID property.</param>
+        /// <param name="title">Initial value of the Title property.</param>
+        /// <param name="rate">Initial value of the Rate property.</param>
+        /// <param name="submitted">Initial value of the Submitted property.</param>
+        public static Review CreateReview(global::System.Decimal id, global::System.Decimal contentID, global::System.Decimal userID, global::System.String title, global::System.Int32 rate, global::System.String submitted)
+        {
+            Review review = new Review();
+            review.ID = id;
+            review.ContentID = contentID;
+            review.UserID = userID;
+            review.Title = title;
+            review.Rate = rate;
+            review.Submitted = submitted;
+            return review;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Decimal _ID;
+        partial void OnIDChanging(global::System.Decimal value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal ContentID
+        {
+            get
+            {
+                return _ContentID;
+            }
+            set
+            {
+                OnContentIDChanging(value);
+                ReportPropertyChanging("ContentID");
+                _ContentID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ContentID");
+                OnContentIDChanged();
+            }
+        }
+        private global::System.Decimal _ContentID;
+        partial void OnContentIDChanging(global::System.Decimal value);
+        partial void OnContentIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal UserID
+        {
+            get
+            {
+                return _UserID;
+            }
+            set
+            {
+                OnUserIDChanging(value);
+                ReportPropertyChanging("UserID");
+                _UserID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserID");
+                OnUserIDChanged();
+            }
+        }
+        private global::System.Decimal _UserID;
+        partial void OnUserIDChanging(global::System.Decimal value);
+        partial void OnUserIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Comment
+        {
+            get
+            {
+                return _Comment;
+            }
+            set
+            {
+                OnCommentChanging(value);
+                ReportPropertyChanging("Comment");
+                _Comment = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Comment");
+                OnCommentChanged();
+            }
+        }
+        private global::System.String _Comment;
+        partial void OnCommentChanging(global::System.String value);
+        partial void OnCommentChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Rate
+        {
+            get
+            {
+                return _Rate;
+            }
+            set
+            {
+                OnRateChanging(value);
+                ReportPropertyChanging("Rate");
+                _Rate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Rate");
+                OnRateChanged();
+            }
+        }
+        private global::System.Int32 _Rate;
+        partial void OnRateChanging(global::System.Int32 value);
+        partial void OnRateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Submitted
+        {
+            get
+            {
+                return _Submitted;
+            }
+            set
+            {
+                OnSubmittedChanging(value);
+                ReportPropertyChanging("Submitted");
+                _Submitted = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Submitted");
+                OnSubmittedChanged();
+            }
+        }
+        private global::System.String _Submitted;
+        partial void OnSubmittedChanging(global::System.String value);
+        partial void OnSubmittedChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GlobantLibModel", "FK_Review_Content", "Content")]
+        public Content Content
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Content>("GlobantLibModel.FK_Review_Content", "Content").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Content>("GlobantLibModel.FK_Review_Content", "Content").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Content> ContentReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Content>("GlobantLibModel.FK_Review_Content", "Content");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Content>("GlobantLibModel.FK_Review_Content", "Content", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GlobantLibModel", "FK_Review_Users", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GlobantLibModel.FK_Review_Users", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GlobantLibModel.FK_Review_Users", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GlobantLibModel.FK_Review_Users", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GlobantLibModel.FK_Review_Users", "User", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="GlobantLibModel", Name="User")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -1862,6 +2198,28 @@ namespace globantlib.DataAccess
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Lease>("GlobantLibModel.FK_Lease_Users", "Lease", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GlobantLibModel", "FK_Review_Users", "Review")]
+        public EntityCollection<Review> Reviews
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Review>("GlobantLibModel.FK_Review_Users", "Review");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Review>("GlobantLibModel.FK_Review_Users", "Review", value);
                 }
             }
         }

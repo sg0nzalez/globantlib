@@ -119,7 +119,7 @@ namespace globantlib.DataAccess
 
             count = query.Count<Content>();
 
-            var result = query.Skip(Page*PageSize).Take(PageSize);
+            var result = query.Skip(Page * PageSize).Take(PageSize);
 
             foreach (var item in result)
             {
@@ -199,6 +199,33 @@ namespace globantlib.DataAccess
             }
 
             return lResult;
+        }
+
+        public void Create(Domain.Content instance)
+        {
+            Content c = new Content()
+            {
+
+            };
+        }
+
+        public List<Domain.Review> GetReviews(int id)
+        {
+            var reviews = from c in libEntities.Contents
+                          join r in libEntities.Reviews
+                          on c.ID equals r.ContentID
+                          where c.ID == id
+                          select new Domain.Review() 
+                          {
+                              ID = (int)r.ID,
+                              Title = r.Title,
+                              Comment = r.Comment,
+                              Submitted = (string)r.Submitted,
+                              Rate = r.Rate
+                          };
+
+
+            return reviews.ToList<Domain.Review>();
         }
     }
 }

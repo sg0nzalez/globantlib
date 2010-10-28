@@ -37,6 +37,15 @@
       <End Role="DeviceType" EntitySet="DeviceTypes" />
       <End Role="Device" EntitySet="Devices" />
     </AssociationSet>
+    <EntitySet Name="Reviews" EntityType="GlobantLibModel.Review" />
+    <AssociationSet Name="FK_Review_Content" Association="GlobantLibModel.FK_Review_Content">
+      <End Role="Content" EntitySet="Contents" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Review_Users" Association="GlobantLibModel.FK_Review_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Content">
     <Key>
@@ -52,6 +61,7 @@
     <Property Type="DateTime" Name="Released" />
     <Property Type="Int32" Name="Pages" />
     <Property Type="String" Name="ISBN" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Reviews" Relationship="GlobantLibModel.FK_Review_Content" FromRole="Content" ToRole="Review" />
   </EntityType>
   <EntityType Name="Device">
     <Key>
@@ -118,6 +128,7 @@
     <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Type="String" Name="Password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Leases" Relationship="GlobantLibModel.FK_Lease_Users" FromRole="User" ToRole="Lease" />
+    <NavigationProperty Name="Reviews" Relationship="GlobantLibModel.FK_Review_Users" FromRole="User" ToRole="Review" />
   </EntityType>
   <Association Name="FK_Digital_Content">
     <End Type="GlobantLibModel.Content" Role="Content" Multiplicity="1" />
@@ -209,6 +220,44 @@
       </Principal>
       <Dependent Role="Device">
         <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Decimal" Name="ID" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Decimal" Name="ContentID" Nullable="false" Precision="18" Scale="0" />
+    <Property Type="Decimal" Name="UserID" Nullable="false" Precision="18" Scale="0" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Comment" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Rate" Nullable="false" />
+    <Property Type="String" Name="Submitted" Nullable="false" />
+    <NavigationProperty Name="Content" Relationship="GlobantLibModel.FK_Review_Content" FromRole="Review" ToRole="Content" />
+    <NavigationProperty Name="User" Relationship="GlobantLibModel.FK_Review_Users" FromRole="Review" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Review_Content">
+    <End Type="GlobantLibModel.Content" Role="Content" Multiplicity="1" />
+    <End Type="GlobantLibModel.Review" Role="Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Content">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="ContentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Review_Users">
+    <End Type="GlobantLibModel.User" Role="User" Multiplicity="1" />
+    <End Type="GlobantLibModel.Review" Role="Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="UserID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
