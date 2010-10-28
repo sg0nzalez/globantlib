@@ -312,10 +312,10 @@ div#w-contents-details div.thumbnail li a {
     text-decoration:none;
     color:#333;
 }
-div#w-contents-details div.new-review{
+div#w-contents-details div.new-review {
     padding:10px 0;
     float:left;
-    width:100%;
+    width:100% !important;
     background:#f0f0f0;
 }
 div#w-contents-details div.new-review div.field {
@@ -323,9 +323,24 @@ div#w-contents-details div.new-review div.field {
     width:100%;
     margin-bottom:5px;
 }
+div#w-contents-details div.new-review div.field span {
+    font-size:11px;
+    color:#f00;
+    margin-left:90px;
+}
 div#w-contents-details div.new-review div.field.submit {
     padding-left:90px;
     margin-bottom:0;
+}
+div#w-contents-details div.new-review div.field.submit a {
+    line-height:26px;
+    font-size:14px;
+    margin-left:10px;
+    text-decoration:none;
+    color:#666;
+}
+div#w-contents-details div.new-review div.field.submit a:hover {
+    color:#000;
 }
 div#w-contents-details div.new-review div.field label {
     float:left;
@@ -347,46 +362,55 @@ textarea#w-contents-review-text {
     width:630px;
     height:100px;
 }
-div#w-contents-details div.reviews h2 {
+div#w-contents-reviews {
+    float:left;
+    width:100%;
+}
+div#w-contents-reviews div.loading {
+    font-size:14px;
+    font-weight:bold;
+    color:#666;
+}
+div#w-contents-reviews h2 {
     color:#333;
     margin-bottom:10px;
     line-height:20px;
 }
-div#w-contents-details div.reviews h2 a {
+div#w-contents-reviews h2 a {
     font-size:12px;
     font-weight:normal;
     text-decoration:none;
     color:#666;
     display:block;
 }
-div#w-contents-details div.reviews div.head {
+div#w-contents-reviews div.head {
     float:left;
     width:180px;
 }
-div#w-contents-details div.reviews div.head img {
+div#w-contents-reviews div.head img {
     float:left;
     width:64px;
 }
-div#w-contents-details div.reviews div.head h4 {
+div#w-contents-reviews div.head h4 {
     padding-left:64px;
     font-size:11px;
 }
-div#w-contents-details div.reviews div.body {
+div#w-contents-reviews div.body {
     padding-left:190px;
 }
-div#w-contents-details div.reviews ul {
+div#w-contents-reviews ul {
     clear:left;
 }
-div#w-contents-details div.reviews li {
+div#w-contents-reviews li {
     padding-top:10px;
     margin-top:10px;
     border-top:1px solid #e0e0e0;
 }
-div#w-contents-details div.reviews h3 {
+div#w-contents-reviews h3 {
     font-size:14px;
     margin-bottom:5px;
 }
-div#w-contents-details div.reviews p {
+div#w-contents-reviews p {
     font-size:12px;
     color:#666;
     line-height:15px;
