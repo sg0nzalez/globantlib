@@ -116,15 +116,15 @@
         function sendObj(str) {
             var req = createXMLHttpRequest();
             req.open(options.type, options.service, true);
-            req.setRequestHeader("Content-Type", "application/xml");
+            req.setRequestHeader("Content-Type", "application/xml; charset=UTF-8");
             req.onreadystatechange = options.callback;
             req.send(str);
         }
         if (typeof obj === 'string') {
-            sendObj(obj);
+            sendObj(options.data);
         }
         else if (typeof obj === 'object') {
-            sendObj("<" + options.root + ">" + flatten(obj) + "</" + options.root + ">");
+            sendObj("<" + options.root + ">" + flatten(options.data) + "</" + options.root + ">");
         }
     }
 
@@ -134,7 +134,7 @@
         "transformDocument": transformDocument,
         "transformWithCallback": transformWithCallback,
         "sendAsXML": sendAsXML,
-        "flatten" : flatten
+        "flatten": flatten
     }
 
 } ());
