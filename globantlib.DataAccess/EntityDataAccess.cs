@@ -47,7 +47,9 @@ namespace globantlib.DataAccess
             {
                 ID = (int)t.ID,
                 Type = t.Type,
-                Image = t.image
+                Image = t.image,
+                Quantity = t.Devices.Count,
+                Available = ""
             };
         }
 
@@ -56,8 +58,6 @@ namespace globantlib.DataAccess
             return new Domain.Device()
             {
                 ID = (int)d.ID,
-                LeasableID = (int)d.LeasableID,
-                TypeID = (int)d.TypeID
             };
         }
 
@@ -65,7 +65,7 @@ namespace globantlib.DataAccess
         {
             return new Domain.Lease()
             {
-                ID = (int)l.ID,
+                //ID = (int)l.ID,
                 StartDate = l.StartDate,
                 EndDate = l.EndDate
             };
@@ -140,9 +140,15 @@ namespace globantlib.DataAccess
 
             var devices = libEntities.Devices.Where<Device>(t => t.TypeID == typeID);
 
+            //var days = DateTime.DaysInMonth(year, month);
+
+            //var dateRequired = new DateTime(year, month, 1);
+
             foreach (var device in devices)
             {
-                var leases = libEntities.Leases.Where<Lease>(l => l.LeasableID == device.LeasableID);
+                var leases = libEntities.Leases.Where<Lease>(
+                    l => l.LeasableID == device.LeasableID);
+                
                 List<Domain.Lease> lLease = new List<Domain.Lease>();
                 foreach (var lease in leases)
                 {
@@ -151,6 +157,21 @@ namespace globantlib.DataAccess
                 Domain.Device d = Create(device);
                 d.Leases = lLease;
                 lResult.Add(d);
+                
+                /*var Availability = new List<int>();
+
+                Domain.Device d = Create(device);
+                for (int i = 1; i <= days; i++)
+                {
+                    var query = libEntities.Leases.Where(c => c.Date > dateRequired);
+                    if(query.Count<Lease>() > 0) 
+                    {
+                        Availability.Add(i);
+                    }
+                    dateRequired.AddDays(1);
+                }
+                d.Availability = Availability;
+                lResult.Add(d);*/
             }
 
             return lResult;
@@ -172,14 +193,12 @@ namespace globantlib.DataAccess
         {
             List<Domain.DeviceType> lResult = new List<Domain.DeviceType>();
 
-            foreach (var item in libEntities.DeviceTypes)
+            foreach (var item in libEntities.DeviceTypes.Include("Devices"))
             {
                 lResult.Add(Create(item));
             }
 
             return lResult;
         }
-        
-
     }
 }

@@ -18,6 +18,14 @@ namespace globantlib.Domain
         public string Type { get; set; }
 
         [DataMember]
+        public int Quantity;
+
+        [DataMember]
+        public string Available;
+
+        [DataMember]
         public string Image { get; set; }
+
+        
     }
 }

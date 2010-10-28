@@ -4,7 +4,7 @@
     * Load and show the list of contents
     */
     function showList(page) {
-        var xml = '/data/devicesList.xml',
+        var xml = '/DeviceService.mvc/',
             target = document.getElementById('w-devices-list');
         if (page) {
             xml += '?page=' + page;

@@ -11,9 +11,10 @@ namespace globantlib.Domain
     [DataContract(Namespace = "")]
     public class Lease
     {
+        /*
         [DataMember]
         public int ID { get; set; }
-
+        */
         [DataMember]
         public DateTime StartDate { get; set; }
 

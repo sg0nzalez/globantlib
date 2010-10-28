@@ -27,9 +27,21 @@
             });
         };
     </script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("books", "0");
+
+        function initialize() {
+            var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
+            viewer.load('ISBN:0738531367');
+        }
+
+        google.setOnLoadCallback(initialize);
+    </script>
 </head>
 <body>
     <input onkeyup="search(this.value)" />
     <table id="list"></table>
+    <div id="viewerCanvas" style="width: 600px; height: 500px"></div>
 </body>
 </html>
