@@ -51,7 +51,7 @@
             target = document.getElementById('w-contents-left');
         target.className = 'loading';
         XML.transformWithCallback(xml, 'widgets/contents/xsl/details.xsl', target, function () {
-            initReviews();
+            initReviews(id);
         });
     }
 
@@ -100,8 +100,8 @@
     /**
     * Initialize reviews 
     */
-    function initReviews() {
-        REVIEWS.init();
+    function initReviews(id) {
+        REVIEWS.init(id);
     }
 
     /**
