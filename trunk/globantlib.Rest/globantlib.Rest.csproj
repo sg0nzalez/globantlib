@@ -141,12 +141,14 @@
   <ItemGroup>
     <Compile Include="administrator\adminTemplate.Master.cs">
       <DependentUpon>adminTemplate.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="administrator\adminTemplate.Master.designer.cs">
       <DependentUpon>adminTemplate.Master</DependentUpon>
     </Compile>
     <Compile Include="administrator\BooksCRUD.aspx.cs">
       <DependentUpon>BooksCRUD.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="administrator\BooksCRUD.aspx.designer.cs">
       <DependentUpon>BooksCRUD.aspx</DependentUpon>

@@ -101,13 +101,14 @@ var CONTENTS_REVIEWS = (function () {
             /*XML.sendAsXML({
                 "data": gatherFormData(),
                 "type": "POST",
+                "root" : "Review",
                 "service": '/LibraryService.mvc/Reviewddd?ContentId=',
                 "callback": function () { }
             });*/
             $.ajax({
                 "url": '/LibraryService.mvc/Review?ContentId=' + contentId,
                 "type": "POST",
-                "data": gatherFormData(),
+                "data": XML.flatten(gatherFormData(), "Review"),
                 "contentType": "application/xml",
                 "success": function () {
                     submitSuccess();

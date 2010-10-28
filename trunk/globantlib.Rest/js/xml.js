@@ -96,7 +96,7 @@
     /**
     * Flattens the object to XML
     */
-    function flatten(obj) {
+    function flatten(obj, root) {
         var str = "";
         for (i in obj) {
             if (typeof obj[i] === 'string') {
@@ -106,7 +106,7 @@
                 str += flatten(obj[i]);
             }
         }
-        return str;
+        return "<" + root + ">" + str + "</" + root + ">"
     }
 
     /**
@@ -124,7 +124,7 @@
             sendObj(options.data);
         }
         else if (typeof obj === 'object') {
-            sendObj("<" + options.root + ">" + flatten(options.data) + "</" + options.root + ">");
+            sendObj(flatten(object.data));
         }
     }
 
