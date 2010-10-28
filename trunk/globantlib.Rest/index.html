@@ -28,6 +28,14 @@
 			
 				<div id="w-contents">
 					<div id="w-contents-left">
+                        <div id="w-contents-search">
+                          <form action="#" method="get">
+                            <input class="text" type="text" placeholder="Search Contents" />
+                            <input class="submit" type="submit" value="Search" />
+                          </form>
+                        </div> <!-- #w-contents-search -->
+                        <div id="w-contents-list"></div>
+                        <div id="w-contents-details"></div>
 					</div> <!-- #content-left -->
 					<div id="w-contents-right">
 						<div id="w-contents-ipad"></div> <!-- #w-contents-ipad -->
@@ -51,15 +59,21 @@
 	
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
-		<script src="widgets/contents/js/contents.js"></script>
-        <script src="widgets/devices/js/devices.js"></script>
-		<script src="widgets/reviews/js/reviews.js"></script>
+
+        <script src="widgets/contents/list/contents_list.js"></script>
+        <script src="widgets/contents/details/contents_details.js"></script>
+        <script src="widgets/contents/search/contents_search.js"></script>
+		<script src="widgets/contents/reviews/contents_reviews.js"></script>
+		<script src="widgets/contents/loader/contents_loader.js"></script>
 		<script src="js/xml.js"></script>
 		<script src="js/router.js"></script>
 		<script src="js/page_handler.js"></script>
 		<script src="js/hash_reader.js"></script>
 		
 		<script>
+            /**
+            * Application kickstart
+            */
 			$(function () {
 				HASH_READER.init();
 			});
