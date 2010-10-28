@@ -53,6 +53,37 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\images\digital.png" />
+    <Content Include="css\images\print.png" />
+    <Content Include="css\jqueryui\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="css\jqueryui\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="css\jqueryui\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="css\jqueryui\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="css\jqueryui\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="css\jqueryui\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="css\jqueryui\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="css\jqueryui\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="css\jqueryui\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="css\jqueryui\images\ui-icons_222222_256x240.png" />
+    <Content Include="css\jqueryui\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="css\jqueryui\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="css\jqueryui\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="css\jqueryui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="css\jqueryui\jquery-ui-1.8.5.custom.css" />
+    <Content Include="css\jqueryui\jquery.ui.accordion.css" />
+    <Content Include="css\jqueryui\jquery.ui.autocomplete.css" />
+    <Content Include="css\jqueryui\jquery.ui.base.css" />
+    <Content Include="css\jqueryui\jquery.ui.button.css" />
+    <Content Include="css\jqueryui\jquery.ui.core.css" />
+    <Content Include="css\jqueryui\jquery.ui.datepicker.css" />
+    <Content Include="css\jqueryui\jquery.ui.dialog.css" />
+    <Content Include="css\jqueryui\jquery.ui.progressbar.css" />
+    <Content Include="css\jqueryui\jquery.ui.resizable.css" />
+    <Content Include="css\jqueryui\jquery.ui.selectable.css" />
+    <Content Include="css\jqueryui\jquery.ui.slider.css" />
+    <Content Include="css\jqueryui\jquery.ui.tabs.css" />
+    <Content Include="css\jqueryui\jquery.ui.theme.css" />
+    <Content Include="css\jqueryui\jqueryui.css" />
     <Content Include="css\styles.css" />
     <Content Include="data\content1.xml">
       <SubType>Designer</SubType>
@@ -63,12 +94,18 @@
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
     <Content Include="img\book.jpg" />
+    <Content Include="img\ipad.jpg" />
+    <Content Include="img\kindle.jpg" />
+    <Content Include="img\loading.gif" />
+    <Content Include="img\netbook.jpg" />
     <Content Include="img\no-img.gif" />
+    <Content Include="img\overlay_background.png" />
     <Content Include="index.html" />
     <Content Include="js\hash_reader.js" />
     <Content Include="js\jquery.rest.js" />
     <Content Include="js\jquery.rest.min.js" />
     <Content Include="js\json2.js" />
+    <Content Include="js\modernizr.js" />
     <Content Include="js\page_handler.js" />
     <Content Include="js\router.js" />
     <Content Include="js\xml.js" />
@@ -88,7 +125,7 @@
     <Content Include="widgets\contents\xsl\list.xsl">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="widgets\reviews\js\reviews.js" />
+    <Content Include="widgets\devices\ViewDevices.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DeviceService.cs" />
@@ -97,6 +134,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="widgets\devices\ViewDevices.aspx.cs">
+      <DependentUpon>ViewDevices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="widgets\devices\ViewDevices.aspx.designer.cs">
+      <DependentUpon>ViewDevices.aspx</DependentUpon>
+    </Compile>
     <Compile Include="XMLDeclaration.cs" />
   </ItemGroup>
   <ItemGroup>

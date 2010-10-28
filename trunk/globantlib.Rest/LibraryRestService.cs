@@ -13,6 +13,9 @@ namespace globantlib.Rest
     // Start the service and browse to http://<machine_name>:<port>/Service1/help to view the service's generated help page
     // NOTE: By default, a new instance of the service is created for each call; change the InstanceContextMode to Single if you want
     // a single instance of the service to process all calls.	
+    [ServiceKnownType(typeof(Content))]
+    [ServiceKnownType(typeof(Response))]
+    [ServiceKnownType(typeof(Error))]
     [ServiceContract]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
@@ -35,8 +38,9 @@ namespace globantlib.Rest
 
         [IncludeXmlDeclaration]
         [WebGet(UriTemplate = "Search?Text={text}&Page={page}", RequestFormat= WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle=WebMessageBodyStyle.Bare)]
-        public Response SearchCollection(String text, String page)
+        public IResponse SearchCollection(String text, String page)
         {
+            IResponse result;
             int page_size = 4;
             int actual_page, count;
             int.TryParse(page,out actual_page);
@@ -53,13 +57,15 @@ namespace globantlib.Rest
             {
                 resp.Pages.Add(new Page() { number = i+1, current = false });
             }
-
-            
-
-            if(resp.Pages.Count > 0)
+            if (resp.Pages.Count > 0)
+            {
                 resp.Pages[actual_page].current = true;
+                result = resp;
+            }
+            else
+                result = new Error() { Message = "Not found" };            
 
-            return resp;
+            return result;
         }
 
         [WebInvoke(UriTemplate = "", Method = "POST")]
@@ -72,10 +78,15 @@ namespace globantlib.Rest
 
         [IncludeXmlDeclaration]
         [WebGet(UriTemplate = "{id}")]
-        public Content Get(string id)
+        public IResponse Get(string id)
         {
             int i = int.Parse(id);
-            return libEntities.GetContent(i);
+            IResponse result = libEntities.GetContent(i);
+
+            if (result == null)
+                result = new Error() { Message = "Not Found" };
+
+            return result;
         }
 
         [WebInvoke(UriTemplate = "{id}", Method = "PUT")]
