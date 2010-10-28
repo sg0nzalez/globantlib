@@ -88,6 +88,7 @@
     <Content Include="widgets\contents\xsl\list.xsl">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="widgets\reviews\js\reviews.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DeviceService.cs" />

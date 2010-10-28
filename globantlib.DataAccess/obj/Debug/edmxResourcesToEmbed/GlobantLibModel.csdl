@@ -51,6 +51,7 @@
     <Property Type="String" Name="Publisher" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Type="DateTime" Name="Released" />
     <Property Type="Int32" Name="Pages" />
+    <Property Type="String" Name="ISBN" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Device">
     <Key>
@@ -61,6 +62,7 @@
     <NavigationProperty Name="Leasable" Relationship="GlobantLibModel.FK_Device_Leasable" FromRole="Device" ToRole="Leasable" />
     <Property Type="Decimal" Name="TypeID" Nullable="false" Precision="18" Scale="0" />
     <NavigationProperty Name="DeviceType" Relationship="GlobantLibModel.FK_Device_Device" FromRole="Device" ToRole="DeviceType" />
+    <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Digital">
     <Key>
@@ -89,10 +91,10 @@
     <Property Type="Decimal" Name="ID" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="Decimal" Name="LeasableID" Nullable="false" Precision="18" Scale="0" />
     <Property Type="Decimal" Name="User" Nullable="false" Precision="18" Scale="0" />
-    <Property Type="DateTime" Name="Date" Nullable="false" />
-    <Property Type="Int32" Name="Period" Nullable="false" />
     <NavigationProperty Name="Leasable" Relationship="GlobantLibModel.FK_Lease_Leasable" FromRole="Lease" ToRole="Leasable" />
     <NavigationProperty Name="User1" Relationship="GlobantLibModel.FK_Lease_Users" FromRole="Lease" ToRole="User" />
+    <Property Type="DateTime" Name="StartDate" Nullable="false" />
+    <Property Type="DateTime" Name="EndDate" Nullable="false" />
   </EntityType>
   <EntityType Name="Physical">
     <Key>
