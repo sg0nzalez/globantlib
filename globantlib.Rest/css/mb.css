@@ -78,3 +78,52 @@ li.first_li
 {
   background: url("/img/bck-btn-hover.png") repeat-x 0 0  transparent;  
 }
+
+
+
+/*
+*Administrator
+*/
+    .fs_left, .fs_right
+    {
+        float: left;
+        min-height: 250px;
+        border: 1px solid #8F8F8F;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -border-radius: 5px;
+    }
+    
+    .fs_left
+    {   
+        margin: 50px 15px 0 60px;    
+        width: 500px;
+    }
+    
+    .fs_right
+    {
+        margin: 50px 60px 0 15px;
+        width: 300px;
+    }
+    
+    .fs_right legend, .fs_left legend
+    {
+        margin-left: 20px;    
+        padding: 0 2px;
+        font-size: 14px;
+    }
+    
+    #admin-panel
+    {
+        float: left;
+        width: 100%;    
+    }
+    
+    .ul_form
+    {
+        list-style: none;
+           
+     }
+/*
+*End Administrator
+*/
