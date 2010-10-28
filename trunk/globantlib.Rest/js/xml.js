@@ -3,9 +3,23 @@
     var currentCall = null;
 
     /**
+    * Returns XMLHttpRequest depending on the user agent
+    */
+    function createXMLHttpRequest() {
+        var obj;
+        if (window.XMLHttpRequest) {
+            obj = new XMLHttpRequest();
+        }
+        else {
+            obj = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        return obj;
+    }
+
+    /**
     * Creates an empty XML document
     */
-    function createDocument() {
+    function createDocument(body) {
         var doc;
         if (window.DOMParser) {
             doc = (new DOMParser()).parseFromString('', 'text/xml');
@@ -23,12 +37,7 @@
         if (currentCall) {
             currentCall.abort();
         }
-        if (window.XMLHttpRequest) {
-            currentCall = new XMLHttpRequest();
-        }
-        else {
-            currentCall = new ActiveXObject('Microsoft.XMLHTTP');
-        }
+        currentCall = createXMLHttpRequest();
         currentCall.open("GET", url, !!callback);
         currentCall.setRequestHeader("Accept", "application/xml");
         if (callback) {
@@ -82,6 +91,37 @@
             }
         }
         loadData();
+    }
+
+    /**
+    * Gets an object and returns an XML document
+    */
+    function sendAsXML(obj, root, service, callback) {
+        function flattenObj(obj) {
+            var str = "";
+            for (i in obj) {
+                if (typeof obj[i] === 'string') {
+                    str += "<" + i + ">" + obj[i] + "</" + i + ">";
+                }
+                else {
+                    str += flattenObj(obj[i]);
+                }
+            }
+            return str;
+        }
+        function sendObj(str) {
+            var req = createXMLHttpRequest();
+            req.open("POST", service, true);
+            req.setRequestHeader("Content-Type", "application/xml");
+            req.onreadystatechange = callback;
+            req.send(str);
+        }
+        if (typeof obj === 'string') {
+            sendObj(obj);
+        }
+        else if (typeof obj === 'object') {
+            sendObj("<" + root + ">" + flattenObj(obj) + "</" + root + ">");
+        }
     }
 
     return {
