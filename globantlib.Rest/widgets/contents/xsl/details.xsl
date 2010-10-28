@@ -90,42 +90,28 @@
             <!-- new review form -->
             
             <ul>
-              <li>
-                <div class="head">
-                  <img src="thumbnail.png" />
-                  <h4>Federico Baña</h4>
-                </div>
-                <div class="body">
-                  <h3>Really nice book</h3>
-                  <img src="img/stars5.gif" />
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                </div>
-              </li>
-              <!-- review -->
-              <li>
-                <div class="head">
-                  <img src="thumbnail.png" />
-                  <h4>Federico Baña</h4>
-                </div>
-                <div class="body">
-                  <h3>Really nice book</h3>
-                  <img src="img/stars5.gif" />
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                </div>
-              </li>
-              <!-- review -->
-              <li>
-                <div class="head">
-                  <img src="thumbnail.png" />
-                  <h4>Federico Baña</h4>
-                </div>
-                <div class="body">
-                  <h3>Really nice book</h3>
-                  <img src="img/stars5.gif" />
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                </div>
-              </li>
-              <!-- review -->
+              <xsl:for-each select="Reviews/Review">
+                <li>
+                  <div class="head">
+                    <img src="{User/Thumbnail}" />
+                    <h4>
+                      <xsl:value-of select="User/Name" />
+                    </h4>                    
+                  </div>
+                  <div class="body">
+                    <h3>
+                      <xsl:value-of select="Title" />
+                    </h3>
+                    <img src="img/stars5.gif" />
+                    <p>
+                      <xsl:value-of select="Submitted" />
+                    </p>
+                    <p>
+                      <xsl:value-of select="Comment" />
+                    </p>
+                  </div>
+                </li>
+              </xsl:for-each>
             </ul>
           </div>
         </div> <!-- .tab-contents -->

@@ -25,5 +25,15 @@ namespace globantlib.Business
         {
             return data.GetContent();
         }
+
+        public void Create(Domain.Content instance)
+        {
+            data.Create(instance);
+        }
+
+        public List<Domain.Review> GetReviews(int id)
+        {
+            return data.GetReviews(id);
+        }
     }
 }

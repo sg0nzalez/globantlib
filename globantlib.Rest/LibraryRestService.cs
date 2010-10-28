@@ -10,16 +10,14 @@ using globantlib.Domain;
 
 namespace globantlib.Rest
 {
-    // Start the service and browse to http://<machine_name>:<port>/Service1/help to view the service's generated help page
-    // NOTE: By default, a new instance of the service is created for each call; change the InstanceContextMode to Single if you want
-    // a single instance of the service to process all calls.	
     [ServiceKnownType(typeof(Content))]
     [ServiceKnownType(typeof(Response))]
     [ServiceKnownType(typeof(Error))]
+    [ServiceKnownType(typeof(Reviews))]
+    [ServiceKnownType(typeof(Review))]
     [ServiceContract]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
-    // NOTE: If the service is renamed, remember to update the global.asax.cs file
     public class LibraryRestService
     {
         LibraryManager libEntities;
@@ -63,16 +61,15 @@ namespace globantlib.Rest
                 result = resp;
             }
             else
-                result = new Error() { Message = "Not found" };            
+                result = new Error() { Message = "Your query didn't generate any results." };            
 
             return result;
         }
 
         [WebInvoke(UriTemplate = "", Method = "POST")]
-        public Content Create(Content instance)
+        public IResponse Create(Content instance)
         {
-            //libEntities.Contents.AddObject(instance);
-            //libEntities.SaveChanges();
+            libEntities.Create(instance);
             return instance;
         }
 
@@ -84,13 +81,13 @@ namespace globantlib.Rest
             IResponse result = libEntities.GetContent(i);
 
             if (result == null)
-                result = new Error() { Message = "Not Found" };
+                result = new Error() { Message = "The content you're trying to reach doesn't exist or has been removed." };
 
             return result;
         }
 
         [WebInvoke(UriTemplate = "{id}", Method = "PUT")]
-        public Content Update(string id, Content instance)
+        public IResponse Update(string id, Content instance)
         {
             //libEntities.Attach(instance);
             //var stateEntry = libEntities.ObjectStateManager.GetObjectStateEntry(instance.ID);
@@ -104,9 +101,29 @@ namespace globantlib.Rest
         [WebInvoke(UriTemplate = "{id}", Method = "DELETE")]
         public void Delete(string id)
         {
-            int i = int.Parse(id);          
-
+            int i = int.Parse(id);
         }
 
+        [IncludeXmlDeclaration]
+        [WebGet(UriTemplate = "Review?ContentId={id}", RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare)]
+        public IResponse GetReviews(String id)
+        {
+            IResponse result = null;
+            
+            int i = 0;
+            int.TryParse(id, out i);
+            Reviews reviews = new Reviews(libEntities.GetReviews(i));
+            result = reviews;
+            return result;
+        }
+
+        [IncludeXmlDeclaration]
+        [WebInvoke(UriTemplate = "Review", Method = "POST")]
+        public IResponse Submit(Review instance)
+        {
+            IResponse result = null;
+
+            return result;
+        }
     }
 }

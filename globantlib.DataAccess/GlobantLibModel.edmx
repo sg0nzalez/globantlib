@@ -13,6 +13,7 @@
           <EntitySet Name="Leasable" EntityType="GlobantLibModel.Store.Leasable" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Lease" EntityType="GlobantLibModel.Store.Lease" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Physical" EntityType="GlobantLibModel.Store.Physical" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Review" EntityType="GlobantLibModel.Store.Review" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Users" EntityType="GlobantLibModel.Store.Users" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Device_Device" Association="GlobantLibModel.Store.FK_Device_Device">
             <End Role="DeviceType" EntitySet="DeviceType" />
@@ -41,6 +42,14 @@
           <AssociationSet Name="FK_Physical_Leasable" Association="GlobantLibModel.Store.FK_Physical_Leasable">
             <End Role="Leasable" EntitySet="Leasable" />
             <End Role="Physical" EntitySet="Physical" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_Content" Association="GlobantLibModel.Store.FK_Review_Content">
+            <End Role="Content" EntitySet="Content" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_Users" Association="GlobantLibModel.Store.FK_Review_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Review" EntitySet="Review" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Content">
@@ -107,6 +116,18 @@
           <Property Name="ContentID" Type="numeric" Nullable="false" />
           <Property Name="LeasableID" Type="numeric" Nullable="false" />
           <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ContentID" Type="numeric" Nullable="false" />
+          <Property Name="UserID" Type="numeric" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="250" />
+          <Property Name="Rate" Type="int" Nullable="false" />
+          <Property Name="Submitted" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -203,6 +224,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Review_Content">
+          <End Role="Content" Type="GlobantLibModel.Store.Content" Multiplicity="1" />
+          <End Role="Review" Type="GlobantLibModel.Store.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Content">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="ContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_Users">
+          <End Role="Users" Type="GlobantLibModel.Store.Users" Multiplicity="1" />
+          <End Role="Review" Type="GlobantLibModel.Store.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -244,6 +289,15 @@
             <End Role="DeviceType" EntitySet="DeviceTypes" />
             <End Role="Device" EntitySet="Devices" />
           </AssociationSet>
+          <EntitySet Name="Reviews" EntityType="GlobantLibModel.Review" />
+          <AssociationSet Name="FK_Review_Content" Association="GlobantLibModel.FK_Review_Content">
+            <End Role="Content" EntitySet="Contents" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_Users" Association="GlobantLibModel.FK_Review_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Content">
           <Key>
@@ -259,6 +313,7 @@
           <Property Type="DateTime" Name="Released" />
           <Property Type="Int32" Name="Pages" />
           <Property Type="String" Name="ISBN" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Reviews" Relationship="GlobantLibModel.FK_Review_Content" FromRole="Content" ToRole="Review" />
         </EntityType>
         <EntityType Name="Device">
           <Key>
@@ -325,6 +380,7 @@
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Leases" Relationship="GlobantLibModel.FK_Lease_Users" FromRole="User" ToRole="Lease" />
+          <NavigationProperty Name="Reviews" Relationship="GlobantLibModel.FK_Review_Users" FromRole="User" ToRole="Review" />
         </EntityType>
         <Association Name="FK_Digital_Content">
           <End Type="GlobantLibModel.Content" Role="Content" Multiplicity="1" />
@@ -419,6 +475,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Decimal" Name="ID" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Decimal" Name="ContentID" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="UserID" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Comment" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Rate" Nullable="false" />
+          <Property Type="String" Name="Submitted" Nullable="false" />
+          <NavigationProperty Name="Content" Relationship="GlobantLibModel.FK_Review_Content" FromRole="Review" ToRole="Content" />
+          <NavigationProperty Name="User" Relationship="GlobantLibModel.FK_Review_Users" FromRole="Review" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Review_Content">
+          <End Type="GlobantLibModel.Content" Role="Content" Multiplicity="1" />
+          <End Type="GlobantLibModel.Review" Role="Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Content">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="ContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_Users">
+          <End Type="GlobantLibModel.User" Role="User" Multiplicity="1" />
+          <End Type="GlobantLibModel.Review" Role="Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -509,6 +603,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="GlobantLibModel.Review">
+              <MappingFragment StoreEntitySet="Review">
+                <ScalarProperty Name="Submitted" ColumnName="Submitted" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -530,42 +637,51 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="GlobantLibModel" ZoomLevel="100">
-        <EntityTypeShape EntityType="GlobantLibModel.Content" Width="1.5" PointX="0.75" PointY="0.75" Height="1.7566536458333317" />
-        <EntityTypeShape EntityType="GlobantLibModel.Device" Width="1.5" PointX="4.75" PointY="3.125" Height="1.7566536458333326" />
-        <EntityTypeShape EntityType="GlobantLibModel.Digital" Width="1.5" PointX="0.5" PointY="4.625" Height="1.7566536458333335" />
-        <EntityTypeShape EntityType="GlobantLibModel.Leasable" Width="1.5" PointX="3.75" PointY="0.75" Height="1.7566536460071802" />
-        <EntityTypeShape EntityType="GlobantLibModel.Lease" Width="1.5" PointX="6.375" PointY="0.75" Height="2.0853483072916661" />
-        <EntityTypeShape EntityType="GlobantLibModel.Physical" Width="1.5" PointX="2.875" PointY="4.5" Height="1.9210009765624996" />
-        <EntityTypeShape EntityType="GlobantLibModel.User" Width="1.5" PointX="6.875" PointY="3.25" Height="2.0853483080863953" />
+        <EntityTypeShape EntityType="GlobantLibModel.Content" Width="1.5" PointX="0.625" PointY="0.75" Height="2.7427376302083331" />
+        <EntityTypeShape EntityType="GlobantLibModel.Device" Width="1.5" PointX="7.375" PointY="0.875" Height="1.9210009765624996" />
+        <EntityTypeShape EntityType="GlobantLibModel.Digital" Width="1.5" PointX="2.75" PointY="0.75" Height="1.7566536458333335" />
+        <EntityTypeShape EntityType="GlobantLibModel.Leasable" Width="1.5" PointX="5" PointY="2.625" Height="1.7566536460071802" />
+        <EntityTypeShape EntityType="GlobantLibModel.Lease" Width="1.5" PointX="5.125" PointY="5.375" Height="2.0853483072916661" />
+        <EntityTypeShape EntityType="GlobantLibModel.Physical" Width="1.5" PointX="2.75" PointY="2.875" Height="1.9210009765624996" />
+        <EntityTypeShape EntityType="GlobantLibModel.User" Width="1.5" PointX="2.75" PointY="5.375" Height="2.2496956380208326" />
         <AssociationConnector Association="GlobantLibModel.FK_Digital_Content" >
-          <ConnectorPoint PointX="1.375" PointY="3.16404296875" />
-          <ConnectorPoint PointX="1.375" PointY="4.625" />
+          <ConnectorPoint PointX="2.125" PointY="1.6283268229166668" />
+          <ConnectorPoint PointX="2.75" PointY="1.6283268229166668" />
         </AssociationConnector>
         <AssociationConnector Association="GlobantLibModel.FK_Physical_Content" >
-          <ConnectorPoint PointX="2.15625" PointY="3.16404296875" />
-          <ConnectorPoint PointX="2.15625" PointY="4.53125" />
-          <ConnectorPoint PointX="2.875" PointY="4.53125" />
+          <ConnectorPoint PointX="2.125" PointY="3.1838688151041667" />
+          <ConnectorPoint PointX="2.75" PointY="3.1838688151041667" />
         </AssociationConnector>
         <AssociationConnector Association="GlobantLibModel.FK_Device_Leasable" >
-          <ConnectorPoint PointX="5" PointY="2.50665364600718" />
-          <ConnectorPoint PointX="5" PointY="3.125" />
+          <ConnectorPoint PointX="6.5" PointY="3.36675098828125" />
+          <ConnectorPoint PointX="7.40625" PointY="3.36675098828125" />
+          <ConnectorPoint PointX="7.40625" PointY="2.7960009765624996" />
         </AssociationConnector>
         <AssociationConnector Association="GlobantLibModel.FK_Lease_Leasable" >
-          <ConnectorPoint PointX="5.25" PointY="1.62832682300359" />
-          <ConnectorPoint PointX="6.375" PointY="1.62832682300359" />
+          <ConnectorPoint PointX="5.8125" PointY="4.38165364600718" />
+          <ConnectorPoint PointX="5.8125" PointY="5.375" />
         </AssociationConnector>
         <AssociationConnector Association="GlobantLibModel.FK_Physical_Leasable" >
-          <ConnectorPoint PointX="4.0625" PointY="2.50665364600718" />
-          <ConnectorPoint PointX="4.0625" PointY="4.5" />
+          <ConnectorPoint PointX="5" PointY="3.62832682300359" />
+          <ConnectorPoint PointX="4.25" PointY="3.62832682300359" />
         </AssociationConnector>
         <AssociationConnector Association="GlobantLibModel.FK_Lease_Users" >
-          <ConnectorPoint PointX="7.375" PointY="3.25" />
-          <ConnectorPoint PointX="7.375" PointY="2.8353483072916661" />
+          <ConnectorPoint PointX="4.25" PointY="6.4176741536458328" />
+          <ConnectorPoint PointX="5.125" PointY="6.4176741536458328" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="GlobantLibModel.DeviceType" Width="1.5" PointX="4.75" PointY="5.5" Height="1.5923063151041674" />
+        <EntityTypeShape EntityType="GlobantLibModel.DeviceType" Width="1.5" PointX="7.375" PointY="4.25" Height="1.5923063151041674" />
         <AssociationConnector Association="GlobantLibModel.FK_Device_Device" >
-          <ConnectorPoint PointX="5.5" PointY="5.5" />
-          <ConnectorPoint PointX="5.5" PointY="4.8816536458333326" />
+          <ConnectorPoint PointX="8.203125" PointY="4.25" />
+          <ConnectorPoint PointX="8.203125" PointY="2.7960009765624996" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="GlobantLibModel.Review" Width="1.5" PointX="0.625" PointY="4.5" Height="2.4140429687499996" />
+        <AssociationConnector Association="GlobantLibModel.FK_Review_Content" >
+          <ConnectorPoint PointX="1.375" PointY="3.4927376302083331" />
+          <ConnectorPoint PointX="1.375" PointY="4.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="GlobantLibModel.FK_Review_Users" >
+          <ConnectorPoint PointX="2.75" PointY="6.144521484375" />
+          <ConnectorPoint PointX="2.125" PointY="6.144521484375" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
