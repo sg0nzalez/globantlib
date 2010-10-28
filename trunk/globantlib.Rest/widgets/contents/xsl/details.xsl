@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	
-	<xsl:template match="/Content">
+	<xsl:template match="Content">
     <div id="w-contents-details">
         <h1 class="title">
           <xsl:value-of select="Title" />
         </h1>
 		    <div class="thumbnail">
-            <img src="{Thumbnail}" />
+            <img src="{Thumbnail}" width="192" />
             <ul>
                 <xsl:for-each select="Digitals/Digital">
                     <li><a target="_blank" href="{Link}">Download <xsl:value-of select="Format" /></a></li>
@@ -132,5 +132,11 @@
       </div>
     </div>
 	</xsl:template>
+
+  <xsl:template match="Error">
+    <p id="w-contents-details-error">
+      <xsl:value-of select="Message"/><!-- The content you're trying to reach doesn't exist or has been removed. -->
+    </p>
+  </xsl:template>
 	
 </xsl:stylesheet>
