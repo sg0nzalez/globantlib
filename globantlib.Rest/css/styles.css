@@ -18,7 +18,7 @@ time, mark, audio, video {
     vertical-align:baseline;
     background:transparent;
     list-style:none;
-    font-family:Arial, serif;
+    font-family:Tahoma, serif;
     outline:0;
 }
 
@@ -195,16 +195,19 @@ ul#w-contents-list .content {
 }
 ul#w-contents-list .thumbnail {
    float:left;
+   display:block;
+   width:100px;
+   overflow:hidden;
 }
 ul#w-contents-list .title,
 ul#w-contents-list .tagline,
 ul#w-contents-list .available,
 ul#w-contents-list .description {
-   padding-left:103px;
+   padding-left:110px;
 }
 ul#w-contents-list .title {
-    font-size:14px;
-    margin-bottom:2px;
+    font-size:18px;
+    margin-bottom:5px;
 }
 ul#w-contents-list .title a {
     text-decoration:none;
@@ -333,8 +336,8 @@ div#w-contents-details div.new-review div.field.submit {
     margin-bottom:0;
 }
 div#w-contents-details div.new-review div.field.submit a {
-    line-height:26px;
-    font-size:14px;
+    line-height:24px;
+    font-size:12px;
     margin-left:10px;
     text-decoration:none;
     color:#666;
@@ -389,10 +392,9 @@ div#w-contents-reviews div.head {
 }
 div#w-contents-reviews div.head img {
     float:left;
-    width:64px;
 }
 div#w-contents-reviews div.head h4 {
-    padding-left:64px;
+    padding-left:60px;
     font-size:11px;
 }
 div#w-contents-reviews div.body {
@@ -402,6 +404,8 @@ div#w-contents-reviews ul {
     clear:left;
 }
 div#w-contents-reviews li {
+    float:left;
+    width:100%;
     padding-top:10px;
     margin-top:10px;
     border-top:1px solid #e0e0e0;
