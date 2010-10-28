@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Contents">
       <EntityTypeMapping TypeName="GlobantLibModel.Content">
         <MappingFragment StoreEntitySet="Content">
+          <ScalarProperty Name="ISBN" ColumnName="ISBN" />
           <ScalarProperty Name="Pages" ColumnName="Pages" />
           <ScalarProperty Name="Released" ColumnName="Released" />
           <ScalarProperty Name="Publisher" ColumnName="Publisher" />
@@ -17,6 +18,7 @@
     <EntitySetMapping Name="Devices">
       <EntityTypeMapping TypeName="GlobantLibModel.Device">
         <MappingFragment StoreEntitySet="Device">
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="TypeID" ColumnName="TypeID" />
           <ScalarProperty Name="LeasableID" ColumnName="LeasableID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
@@ -44,8 +46,8 @@
     <EntitySetMapping Name="Leases">
       <EntityTypeMapping TypeName="GlobantLibModel.Lease">
         <MappingFragment StoreEntitySet="Lease">
-          <ScalarProperty Name="Period" ColumnName="Period" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="User" ColumnName="User" />
           <ScalarProperty Name="LeasableID" ColumnName="LeasableID" />
           <ScalarProperty Name="ID" ColumnName="ID" />

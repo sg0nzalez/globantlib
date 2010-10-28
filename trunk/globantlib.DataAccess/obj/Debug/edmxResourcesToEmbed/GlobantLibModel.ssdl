@@ -49,6 +49,7 @@
     <Property Name="Publisher" Type="nvarchar" MaxLength="100" />
     <Property Name="Released" Type="date" />
     <Property Name="Pages" Type="int" />
+    <Property Name="ISBN" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Device">
     <Key>
@@ -57,6 +58,7 @@
     <Property Name="ID" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="TypeID" Type="numeric" Nullable="false" />
     <Property Name="LeasableID" Type="numeric" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="DeviceType">
     <Key>
@@ -89,8 +91,8 @@
     <Property Name="ID" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="LeasableID" Type="numeric" Nullable="false" />
     <Property Name="User" Type="numeric" Nullable="false" />
-    <Property Name="Date" Type="datetime" Nullable="false" />
-    <Property Name="Period" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Physical">
     <Key>
