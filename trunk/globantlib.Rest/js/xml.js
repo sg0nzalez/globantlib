@@ -94,33 +94,37 @@
     }
 
     /**
+    * Flattens the object to XML
+    */
+    function flatten(obj) {
+        var str = "";
+        for (i in obj) {
+            if (typeof obj[i] === 'string') {
+                str += "<" + i + ">" + obj[i] + "</" + i + ">";
+            }
+            else {
+                str += flatten(obj[i]);
+            }
+        }
+        return str;
+    }
+
+    /**
     * Gets an object and returns an XML document
     */
-    function sendAsXML(obj, root, service, callback) {
-        function flattenObj(obj) {
-            var str = "";
-            for (i in obj) {
-                if (typeof obj[i] === 'string') {
-                    str += "<" + i + ">" + obj[i] + "</" + i + ">";
-                }
-                else {
-                    str += flattenObj(obj[i]);
-                }
-            }
-            return str;
-        }
+    function sendAsXML(options) {
         function sendObj(str) {
             var req = createXMLHttpRequest();
-            req.open("POST", service, true);
+            req.open(options.type, options.service, true);
             req.setRequestHeader("Content-Type", "application/xml");
-            req.onreadystatechange = callback;
+            req.onreadystatechange = options.callback;
             req.send(str);
         }
         if (typeof obj === 'string') {
             sendObj(obj);
         }
         else if (typeof obj === 'object') {
-            sendObj("<" + root + ">" + flattenObj(obj) + "</" + root + ">");
+            sendObj("<" + options.root + ">" + flatten(obj) + "</" + options.root + ">");
         }
     }
 
@@ -128,7 +132,9 @@
         "createDocument": createDocument,
         "loadDocument": loadDocument,
         "transformDocument": transformDocument,
-        "transformWithCallback": transformWithCallback
+        "transformWithCallback": transformWithCallback,
+        "sendAsXML": sendAsXML,
+        "flatten" : flatten
     }
 
 } ());

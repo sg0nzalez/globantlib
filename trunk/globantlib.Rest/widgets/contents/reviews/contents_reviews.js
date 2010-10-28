@@ -56,6 +56,9 @@ var CONTENTS_REVIEWS = (function () {
     */
     function gatherFormData() {
         data = {};
+        data.title = $("#w-contents-review-title").val();
+        data.rate = $("#w-contents-review-rate").val();
+        data.comment = $("#w-contents-review-text").val();
         return data;
     }
     function loadList(callback) {
@@ -95,20 +98,21 @@ var CONTENTS_REVIEWS = (function () {
         if (validation.errorCount === 0) {
             hideForm();
             showOverlay();
-            $.ajax({
-                "url": '/LibraryService.mvc/Review?ContentId=' + contentId,
-                "type": "POST",
-                "data": gatherFormData(),
-                "success": function () {
-                    submitSuccess();
-                },
-                "error": function () {
-                    submitError();
-                },
-                "complete": function () {
-                    hideOverlay();
-                }
-            });
+            XML.sendAsXML();
+            /*$.ajax({
+            "url": '/LibraryService.mvc/Review?ContentId=' + contentId,
+            "type": "POST",
+            "data": gatherFormData(),
+            "success": function () {
+            submitSuccess();
+            },
+            "error": function () {
+            submitError();
+            },
+            "complete": function () {
+            hideOverlay();
+            }
+            });*/
             loadList();
         }
     }
