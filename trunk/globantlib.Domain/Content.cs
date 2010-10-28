@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace globantlib.Domain
 {
     [DataContract(Namespace = "")]
-    public class Content
+    public class Content : IResponse
     {
         [DataMember]
         public int ID { get; set; }
@@ -26,13 +26,16 @@ namespace globantlib.Domain
         public string Publisher { get; set; }
 
         [DataMember]
-        public DateTime Released { get; set; }
+        public String Released { get; set; }
 
         [DataMember]
         public int Pages { get; set; }
 
         [DataMember]
         public String Thumbnail { get; set; }
+
+        [DataMember]
+        public String ISBN { get; set; }
 
         [DataMember]
         public string hasDigital;
