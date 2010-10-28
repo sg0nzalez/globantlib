@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ArrayOfDevices>
+  <Device>
+    <id>1</id>
+    <name>IPAD</name>
+    <type>Tablet PC</type>
+    <quantity>2</quantity>
+    <available>Today</available>
+    <thumbnail>ipad.jpg</thumbnail>
+  </Device>
+  <Device>
+    <id>2</id>
+    <name>Kindle</name>
+    <type>E-Reader</type>
+    <quantity>1</quantity>
+    <available>Tomorrow</available>
+    <thumbnail>kindle.jpg</thumbnail>
+  </Device>
+  <Device>
+    <id>3</id>
+    <name>Netbook</name>
+    <type>Portable PC</type>
+    <quantity>1</quantity>
+    <available>More than 3 days...</available>
+    <thumbnail>netbook.jpg</thumbnail>
+  </Device>
+</ArrayOfDevices>

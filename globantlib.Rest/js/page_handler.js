@@ -27,7 +27,8 @@
 	return {
 		"contentList" : contentList,
 		"contentDetails" : contentDetails,
-        "contentDownload" : contentDownload
+        "contentDownload" : contentDownload,
+        "deviceList":showDeviceList
 	}
 
 }());
