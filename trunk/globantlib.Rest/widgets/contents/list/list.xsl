@@ -3,13 +3,6 @@
 	
 	<xsl:template match="Response">
     
-    <div id="w-contents-search">
-      <form action="#" method="get">
-        <input class="text" type="text" placeholder="Search Contents" />
-        <input class="submit" type="submit" value="Search" />
-      </form>
-    </div>
-    
 		<ul id="w-contents-list">
 			<xsl:for-each select="ArrayOfContents/Content">
 				<li class="content">
@@ -49,15 +42,11 @@
   </xsl:template>
 
   <xsl:template match="Error">
-    <div id="w-contents-search">
-      <form action="#" method="get">
-        <input class="text" type="text" placeholder="Search Contents" />
-        <input class="submit" type="submit" value="Search" />
-      </form>
-    </div>
+    
     <p id="w-contents-search-error">
       <xsl:value-of select="Message"/>
     </p>
+    
   </xsl:template>
   
 </xsl:stylesheet>
