@@ -87,8 +87,9 @@ li.first_li
     .fs_left, .fs_right
     {
         float: left;
-        min-height: 250px;
+        min-height: 370px;
         border: 1px solid #8F8F8F;
+        padding: 10px;
         -moz-border-radius: 5px;
         -webkit-border-radius: 5px;
         -border-radius: 5px;
@@ -97,13 +98,15 @@ li.first_li
     .fs_left
     {   
         margin: 50px 15px 0 60px;    
-        width: 500px;
+        width: 480px;
+       
     }
     
     .fs_right
     {
         margin: 50px 60px 0 15px;
-        width: 300px;
+        width: 265px;
+        padding-left: 15px;
     }
     
     .fs_right legend, .fs_left legend
@@ -122,8 +125,60 @@ li.first_li
     .ul_form
     {
         list-style: none;
+        margin: 0 0 0 30px;
            
-     }
+    }
+    
+    .ul_form li
+    {
+        margin: 15px 0;    
+    }
+    
+    .ul_form input[type="text"]
+    {
+        width: 200px;
+    }
+    
+    textarea
+    {
+        vertical-align: top;
+        width:200px;
+        height: 100px;
+    }
+    
+    .ul_form label
+    {
+        float: left;
+        width: 120px;
+        text-align: right;
+        margin: 0 10px 0 0;    
+    
+    }
+    
+    .select_book
+    {
+        width: 250px;
+        height: 300px;
+        margin: 10px 0 0 0;
+     
+    }
+    
+    .li_buttons
+    {
+        text-align: center;    
+    }
+    
+    #search
+    {
+        width: 245px;    
+        font-family: Arial, Verdana, Sans-Serif;
+    }
+    
+    .search_gray
+    {
+        color: Gray; 
+        font-style: italic;
+    }
 /*
 *End Administrator
 */
