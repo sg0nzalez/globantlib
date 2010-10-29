@@ -55,7 +55,7 @@ var CONTENTS_REVIEWS = (function () {
     * Call service and populate review list
     */
     function gatherFormData() {
-        data = {};
+        data = "<Review><Rate>4</Rate><Title>ReviewTremendo</Title><Submitted>10</Submitted><Comments>TT</Comments></Review>";
         data.title = $("#w-contents-review-title").val();
         data.rate = $("#w-contents-review-rate").val();
         data.comment = $("#w-contents-review-text").val();
@@ -106,7 +106,9 @@ var CONTENTS_REVIEWS = (function () {
                 "callback": function () { }
             });*/
             $.ajax({
-                "url": '/LibraryService.mvc/Review?ContentId=' + contentId,
+                "dataType": "xml",
+                "contentType" : "application/xml",
+                "url": '/LibraryService.mvc/SubmitReview?ContentId=' + contentId,
                 "type": "POST",
                 "data": XML.flatten(gatherFormData(), "Review"),
                 "contentType": "application/xml",
