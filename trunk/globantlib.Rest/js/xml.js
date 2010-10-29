@@ -136,7 +136,8 @@
         "transformDocument": transformDocument,
         "transformWithCallback": transformWithCallback,
         "sendAsXML": sendAsXML,
-        "flatten": flatten
+        "flatten": flatten,
+        "createXMLHttpRequest": createXMLHttpRequest
     }
 
 } ());

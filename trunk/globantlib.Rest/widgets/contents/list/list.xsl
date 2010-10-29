@@ -9,12 +9,12 @@
           <xsl:when test="current = 'true'">
             <b>
               <xsl:value-of select="number" />
-            </b>
+            </b> 
           </xsl:when>
           <xsl:otherwise>
             <a href="#contents/list/{number}">
               <xsl:value-of select="number" />
-            </a>
+            </a> 
           </xsl:otherwise>
         </xsl:choose>
       </xsl:for-each>
@@ -23,7 +23,7 @@
     <ul id="w-contents-list">
 			<xsl:for-each select="ArrayOfContents/Content">
 				<li class="content">
-					<a class="thumbnail" href="#contents/details/{ID}"><img width="100" src="{Thumbnail}" /></a>
+					<a class="thumbnail" href="#contents/details/{ID}"><img width="100" src="{Thumbnail}&amp;zoom=1" /></a>
 					<h2 class="title"><a href="#contents/details/{ID}"><xsl:value-of select="Title" /></a></h2>
 					<h3 class="tagline">
             <xsl:if test="Publisher != ''"><span><xsl:value-of select="Publisher" /></span></xsl:if>

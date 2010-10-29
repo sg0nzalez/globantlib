@@ -33,13 +33,8 @@
 	};
 	
 	// content download
-	contents.download = function (id) {
-		PAGE_HANDLER.contentDownload(id);
-	};
-	
-	// content calendar
-	contents.calendar = function (id) {
-		PAGE_HANDLER.contentDetails(id);
+    contents.requests = function () {
+		PAGE_HANDLER.contentRequests();
 	};
 
 	/**

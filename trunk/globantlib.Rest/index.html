@@ -27,21 +27,35 @@
 			<div id="content" class="center">
 			
 				<div id="w-contents">
+
 					<div id="w-contents-left">
                         <div id="w-contents-list"></div>
                         <div id="w-contents-details"></div>
+                        <div id="w-contents-request-list"></div>
 					</div> <!-- #content-left -->
+
 					<div id="w-contents-right">
+
                         <div id="w-contents-search">
-                          <h2>Search Books</h2>
+                          <h2>Search Contents</h2>
                           <form action="#" method="get">
                             <input class="text" type="text" placeholder="Search Contents" />
                           </form>
                           <p>Use this search form to apply a keyword filter to the list as you type.</p>
                         </div> <!-- #w-contents-search -->
-						<div id="w-contents-ipad"></div> <!-- #w-contents-ipad -->
+
+                        <div id="w-contents-request">
+                          <h2>Request Contents</h2>
+                          <p>If you find out your books are not in the list, please drop a line to an admin.</p>
+                          <form action="#" method="get">
+                              <input class="text" type="text" placeholder="Request Contents" />
+                              <input class="submit" type="submit" value="Send" />
+                          </form>
+                          <h3><a href="#contents/requests">See all requested contents</a></h3>
+                        </div>
+
 					</div> <!-- #content-right -->
-                    <div id="w-contents-download"></div> <!-- #w-contents-download -->
+
 				</div> <!-- #w-contents -->
 				
 				<div id="w-devices">
@@ -64,6 +78,7 @@
         <script src="widgets/contents/list/contents_list.js"></script>
         <script src="widgets/contents/details/contents_details.js"></script>
         <script src="widgets/contents/search/contents_search.js"></script>
+        <script src="widgets/contents/request/contents_requests.js"></script>
 		<script src="widgets/contents/reviews/contents_reviews.js"></script>
 		<script src="widgets/contents/loader/contents_loader.js"></script>
 		<script src="js/xml.js"></script>
