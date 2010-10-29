@@ -38,7 +38,7 @@ namespace globantlib.Business
 
         public Domain.Review SubmitReview(int i, Domain.Review instance)
         {
-            return null;
+            return data.SubmitReview(i, instance); ;
         }
     }
 }
