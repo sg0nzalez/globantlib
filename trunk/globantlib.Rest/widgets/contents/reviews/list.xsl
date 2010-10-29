@@ -27,7 +27,7 @@
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
-                <option selected="selected">3</option>
+                <option selected="selected">5</option>
               </select>
             </div>
             <div class="field">
@@ -55,7 +55,7 @@
               <h3>
                 <xsl:value-of select="Title"/>
               </h3>
-              <img src="img/stars{Rate}.gif" />
+              <img width="70" src="img/stars{Rate}.gif" />
               <p>
                 <xsl:value-of select="Comments"/>
               </p>
