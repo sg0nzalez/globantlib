@@ -16,15 +16,19 @@
                 </li>
                 <li>
                     <label>Release Date:</label>
-                    <input type="text" id="release" name="release"/>
+                    <input type="date" id="release" name="release"/>
                 </li>
                 <li>
                     <label>Pages Number: </label>
-                    <input type="text" id="pages" name="pages"/>
+                    <input type="number" id="pages" name="pages"/>
                 </li>
                 <li>
                     <label>Publisher: </label>
                     <input type="text" id="publisher" name="publisher"/>
+                </li>
+                <li>
+                    <label>ISBN - 10: </label>
+                    <input type="text" id="isbn" name="isbn"/>
                 </li>
                 <li>
                     <label>Description: </label>
@@ -74,34 +78,35 @@
             }
 
             function bookCRUD(action) {
-                var title, autor, release, pages, publisher, description, id, thumbnail;
+                var title, autor, release, pages, isbn, publisher, description, id, thumbnail;
                 title = $("#title").val();
                 author = $("#author").val();
                 release = $("#release").val();
                 publisher = $("#publisher").val();
                 description = $("#description").val();
+                isbn = $("#isbn").val();
                 pages = $("#pages").val();
                 thumbnail = "";
                 id = ($("#select_book").val() != "" && $("#select_book").val() != "undefined" && $("#select_book").val() != null)?$("#select_book").val():"";
 
                 xmlData = '<?xml version="1.0" encoding="utf-8"?>'
-                            + '<Content>'
+                            + '<Content xmlns:i="http://www.w3.org/2001/XMLSchema-instance">'
                                 + '<Author>' + author + '</Author>'
                                 + '<Description>' + description + '</Description>'
                                 + '<Pages>' + pages + '</Pages>'
+                                + '<ISBN>' + isbn + '</ISBN>'
                                 + '<Publisher>' + publisher + '</Publisher>'
                                 + '<Released>' + release + '</Released>'
                                 + '<Thumbnail>' + thumbnail + '</Thumbnail>'
                                 + '<Title>' + title + '</Title>'
                             + '</Content>';
 
-                alert(xmlData);
 
                 $.ajax({
                     url: "/LibraryService.mvc/",
-                    contentType : "application/xml",
-                    dataType : "xml",
                     type: action,
+                    contentType: "application/xml",
+                    dataType: "xml",
                     data: xmlData,
                     success: function (msg) {
                         alert(msg);
