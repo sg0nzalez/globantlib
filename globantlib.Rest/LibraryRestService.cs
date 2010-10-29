@@ -7,14 +7,16 @@ using System.ServiceModel.Web;
 using System.Text;
 using globantlib.Business;
 using globantlib.Domain;
+using System.Runtime.Serialization;
 
 namespace globantlib.Rest
 {
     [ServiceKnownType(typeof(Content))]
     [ServiceKnownType(typeof(Response))]
     [ServiceKnownType(typeof(Error))]
-    [ServiceKnownType(typeof(Reviews))]
+    [ServiceKnownType(typeof(ReviewCollection))]
     [ServiceKnownType(typeof(Review))]
+    [ServiceKnownType(typeof(BookRequestCollection))]
     [ServiceKnownType(typeof(User))]
     [ServiceContract]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
@@ -40,7 +42,7 @@ namespace globantlib.Rest
         public IResponse SearchCollection(String text, String page)
         {
             IResponse result;
-            int page_size = 4;
+            int page_size = 5;
             int actual_page, count;
             int.TryParse(page,out actual_page);
             
@@ -53,7 +55,10 @@ namespace globantlib.Rest
             resp.ArrayOfContents = libEntities.SearchContents(actual_page, page_size, text, out count);
             resp.Pages = new List<Page>();
             
-            int pages = 1 + (int)(count / page_size);
+            int pages = (int)Math.Ceiling((double)(count / page_size));
+            if (count % page_size != 0)
+                pages++;
+
             for (int i = 0; i < pages; i++)
             {
                 resp.Pages.Add(new Page() { number = i+1, current = false });
@@ -81,7 +86,8 @@ namespace globantlib.Rest
         [WebGet(UriTemplate = "{id}")]
         public IResponse Get(string id)
         {
-            int i = int.Parse(id);
+            int i = 0;
+            int.TryParse(id, out i);
             IResponse result = libEntities.GetContent(i);
 
             if (result == null)
@@ -116,7 +122,7 @@ namespace globantlib.Rest
             
             int i = 0;
             int.TryParse(id, out i);
-            Reviews reviews = new Reviews(libEntities.GetReviews(i));
+            ReviewCollection reviews = new ReviewCollection(libEntities.GetReviews(i));
             result = reviews;
             return result;
         }
@@ -130,6 +136,20 @@ namespace globantlib.Rest
             int i = 0;
             if(int.TryParse(id, out i))
                 result = libEntities.SubmitReview(i, instance);
+
+            if (result == null)
+                result = new Error() { Message = "The content you're trying to reach doesn't exist or has been removed." };
+
+            return result;
+        }
+
+        [IncludeXmlDeclaration]
+        [WebGet(UriTemplate = "BookRequests", RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare)]
+        public IResponse GetBookRequest()
+        {
+            IResponse result = null;
+
+            result = libEntities.GetBookRequests();
 
             if (result == null)
                 result = new Error() { Message = "The content you're trying to reach doesn't exist or has been removed." };
