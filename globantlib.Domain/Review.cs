@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Runtime.Serialization;
+using System.Text;
+using System.Xml.Serialization;
 
 namespace globantlib.Domain
 {
     [DataContract(Namespace = "")]
-    public class Review
+    public class Review : IResponse
     {
         [DataMember]
         public int ID { get; set; }
@@ -22,7 +23,7 @@ namespace globantlib.Domain
         public String Submitted { get; set; }
 
         [DataMember]
-        public String Comments { get; set; }
+        public String Comment { get; set; }
 
         [DataMember]
         public User User { get; set; }
