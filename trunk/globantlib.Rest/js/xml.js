@@ -117,14 +117,16 @@
             var req = createXMLHttpRequest();
             req.open(options.type, options.service, true);
             req.setRequestHeader("Content-Type", "application/xml; charset=UTF-8");
-            req.onreadystatechange = options.callback;
+            req.onreadystatechange = function () {
+                options.callback(req);
+            };
             req.send(str);
         }
-        if (typeof obj === 'string') {
+        if (typeof options.data === 'string') {
             sendObj(options.data);
         }
-        else if (typeof obj === 'object') {
-            sendObj(flatten(object.data));
+        else if (typeof options.data === 'object') {
+            sendObj(flatten(options.data, options.root));
         }
     }
 

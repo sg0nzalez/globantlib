@@ -14,7 +14,7 @@
         </h2>
 
         <!-- new review form -->
-        <form id="w-contents-new-review-form">
+        <form id="w-contents-new-review-form" mathod="#">
           <div class="new-review">
             <div class="field">
               <label for="w-contents-review-title">Title:</label>
