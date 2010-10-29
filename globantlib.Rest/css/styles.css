@@ -118,10 +118,25 @@ div#content-wrap {
     border-bottom:1px solid #e0e0e0;
     background:#fff;
 }
+div#content {
+    overflow:hidden;
+}
 div#footer-wrap {
+    padding:5px 0;
+}
+p#loading-message {
     font-size:11px;
     color:#333;
-    padding:5px 0;
+    line-height:16px;
+    padding-left:21px;
+}
+p#loading-message.loading
+{
+    background:url(images/loading.gif) no-repeat;
+}
+p#loading-message.ready 
+{
+    background:url(images/ready.png) no-repeat;
 }
 a#logo {
     float:left;
@@ -154,13 +169,25 @@ nav#main-nav li a:hover {
 /**
  * Contents style
  */
+div#w-contents 
+{
+    height:100%;
+}
 div#w-contents-left {
-    float:left;
-    width:750px;
+    float:right;
+    width:700px;
+    height:100%;
+    overflow:auto;
+    overflow-x:hidden;
+    padding-right:30px;
+    margin-right:-30px;
 }
 div#w-contents-right {
-    float:right;
-    width:200px;
+    float:left;
+    width:230px;
+    height:100%;
+    border-right:1px solid #e0e0e0;
+    padding-right:16px;
 }
 p#w-contents-search-error {
     font-size:14px;
@@ -174,13 +201,27 @@ div#w-contents-search {
     width:100%;
     margin-bottom:10px;
 }
+div#w-contents-search h2
+{
+    font-size:12px;
+    margin-bottom:5px;
+    padding:8px 0 0;
+}
+div#w-contents-search p
+{
+    font-size:11px;
+    color:#999;
+    float:left;
+    width:100%;
+    line-height:13px;
+}
 div#w-contents-search input.text {
     float:left;
-    width:640px;
-}
-div#w-contents-search input.submit {
-    float:right;
-    width:100px;
+    display:block;
+    width:100%;
+    border:1px solid #ccc;
+    color:#666;
+    margin-bottom:5px;
 }
 ul#w-contents-list {
     float:left;
@@ -189,7 +230,7 @@ ul#w-contents-list {
 ul#w-contents-list .content {
    float:left;
    width:100%;
-   padding-top:10px;
+   padding:10px 0;
    border-top:1px solid #e0e0e0;
 }
 ul#w-contents-list .thumbnail {
@@ -361,10 +402,10 @@ div#w-contents-details div.new-review textarea {
     float:left;
 }
 input#w-contents-review-title {
-    width:630px;
+    width:560px;
 }
 textarea#w-contents-review-text {
-    width:630px;
+    width:560px;
     height:100px;
 }
 div#w-contents-reviews {

@@ -28,16 +28,17 @@
 			
 				<div id="w-contents">
 					<div id="w-contents-left">
-                        <div id="w-contents-search">
-                          <form action="#" method="get">
-                            <input class="text" type="text" placeholder="Search Contents" />
-                            <input class="submit" type="submit" value="Search" />
-                          </form>
-                        </div> <!-- #w-contents-search -->
                         <div id="w-contents-list"></div>
                         <div id="w-contents-details"></div>
 					</div> <!-- #content-left -->
 					<div id="w-contents-right">
+                        <div id="w-contents-search">
+                          <h2>Search Books</h2>
+                          <form action="#" method="get">
+                            <input class="text" type="text" placeholder="Search Contents" />
+                          </form>
+                          <p>Use this search form to apply a keyword filter to the list as you type.</p>
+                        </div> <!-- #w-contents-search -->
 						<div id="w-contents-ipad"></div> <!-- #w-contents-ipad -->
 					</div> <!-- #content-right -->
                     <div id="w-contents-download"></div> <!-- #w-contents-download -->
@@ -53,7 +54,7 @@
 		
 		<div id="footer-wrap" class="full">
 			<footer id="footer" class="center">
-				<p id="copyright">&copy; tremendo!</p> <!-- #copyright -->
+				<p id="loading-message"></p> <!-- #copyright -->
 			</footer> <!-- #footer -->
 		</div> <!-- #footer-wrap -->
 	
@@ -69,14 +70,16 @@
 		<script src="js/router.js"></script>
 		<script src="js/page_handler.js"></script>
 		<script src="js/hash_reader.js"></script>
+		<script src="js/viewport.js"></script>
 		
 		<script>
             /**
             * Application kickstart
             */
-			$(function () {
-				HASH_READER.init();
-			});
+		    $(function () {
+		        HASH_READER.init();
+		        VIEWPORT.init();
+		    });
 		</script>
 	
 	</body>
