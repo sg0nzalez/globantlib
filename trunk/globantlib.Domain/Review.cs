@@ -10,7 +10,10 @@ namespace globantlib.Domain
     public class Review
     {
         [DataMember]
-        public User User { get; set; }
+        public int ID { get; set; }
+
+        [DataMember]
+        public int Rate { get; set; }
         
         [DataMember]
         public String Title { get; set; }
@@ -19,12 +22,9 @@ namespace globantlib.Domain
         public String Submitted { get; set; }
 
         [DataMember]
-        public int Rate { get; set; }
+        public String Comments { get; set; }
 
         [DataMember]
-        public String Comment { get; set; }
-        
-        [DataMember]
-        public int ID { get; set; }
+        public User User { get; set; }
     }
 }
