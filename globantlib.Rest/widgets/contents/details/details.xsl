@@ -7,7 +7,7 @@
           <xsl:value-of select="Title" />
         </h1>
 		    <div class="thumbnail">
-            <img src="{Thumbnail}" width="192" />
+            <img src="{Thumbnail}&amp;zoom=2" width="192" />
             <ul>
                 <xsl:for-each select="Digitals/Digital">
                     <li><a target="_blank" href="{Link}">Download <xsl:value-of select="Format" /></a></li>

@@ -63,7 +63,9 @@
     <Content Include="bin\globantlib.Rest.dll" />
     <Content Include="bin\globantlib.Rest.pdb" />
     <Content Include="css\images\digital.png" />
+    <Content Include="css\images\loading.gif" />
     <Content Include="css\images\print.png" />
+    <Content Include="css\images\ready.png" />
     <Content Include="css\jqueryui\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="css\jqueryui\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="css\jqueryui\images\ui-bg_flat_10_000000_40x100.png" />
@@ -95,14 +97,7 @@
     <Content Include="css\jqueryui\jqueryui.css" />
     <Content Include="css\mb.css" />
     <Content Include="css\styles.css" />
-    <Content Include="data\content1.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="data\contents.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="data\devicesList.xml" />
-    <Content Include="data\reviews.xml" />
+    <Content Include="data\bookrequest.xml" />
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
     <Content Include="img\bck-btn-hover.png" />
@@ -134,10 +129,16 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="widgets\contents\details\contents_details.js" />
-    <Content Include="widgets\contents\details\details.xsl" />
+    <Content Include="widgets\contents\details\details.xsl">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="widgets\contents\list\contents_list.js" />
     <Content Include="widgets\contents\list\list.xsl" />
     <Content Include="widgets\contents\loader\contents_loader.js" />
+    <Content Include="widgets\contents\request\list.xsl">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="widgets\contents\request\contents_requests.js" />
     <Content Include="widgets\contents\reviews\contents_reviews.js" />
     <Content Include="widgets\contents\reviews\list.xsl" />
     <Content Include="widgets\contents\search\contents_search.js" />
