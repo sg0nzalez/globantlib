@@ -1,7 +1,7 @@
 ﻿var PAGE_HANDLER = (function () {
 
     function contentList(page, query) {
-        CONTENTS_LOADER.show();
+        CONTENTS_LOADER.show("Loading book list...");
         CONTENTS_LIST.init(page, query, function () {
             CONTENTS_LIST.show();
             CONTENTS_SEARCH.init(query);
@@ -11,10 +11,10 @@
     }
 
     function contentDetails(id) {
-        CONTENTS_LOADER.show();
+        CONTENTS_LOADER.show("Loading book details...");
         CONTENTS_DETAILS.init(id, function () {
             CONTENTS_DETAILS.show();
-            CONTENTS_SEARCH.hide();
+            CONTENTS_SEARCH.init();
             CONTENTS_LIST.hide();
             CONTENTS_LOADER.hide();
         });

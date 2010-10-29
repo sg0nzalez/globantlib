@@ -122,6 +122,7 @@
     <Content Include="js\modernizr.js" />
     <Content Include="js\page_handler.js" />
     <Content Include="js\router.js" />
+    <Content Include="js\viewport.js" />
     <Content Include="js\xml.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

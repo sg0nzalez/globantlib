@@ -17,10 +17,12 @@ var CONTENTS_REVIEWS = (function () {
     * Loading messages
     */
     function showOverlay() {
-        $("#copyright").html('loading...');
+        $("#loading-message")
+            .text('Submitting Review...');
     }
     function hideOverlay() {
-        $("#copyright").html('stopped loading');
+        $("#loading-message")
+            .text('Ready');
     }
 
     /**
