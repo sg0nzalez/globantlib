@@ -5,8 +5,7 @@
 	// devices list first page
 	devices = function () {
 		PAGE_HANDLER.deviceList();
-	}; 
-	
+	};
 
 	// devices list page N
 	devices.list = function (page) {

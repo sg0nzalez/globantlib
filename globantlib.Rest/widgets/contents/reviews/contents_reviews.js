@@ -17,8 +17,10 @@ var CONTENTS_REVIEWS = (function () {
     * Loading messages
     */
     function showOverlay() {
+        $("#copyright").html('loading...');
     }
     function hideOverlay() {
+        $("#copyright").html('stopped loading');
     }
 
     /**
@@ -40,9 +42,7 @@ var CONTENTS_REVIEWS = (function () {
         alert('ERRORRR!!');
     }
     function submitSuccess() {
-        loadList(function () {
-            hideForm();
-        });
+        loadList();
     }
     function submitValidationErrors(errors) {
         var span;
@@ -56,20 +56,13 @@ var CONTENTS_REVIEWS = (function () {
     /**
     * Call service and populate review list
     */
-    function gatherFormData() {
-        data = {};
-        data.Comment = $("#w-contents-review-text").val();
-        data.ID = "0";
-        data.Rate = $("#w-contents-review-rate").val();
-        data.Submitted = "10/10/10";
-        data.Title = $("#w-contents-review-title").val();
-        data.User = "<Name>Milka</Name><Thumbnail></Thumbnail>";
-        return data;
-    }
     function loadList(callback) {
         var service = '/LibraryService.mvc/Review?ContentId=' + contentId,
             target = document.getElementById('w-contents-reviews');
-        XML.transformWithCallback(service, 'widgets/contents/reviews/list.xsl', target, callback);
+        XML.transformWithCallback(service, 'widgets/contents/reviews/list.xsl', target, function () {
+            hideForm();
+            initControls();
+        });
     }
 
     /**
@@ -97,6 +90,22 @@ var CONTENTS_REVIEWS = (function () {
     /**
     * Submit review to server
     */
+    function gatherFormData() {
+        var rightNow = new Date(),
+            day = rightNow.getDate(),
+            month = rightNow.getMonth(),
+            year = (rightNow.getFullYear() + "").substring(2),
+            hours = rightNow.getHours(),
+            minutes = rightNow.getMinutes() < 10 ? "0" + rightNow.getMinutes() : rightNow.getMinutes();
+        data = {};
+        data.Comment = $("#w-contents-review-text").val();
+        data.ID = "0";
+        data.Rate = $("#w-contents-review-rate").val();
+        data.Submitted = (day + '/' + month + '/' + year + ' ' + hours + ':' + minutes);
+        data.Title = $("#w-contents-review-title").val();
+        data.User = "<Name>Milka</Name><Thumbnail>no-img.png</Thumbnail>";
+        return data;
+    }
     function submitReview() {
         var validation = validateReview();
         submitValidationErrors(validation.errors); // Show submit errors
@@ -142,10 +151,7 @@ var CONTENTS_REVIEWS = (function () {
     }
     function init(id) {
         contentId = id;
-        loadList(function () {
-            hideForm();
-            initControls();
-        });
+        loadList();
     }
 
     /**

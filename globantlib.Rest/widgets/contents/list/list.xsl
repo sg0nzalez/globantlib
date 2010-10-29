@@ -3,7 +3,24 @@
 	
 	<xsl:template match="Response">
     
-		<ul id="w-contents-list">
+    <p id="w-contents-pagination">
+      <xsl:for-each select="Pages/Page">
+        <xsl:choose>
+          <xsl:when test="current = 'true'">
+            <b>
+              <xsl:value-of select="number" />
+            </b>
+          </xsl:when>
+          <xsl:otherwise>
+            <a href="#contents/list/{number}">
+              <xsl:value-of select="number" />
+            </a>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:for-each>
+    </p>
+    
+    <ul id="w-contents-list">
 			<xsl:for-each select="ArrayOfContents/Content">
 				<li class="content">
 					<a class="thumbnail" href="#contents/details/{ID}"><img width="100" src="{Thumbnail}" /></a>
@@ -21,23 +38,6 @@
 				</li>
 			</xsl:for-each>
 		</ul>
-
-    <p id="w-contents-pagination">
-      <xsl:for-each select="Pages/Page">
-        <xsl:choose>
-          <xsl:when test="current = 'true'">
-            <b>
-              <xsl:value-of select="number" />
-            </b>
-          </xsl:when>
-          <xsl:otherwise>
-            <a href="#contents/list/{number}">
-              <xsl:value-of select="number" />
-            </a>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:for-each>
-    </p>
     
   </xsl:template>
 

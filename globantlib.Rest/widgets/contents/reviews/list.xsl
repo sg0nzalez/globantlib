@@ -50,6 +50,9 @@
               <h4>
                 <xsl:value-of select="User/Name"/>
               </h4>
+              <h5>
+                <xsl:value-of select="Submitted"/>
+              </h5>
             </div>
             <div class="body">
               <h3>
@@ -57,7 +60,7 @@
               </h3>
               <img width="70" src="img/stars{Rate}.gif" />
               <p>
-                <xsl:value-of select="Comments"/>
+                <xsl:value-of select="Comment"/>
               </p>
             </div>
           </li>
