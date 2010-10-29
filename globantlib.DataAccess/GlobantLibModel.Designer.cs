@@ -221,6 +221,22 @@ namespace globantlib.DataAccess
             }
         }
         private ObjectSet<Review> _Reviews;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<BookRequest> BookRequests
+        {
+            get
+            {
+                if ((_BookRequests == null))
+                {
+                    _BookRequests = base.CreateObjectSet<BookRequest>("BookRequests");
+                }
+                return _BookRequests;
+            }
+        }
+        private ObjectSet<BookRequest> _BookRequests;
 
         #endregion
         #region AddTo Methods
@@ -296,6 +312,14 @@ namespace globantlib.DataAccess
         {
             base.AddObject("Reviews", review);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the BookRequests EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToBookRequests(BookRequest bookRequest)
+        {
+            base.AddObject("BookRequests", bookRequest);
+        }
 
         #endregion
     }
@@ -304,6 +328,90 @@ namespace globantlib.DataAccess
     #endregion
     
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GlobantLibModel", Name="BookRequest")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class BookRequest : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new BookRequest object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="title">Initial value of the Title property.</param>
+        public static BookRequest CreateBookRequest(global::System.Decimal id, global::System.String title)
+        {
+            BookRequest bookRequest = new BookRequest();
+            bookRequest.ID = id;
+            bookRequest.Title = title;
+            return bookRequest;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Decimal _ID;
+        partial void OnIDChanging(global::System.Decimal value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                if (_Title != value)
+                {
+                    OnTitleChanging(value);
+                    ReportPropertyChanging("Title");
+                    _Title = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("Title");
+                    OnTitleChanged();
+                }
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
+
+        #endregion
+    
+    }
     
     /// <summary>
     /// No Metadata Documentation available.

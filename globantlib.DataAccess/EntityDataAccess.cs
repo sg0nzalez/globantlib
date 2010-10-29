@@ -29,7 +29,7 @@ namespace globantlib.DataAccess
                         Pages = c.Pages.HasValue ? c.Pages.Value : 0,
                         Publisher = c.Publisher,
                         ISBN = c.ISBN,
-                        Thumbnail = c.ISBN == null ? "img/no-img.gif" : @"http://bks8.books.google.com/books?vid=ISBN" + c.ISBN + @"&printsec=frontcover&img=1&zoom=1",
+                        Thumbnail = c.ISBN == null ? "img/no-img.gif?dummy=noimg" : @"http://bks8.books.google.com/books?vid=ISBN" + c.ISBN + @"&printsec=frontcover&img=1",
                         Released = c.Released.HasValue ? c.Released.Value.ToShortDateString() : "",
                         hasDigital = c.Digitals.Count > 0 ? "Yes" : "No",
                         hasPhysical = c.Physicals.Count > 0 ? "Yes" : "No",
@@ -262,6 +262,11 @@ namespace globantlib.DataAccess
             }      
 
             return new Domain.Review();
+        }
+
+        public Domain.BookRequestCollection GetBookRequests()
+        {
+            return new Domain.BookRequestCollection(from r in libEntities.BookRequests select r.Title );
         }
     }
 }
