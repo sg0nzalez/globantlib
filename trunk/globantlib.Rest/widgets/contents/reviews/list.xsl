@@ -57,7 +57,7 @@
               </h3>
               <img src="img/stars{Rate}.gif" />
               <p>
-                <xsl:value-of select="Comment"/>
+                <xsl:value-of select="Comments"/>
               </p>
             </div>
           </li>
