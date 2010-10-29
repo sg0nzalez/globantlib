@@ -179,8 +179,6 @@ div#w-contents-left {
     height:100%;
     overflow:auto;
     overflow-x:hidden;
-    padding-right:30px;
-    margin-right:-30px;
 }
 div#w-contents-right {
     float:left;
