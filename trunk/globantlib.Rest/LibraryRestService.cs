@@ -15,6 +15,7 @@ namespace globantlib.Rest
     [ServiceKnownType(typeof(Error))]
     [ServiceKnownType(typeof(Reviews))]
     [ServiceKnownType(typeof(Review))]
+    [ServiceKnownType(typeof(User))]
     [ServiceContract]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
@@ -118,8 +119,9 @@ namespace globantlib.Rest
         }
 
         [IncludeXmlDeclaration]
-        [WebInvoke(UriTemplate = "Review", Method = "POST")]
-        public IResponse Submit(Review instance)
+        [WebInvoke(UriTemplate = "SubmitReview?ContentId={id}", Method = "POST", BodyStyle = WebMessageBodyStyle.Bare,
+            RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml)]
+        public IResponse Submit(String id, Review instance)
         {
             IResponse result = null;
 
