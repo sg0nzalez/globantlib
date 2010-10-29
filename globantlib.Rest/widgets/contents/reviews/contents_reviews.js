@@ -40,7 +40,9 @@ var CONTENTS_REVIEWS = (function () {
         alert('ERRORRR!!');
     }
     function submitSuccess() {
-        loadList();
+        loadList(function () {
+            hideForm();
+        });
     }
     function submitValidationErrors(errors) {
         var span;
@@ -55,7 +57,7 @@ var CONTENTS_REVIEWS = (function () {
     * Call service and populate review list
     */
     function gatherFormData() {
-        data = "<Review><Rate>4</Rate><Title>ReviewTremendo</Title><Submitted>10</Submitted><Comments>TT</Comments></Review>";
+        data = {};
         data.title = $("#w-contents-review-title").val();
         data.rate = $("#w-contents-review-rate").val();
         data.comment = $("#w-contents-review-text").val();
@@ -98,28 +100,21 @@ var CONTENTS_REVIEWS = (function () {
         if (validation.errorCount === 0) {
             hideForm();
             showOverlay();
-            /*XML.sendAsXML({
+            XML.sendAsXML({
                 "data": gatherFormData(),
                 "type": "POST",
-                "root" : "Review",
-                "service": '/LibraryService.mvc/Reviewddd?ContentId=',
-                "callback": function () { }
-            });*/
-            $.ajax({
-                "dataType": "xml",
-                "contentType" : "application/xml",
-                "url": '/LibraryService.mvc/SubmitReview?ContentId=' + contentId,
-                "type": "POST",
-                "data": XML.flatten(gatherFormData(), "Review"),
-                "contentType": "application/xml",
-                "success": function () {
-                    submitSuccess();
-                },
-                "error": function () {
-                    submitError();
-                },
-                "complete": function () {
-                    hideOverlay();
+                "root": "Review",
+                "service": '/LibraryService.mvc/Review?ContentId=',
+                "callback": function (xhr) {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            submitSuccess();
+                        }
+                        else {
+                            submitError();
+                        }
+                        hideOverlay();
+                    }
                 }
             });
         }
