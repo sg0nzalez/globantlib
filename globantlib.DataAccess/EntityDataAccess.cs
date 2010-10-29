@@ -205,8 +205,17 @@ namespace globantlib.DataAccess
         {
             Content c = new Content()
             {
-
+                Author = instance.Author,
+                Description = instance.Description,
+                ISBN = instance.ISBN,
+                Pages = instance.Pages,
+                Publisher = instance.Publisher,
+                Released = DateTime.Parse(instance.Released),
+                Title = instance.Title
             };
+
+            libEntities.Contents.AddObject(c);
+            libEntities.SaveChanges();
         }
 
         public List<Domain.Review> GetReviews(int id)
