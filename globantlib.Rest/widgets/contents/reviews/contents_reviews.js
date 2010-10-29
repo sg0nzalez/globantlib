@@ -58,9 +58,12 @@ var CONTENTS_REVIEWS = (function () {
     */
     function gatherFormData() {
         data = {};
-        data.title = $("#w-contents-review-title").val();
-        data.rate = $("#w-contents-review-rate").val();
-        data.comment = $("#w-contents-review-text").val();
+        data.Comment = $("#w-contents-review-text").val();
+        data.ID = "0";
+        data.Rate = $("#w-contents-review-rate").val();
+        data.Submitted = "10/10/10";
+        data.Title = $("#w-contents-review-title").val();
+        data.User = "<Name>Milka</Name><Thumbnail></Thumbnail>";
         return data;
     }
     function loadList(callback) {
@@ -104,7 +107,7 @@ var CONTENTS_REVIEWS = (function () {
                 "data": gatherFormData(),
                 "type": "POST",
                 "root": "Review",
-                "service": '/LibraryService.mvc/Review?ContentId=',
+                "service": '/LibraryService.mvc/SubmitReview?ContentId=' + contentId,
                 "callback": function (xhr) {
                     if (xhr.readyState === 4) {
                         if (xhr.status === 200) {
