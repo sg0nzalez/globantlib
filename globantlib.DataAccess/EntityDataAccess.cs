@@ -219,7 +219,7 @@ namespace globantlib.DataAccess
                           {
                               ID = (int)r.ID,
                               Title = r.Title,
-                              Comment = r.Comment,
+                              Comments = r.Comment,
                               Submitted = (string)r.Submitted,
                               Rate = r.Rate,
                               User = new Domain.User() { Name = r.User.FirstName, Thumbnail = "img/no-user.png" }
