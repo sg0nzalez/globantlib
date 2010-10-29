@@ -116,6 +116,7 @@
     <Content Include="img\no-img.gif" />
     <Content Include="img\no-user.png" />
     <Content Include="img\overlay_background.png" />
+    <Content Include="img\stars5.gif" />
     <Content Include="index.html" />
     <Content Include="js\hash_reader.js" />
     <Content Include="js\modernizr.js" />

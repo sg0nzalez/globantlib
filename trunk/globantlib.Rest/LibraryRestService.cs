@@ -52,11 +52,13 @@ namespace globantlib.Rest
             Response resp = new Response();
             resp.ArrayOfContents = libEntities.SearchContents(actual_page, page_size, text, out count);
             resp.Pages = new List<Page>();
-            for (int i = 0; i < count / page_size; i++)
+            
+            int pages = 1 + (int)(count / page_size);
+            for (int i = 0; i < pages; i++)
             {
                 resp.Pages.Add(new Page() { number = i+1, current = false });
             }
-            if (resp.Pages.Count > 0)
+            if (count > 0)
             {
                 resp.Pages[actual_page].current = true;
                 result = resp;
@@ -120,16 +122,17 @@ namespace globantlib.Rest
         }
 
         [IncludeXmlDeclaration]
-        [WebInvoke(UriTemplate = "SubmitReview?ContentId={id}", Method = "POST", BodyStyle = WebMessageBodyStyle.Bare,
-            RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml)]
+        [WebInvoke(UriTemplate = "SubmitReview?ContentId={id}", Method = "POST")]
         public IResponse Submit(String id, Review instance)
         {
             IResponse result = null;
-            Review rev = null;
 
             int i = 0;
             if(int.TryParse(id, out i))
-                rev = libEntities.SubmitReview(i, instance);
+                result = libEntities.SubmitReview(i, instance);
+
+            if (result == null)
+                result = new Error() { Message = "The content you're trying to reach doesn't exist or has been removed." };
 
             return result;
         }
