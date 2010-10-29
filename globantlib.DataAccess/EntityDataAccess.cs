@@ -266,7 +266,7 @@ namespace globantlib.DataAccess
 
         public Domain.BookRequestCollection GetBookRequests()
         {
-            return new Domain.BookRequestCollection(from r in libEntities.BookRequests select r.Title );
+            return new Domain.BookRequestCollection(from r in libEntities.BookRequests select new Domain.BookRequest() { Title = r.Title, UserName = "Guest" });
         }
     }
 }

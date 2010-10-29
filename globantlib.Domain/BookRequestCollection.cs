@@ -7,13 +7,13 @@ using System.Runtime.Serialization;
 namespace globantlib.Domain
 {
     [CollectionDataContract(Name = "BookRequests",ItemName = "BookRequest" , Namespace = "")]
-    public class BookRequestCollection: List<String>, IResponse
+    public class BookRequestCollection : List<BookRequest>, IResponse
     {
         public BookRequestCollection()
             : base()
         { }
 
-        public BookRequestCollection(IEnumerable<String> collection)
+        public BookRequestCollection(IEnumerable<BookRequest> collection)
             : base(collection)
         { }
     }
