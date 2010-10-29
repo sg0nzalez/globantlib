@@ -157,5 +157,12 @@ namespace globantlib.Rest
 
             return result;
         }
+
+        [IncludeXmlDeclaration]
+        [WebGet(UriTemplate = "BookRequest?Text={text}", RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare)]
+        public void SubmitBookRequest(String text)
+        {
+            libEntities.SubmitBookRequest(text);
+        }
     }
 }
