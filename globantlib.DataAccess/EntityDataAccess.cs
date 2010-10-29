@@ -228,7 +228,7 @@ namespace globantlib.DataAccess
                           {
                               ID = (int)r.ID,
                               Title = r.Title,
-                              Comments = r.Comment,
+                              Comment = r.Comment,
                               Submitted = (string)r.Submitted,
                               Rate = r.Rate,
                               User = new Domain.User() { Name = r.User.FirstName, Thumbnail = "img/no-user.png" }
@@ -236,6 +236,32 @@ namespace globantlib.DataAccess
 
 
             return reviews.ToList<Domain.Review>();
+        }
+
+        public Domain.Review SubmitReview(int i, Domain.Review instance)
+        {
+            Content cont = libEntities.Contents.Where<Content>(c => c.ID == i).FirstOrDefault();
+
+            User user = libEntities.Users.Where<User>(u => u.FirstName == instance.User.Name).FirstOrDefault();
+            
+            if (cont != null && user != null)
+            {
+                Review rev = new Review()
+                {
+                    Comment = instance.Comment,
+                    Content = cont,
+                    Rate = instance.Rate,
+                    Submitted = instance.Submitted,
+                    Title = instance.Title,
+                    User = user
+                };
+
+                cont.Reviews.Add(rev);
+
+                libEntities.SaveChanges();      
+            }      
+
+            return new Domain.Review();
         }
     }
 }
