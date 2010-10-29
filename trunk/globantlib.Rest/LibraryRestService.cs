@@ -17,6 +17,7 @@ namespace globantlib.Rest
     [ServiceKnownType(typeof(ReviewCollection))]
     [ServiceKnownType(typeof(Review))]
     [ServiceKnownType(typeof(BookRequestCollection))]
+    [ServiceKnownType(typeof(BookRequest))]
     [ServiceKnownType(typeof(User))]
     [ServiceContract]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
