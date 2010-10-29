@@ -67,6 +67,7 @@ namespace globantlib.Rest
             return result;
         }
 
+        [IncludeXmlDeclaration]
         [WebInvoke(UriTemplate = "", Method = "POST")]
         public IResponse Create(Content instance)
         {
@@ -124,6 +125,11 @@ namespace globantlib.Rest
         public IResponse Submit(String id, Review instance)
         {
             IResponse result = null;
+            Review rev = null;
+
+            int i = 0;
+            if(int.TryParse(id, out i))
+                rev = libEntities.SubmitReview(i, instance);
 
             return result;
         }

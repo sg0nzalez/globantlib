@@ -75,30 +75,34 @@
 
             function bookCRUD(action) {
                 var title, autor, release, pages, publisher, description, id, thumbnail;
-                title = $("#title");
-                author = $("#author");
-                release = $("#release");
-                publisher = $("#publisher");
-                description = $("#description");
+                title = $("#title").val();
+                author = $("#author").val();
+                release = $("#release").val();
+                publisher = $("#publisher").val();
+                description = $("#description").val();
+                pages = $("#pages").val();
                 thumbnail = "";
                 id = ($("#select_book").val() != "" && $("#select_book").val() != "undefined" && $("#select_book").val() != null)?$("#select_book").val():"";
 
                 xmlData = '<?xml version="1.0" encoding="utf-8"?>'
-                            + '<Content xmlns:i="http://www.w3.org/2001/XMLSchema-instance">'
+                            + '<Content>'
                                 + '<Author>' + author + '</Author>'
                                 + '<Description>' + description + '</Description>'
-                                + '<Pages>' + author + '</Pages>'
+                                + '<Pages>' + pages + '</Pages>'
                                 + '<Publisher>' + publisher + '</Publisher>'
                                 + '<Released>' + release + '</Released>'
                                 + '<Thumbnail>' + thumbnail + '</Thumbnail>'
                                 + '<Title>' + title + '</Title>'
                             + '</Content>';
 
+                alert(xmlData);
 
                 $.ajax({
-                    url: "/LibraryService.mvc",
+                    url: "/LibraryService.mvc/",
+                    contentType : "application/xml",
+                    dataType : "xml",
                     type: action,
-                    data: encodeURIComponent(xmlData),
+                    data: xmlData,
                     success: function (msg) {
                         alert(msg);
                     },
