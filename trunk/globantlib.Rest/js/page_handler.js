@@ -20,9 +20,18 @@
         });
     }
 
+    function devicesList(page) {
+        document.location.href = "/";
+    }
+
+    function devicesCalendar(id) {
+    }
+
     return {
         "contentList": contentList,
-        "contentDetails": contentDetails
+        "contentDetails": contentDetails,
+        "devicesList": devicesList,
+        "devicesCalendar": devicesCalendar
     }
 
 } ());
