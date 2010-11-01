@@ -385,7 +385,7 @@ namespace globantlib.DataAccess
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Title
         {
@@ -395,14 +395,11 @@ namespace globantlib.DataAccess
             }
             set
             {
-                if (_Title != value)
-                {
-                    OnTitleChanging(value);
-                    ReportPropertyChanging("Title");
-                    _Title = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Title");
-                    OnTitleChanged();
-                }
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
             }
         }
         private global::System.String _Title;

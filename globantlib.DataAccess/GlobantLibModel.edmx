@@ -6,12 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="GlobantLibModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="GlobantLibModelStoreContainer">
-          <EntitySet Name="BookRequest" EntityType="GlobantLibModel.Store.BookRequest" store:Type="Tables" store:Schema="dbo" store:Name="BookRequest">
-            <DefiningQuery>SELECT 
-      [BookRequest].[ID] AS [ID], 
-      [BookRequest].[Title] AS [Title]
-      FROM [dbo].[BookRequest] AS [BookRequest]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="BookRequest" EntityType="GlobantLibModel.Store.BookRequest" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Content" EntityType="GlobantLibModel.Store.Content" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Device" EntityType="GlobantLibModel.Store.Device" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="DeviceType" EntityType="GlobantLibModel.Store.DeviceType" store:Type="Tables" Schema="dbo" />
@@ -58,13 +53,9 @@
             <End Role="Review" EntitySet="Review" />
           </AssociationSet>
         </EntityContainer>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'GlobantLib.dbo.BookRequest' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
         <EntityType Name="BookRequest">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="Title" />
           </Key>
           <Property Name="ID" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
@@ -534,7 +525,6 @@
         <EntityType Name="BookRequest">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="Title" />
           </Key>
           <Property Type="Decimal" Name="ID" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
