@@ -528,6 +528,11 @@ div#w-contents-details div.new-review select,
 div#w-contents-details div.new-review textarea {
     float:left;
 }
+p#w-contents-reviews-error 
+{
+    font-size:14px;
+    font-weight:bold;
+}
 input#w-contents-review-title {
     width:560px;
 }
