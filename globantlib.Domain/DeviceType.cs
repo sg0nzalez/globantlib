@@ -20,8 +20,8 @@ namespace globantlib.Domain
         [DataMember]
         public int Quantity;
 
-        /*[DataMember]
-        public string Available;*/
+        [DataMember]
+        public string Available;
 
         [DataMember]
         public string Image { get; set; }
