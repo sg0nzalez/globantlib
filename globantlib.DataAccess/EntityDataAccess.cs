@@ -49,7 +49,6 @@ namespace globantlib.DataAccess
                 Type = t.Type,
                 Image = t.image,
                 Quantity = t.Devices.Count,
-                //Available = ""
             };
         }
 
@@ -65,7 +64,6 @@ namespace globantlib.DataAccess
         {
             return new Domain.Lease()
             {
-                //ID = (int)l.ID,
                 StartDate = l.StartDate,
                 EndDate = l.EndDate
             };
@@ -140,10 +138,6 @@ namespace globantlib.DataAccess
 
             var devices = libEntities.Devices.Where<Device>(t => t.TypeID == typeID);
 
-            //var days = DateTime.DaysInMonth(year, month);
-
-            //var dateRequired = new DateTime(year, month, 1);
-
             foreach (var device in devices)
             {
                 var leases = libEntities.Leases.Where<Lease>(
@@ -157,21 +151,6 @@ namespace globantlib.DataAccess
                 Domain.Device d = Create(device);
                 d.Leases = lLease;
                 lResult.Add(d);
-                
-                /*var Availability = new List<int>();
-
-                Domain.Device d = Create(device);
-                for (int i = 1; i <= days; i++)
-                {
-                    var query = libEntities.Leases.Where(c => c.Date > dateRequired);
-                    if(query.Count<Lease>() > 0) 
-                    {
-                        Availability.Add(i);
-                    }
-                    dateRequired.AddDays(1);
-                }
-                d.Availability = Availability;
-                lResult.Add(d);*/
             }
 
             return lResult;
@@ -195,10 +174,40 @@ namespace globantlib.DataAccess
 
             foreach (var item in libEntities.DeviceTypes.Include("Devices"))
             {
-                lResult.Add(Create(item));
+                Domain.DeviceType dt = Create(item);
+
+                if (checkAvailability(DateTime.Today, item.ID))
+                    dt.Available = "Today";
+                else
+                    if (checkAvailability(DateTime.Today.AddDays(1), item.ID))
+                        dt.Available = "Tomorrow";
+                    else
+                        dt.Available = "More than 2 days";
+                
+                lResult.Add(dt);
             }
 
             return lResult;
+        }
+
+
+        public bool checkAvailability(DateTime date, Decimal itemID)
+        {
+            foreach (var device in libEntities.Devices.Where(d => d.TypeID == itemID))
+            {
+                var leases = (from l in libEntities.Leases
+                              join x in libEntities.Leasables on l.LeasableID equals x.ID
+                              join d in libEntities.Devices on x.ID equals d.LeasableID
+                              where (l.StartDate == date || l.EndDate == date
+                              || (l.StartDate < date && date < l.EndDate))
+                              && (d.ID == device.ID)
+                              select l).Count();
+                if (leases == 0)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void Create(Domain.Content instance)
