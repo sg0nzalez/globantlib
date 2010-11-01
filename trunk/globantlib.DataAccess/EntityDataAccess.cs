@@ -280,7 +280,8 @@ namespace globantlib.DataAccess
 
         public void SubmitBookRequest(string text)
         {
-            libEntities.BookRequests.AddObject(new BookRequest() { Title = text }); 
+            libEntities.AddToBookRequests(BookRequest.CreateBookRequest(0, text));
+            libEntities.SaveChanges();
         }
     }
 }
