@@ -65,7 +65,7 @@
 
         <xsl:if test="count(Error) > 0">
           <xsl:for-each select="Error">
-          <p id="w-contents-details-error">
+          <p id="w-contents-reviews-error">
             <xsl:value-of select="Message"/>
             <!-- No reviews just yet. -->
           </p>
