@@ -95,7 +95,7 @@ var CONTENTS_REVIEWS = (function () {
     function gatherFormData() {
         var rightNow = new Date(),
             day = rightNow.getDate(),
-            month = rightNow.getMonth(),
+            month = rightNow.getMonth() + 1,
             year = (rightNow.getFullYear() + "").substring(2),
             hours = rightNow.getHours(),
             minutes = rightNow.getMinutes() < 10 ? "0" + rightNow.getMinutes() : rightNow.getMinutes();

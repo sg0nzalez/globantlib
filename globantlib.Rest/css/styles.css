@@ -19,6 +19,10 @@ time, mark, audio, video {
     background:transparent;
     list-style:none;
     font-family:Tahoma, serif;
+}
+
+a 
+{
     outline:0;
 }
 
@@ -98,7 +102,7 @@ input, select {
 
 /* *** */
 body {
-    background:#f0f0f0;
+    background:#b9d52d;
 }
 .full {
     float:left;
@@ -110,8 +114,8 @@ body {
 }
 
 div#header-wrap {
-    background:#e0e0e0;
-    border-bottom:1px solid #d0d0d0;
+    background:url(images/header.gif) #e0e0e0;
+    height:69px;
 }
 div#content-wrap {
     padding:10px 0;
@@ -144,26 +148,25 @@ a#logo {
     font-size:24px;
     font-weight:bold;
     color:#000;
-    padding:10px 0;
+    padding:12px 0 0;
 }
 nav#main-nav {
     float:right;
-    padding-top:18px;
+    padding-top:10px;
 }
 nav#main-nav li {
     float:left;
-    margin-right:5px;
+    margin-left:30px;
 }
 nav#main-nav li a {
     display:block;
-    padding:7px 10px;
     text-decoration:none;
     font-size:12px;
-    color:#fff;
-    background:#aaa;
+    color:#666;
 }
-nav#main-nav li a:hover {
-    background:#a0a0a0;
+nav#main-nav li a:hover 
+{
+    color:#000;
 }
 
 /**
@@ -189,12 +192,15 @@ div#w-contents-right {
     overflow:auto;
     overflow-x:hidden;
 }
-p#w-contents-search-error {
+p#w-contents-search-error 
+{
+    padding-top:70px;
+    background:url(images/warning.png) no-repeat center top;
     font-size:14px;
-    font-weight:bold;
     color:#505050;
     float:left;
     width:100%;
+    text-align:center;
 }
 
 /**
@@ -280,14 +286,53 @@ div#w-contents-request input.submit {
     float:right;
     display:block;
     width:70px;
-    border:1px solid #ccc;
+    height:20px;
     cursor:pointer;
+    border:0;
+    text-indent:-100000px;
+    background:url(images/request_send.png);
+}
+div#w-contents-request input.submit:hover
+{
+    background-position:0 -20px;
+}
+div#w-contents-request-list h2
+{
+    font-size:12px;
+    padding:4px 0 10px;
+    margin-bottom:10px;
+    border-bottom:1px solid #e0e0e0;
 }
 div#w-contents-request-list li
 {
+    float:left;
+    width:48%;
+    height:30px;
+    margin-bottom:10px;
+    background:url(images/print.png) no-repeat;
+}
+div#w-contents-request-list li h3
+{
     font-size:12px;
+    padding-left:22px;
+    line-height:14px;
+    height:16px;
+}
+div#w-contents-request-list li h3 a
+{
     color:#505050;
-    line-height:30px;
+    text-decoration:none;
+}
+div#w-contents-request-list li h3 a:hover
+{
+    color:#000;
+}
+div#w-contents-request-list li h4
+{
+    font-size:11px;
+    color:#999999;
+    font-weight:normal;
+    padding-left:22px;
 }
 
 
@@ -306,12 +351,17 @@ ul#w-contents-list .thumbnail {
    display:block;
    width:100px;
    overflow:hidden;
+   border:1px solid #e0e0e0;
 }
+ul#w-contents-list .thumbnail img
+{
+    display:block;
+}    
 ul#w-contents-list .title,
 ul#w-contents-list .tagline,
 ul#w-contents-list .available,
 ul#w-contents-list .description {
-   padding-left:110px;
+   padding-left:115px;
 }
 ul#w-contents-list .title {
     font-size:18px;
@@ -319,7 +369,7 @@ ul#w-contents-list .title {
 }
 ul#w-contents-list .title a {
     text-decoration:none;
-    color:#333;
+    color:#505050;
 }
 ul#w-contents-list .title a:hover {
     color:#000;
@@ -357,7 +407,6 @@ ul#w-contents-list .description {
     color:#505050;
 }
 p#w-contents-pagination {
-    text-align:center;
     float:left;
     width:100%;
     margin-bottom:10px;
@@ -376,7 +425,9 @@ p#w-contents-pagination a:hover {
 
 p#w-contents-details-error {
     font-size:14px;
-    font-weight:bold;
+    text-align:center;
+    padding-top:70px;
+    background:url(images/warning.png) no-repeat center top;
     color:#505050;
     float:left;
     width:100%;
@@ -424,7 +475,15 @@ div#w-contents-details div.thumbnail li {
 }
 div#w-contents-details div.thumbnail li a {
     text-decoration:none;
-    color:#333;
+    color:#666;
+    display:block;
+    background:url(images/download.png) no-repeat;
+    height:16px;
+    padding-left:22px;
+}
+div#w-contents-details div.thumbnail li a:hover
+{
+    color:#000;
 }
 div#w-contents-details div.new-review {
     padding:10px 0;
@@ -531,6 +590,12 @@ div#w-contents-reviews li {
 div#w-contents-reviews h3 {
     font-size:14px;
     margin-bottom:5px;
+}
+div#w-contents-reviews h3 img
+{
+    position:relative;
+    top:1px;
+    left:5px;
 }
 div#w-contents-reviews p {
     font-size:12px;

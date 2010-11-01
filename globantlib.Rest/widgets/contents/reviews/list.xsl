@@ -57,8 +57,9 @@
             <div class="body">
               <h3>
                 <xsl:value-of select="Title"/>
+                <img width="70" src="img/stars{Rate}.png" />
               </h3>
-              <img width="70" src="img/stars{Rate}.gif" />
+
               <p>
                 <xsl:value-of select="Comment"/>
               </p>
