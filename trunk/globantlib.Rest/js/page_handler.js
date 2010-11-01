@@ -38,19 +38,21 @@
         });
     }
 
-    function devicesList(page) {
-        document.location.href = "/devices/ViewDevices.aspx";
+    function deviceList(page) {
+        contentDeactivate();
+        DEVICES.showList(page);
+        DEVICES.show();
     }
 
-    function devicesCalendar(id) {
+    function deviceCalendar(id) {
     }
 
     return {
         "contentList": contentList,
         "contentDetails": contentDetails,
         "contentRequests": contentRequests,
-        "devicesList": devicesList,
-        "devicesCalendar": devicesCalendar
+        "deviceList": deviceList,
+        "deviceCalendar": deviceCalendar
     }
 
 } ());

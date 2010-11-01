@@ -4,12 +4,12 @@
 	
 	// devices list first page
 	devices = function () {
-		PAGE_HANDLER.deviceList();
+	    PAGE_HANDLER.deviceList();
 	};
 
 	// devices list page N
 	devices.list = function (page) {
-		PAGE_HANDLER.deviceList(page);
+	    PAGE_HANDLER.deviceList(page);
 	};
 	
 	// device calendar

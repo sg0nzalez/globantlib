@@ -1,4 +1,11 @@
-﻿DEVICES = (function () {
+﻿var DEVICES = (function () {
+
+    function hide() {
+        $("#w-devices-list").hide();
+    }
+    function show() {
+        $("#w-devices-list").show();
+    }
 
     /**
     * Load and show the list of contents
@@ -19,6 +26,8 @@
         
     }
     return {
+        "show": show,
+        "hide" : hide,
         "showList": showList,
         "showCalendar": showCalendar
     };
