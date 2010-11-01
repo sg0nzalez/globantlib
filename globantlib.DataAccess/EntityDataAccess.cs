@@ -112,7 +112,7 @@ namespace globantlib.DataAccess
         {
             List<Domain.Content> lResult = new List<Domain.Content>();
 
-            var query = libEntities.Contents.OrderBy("it.ID")
+            var query = libEntities.Contents.OrderBy("it.Title")
                 .Where(c => c.Title.Contains(TextSearch));
 
             count = query.Count<Content>();
@@ -161,6 +161,21 @@ namespace globantlib.DataAccess
             List<Domain.Content> lResult = new List<Domain.Content>();
 
             foreach (var item in libEntities.Contents)
+            {
+                lResult.Add(Create(item));
+            }
+
+            return lResult;
+        }
+
+        public List<Domain.Content> GetContent(string text)
+        {
+            List<Domain.Content> lResult = new List<Domain.Content>();
+
+            var query = libEntities.Contents.OrderBy("it.Title")
+                .Where(c => c.Title.Contains(text));
+
+            foreach (var item in query)
             {
                 lResult.Add(Create(item));
             }
@@ -283,5 +298,7 @@ namespace globantlib.DataAccess
             libEntities.AddToBookRequests(BookRequest.CreateBookRequest(0, text));
             libEntities.SaveChanges();
         }
+
+        
     }
 }

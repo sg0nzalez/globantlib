@@ -1,6 +1,7 @@
 var CONTENTS_SEARCH = (function () {
 
-    var keyUpDelay = 500,
+    var initiated = false,
+        keyUpDelay = 500,
         runningSearch = null,
         currentQuery = "";
 
@@ -45,9 +46,12 @@ var CONTENTS_SEARCH = (function () {
     }
 
     function initControls() {
-        initForm();
-        initTextBox();
-        initPagination(currentQuery);
+        if (!initiated) {
+            initForm();
+            initTextBox();
+            initPagination(currentQuery);
+            initiated = true;
+        }
     }
 
     function init(query) {

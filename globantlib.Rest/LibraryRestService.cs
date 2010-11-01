@@ -39,6 +39,26 @@ namespace globantlib.Rest
         }
 
         [IncludeXmlDeclaration]
+        [WebGet(UriTemplate = "?Text={text}", ResponseFormat = WebMessageFormat.Xml)]
+        public IResponse GetFilteredCollection(String text)
+        {
+            IResponse result = null;
+
+            Response t = new Response();
+            t.ArrayOfContents = libEntities.GetContents(text);
+
+            if (t.ArrayOfContents.Count == 0)
+            {
+                result = new Error() { Message = "Your query didn't generate any results." };
+            }
+            else
+                result = t;
+
+
+            return result;
+        }
+
+        [IncludeXmlDeclaration]
         [WebGet(UriTemplate = "Search?Text={text}&Page={page}", RequestFormat= WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle=WebMessageBodyStyle.Bare)]
         public IResponse SearchCollection(String text, String page)
         {
@@ -124,7 +144,11 @@ namespace globantlib.Rest
             int i = 0;
             int.TryParse(id, out i);
             ReviewCollection reviews = new ReviewCollection(libEntities.GetReviews(i));
-            result = reviews;
+
+            if (reviews.Count == 0)
+                result = new Error() { Message = "There are no reviews to this book." };
+            else
+                result = reviews;
 
             return result;
         }
@@ -151,10 +175,12 @@ namespace globantlib.Rest
         {
             IResponse result = null;
 
-            result = libEntities.GetBookRequests();
+            BookRequestCollection bookreq = libEntities.GetBookRequests();
 
-            if (result == null)
-                result = new Error() { Message = "The content you're trying to reach doesn't exist or has been removed." };
+            if (bookreq.Count == 0)
+                result = new Error() { Message = "." };
+            else
+                result = bookreq;
 
             return result;
         }

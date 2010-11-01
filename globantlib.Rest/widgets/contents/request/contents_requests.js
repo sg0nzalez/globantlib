@@ -1,5 +1,7 @@
 var CONTENTS_REQUESTS = (function () {
 
+    var initiated = false;
+
     function showLoading() {
         $("#loading-message")
             .attr('class', 'loading')
@@ -55,14 +57,17 @@ var CONTENTS_REQUESTS = (function () {
     }
 
     function initSidebar() {
-        $("#w-contents-request form").submit(function (e) {
-            sendRequest();
-            e.preventDefault();
-        });
-        $("#w-contents-request input.text").keyup(validate);
-        $("#w-contents-request input.text").blur(function () {
-            $(this).removeAttr('style');
-        });
+        if (!initiated) {
+            $("#w-contents-request form").submit(function (e) {
+                sendRequest();
+                e.preventDefault();
+            });
+            $("#w-contents-request input.text").keyup(validate);
+            $("#w-contents-request input.text").blur(function () {
+                $(this).removeAttr('style');
+            });
+            initiated = true;
+        }
     }
 
     return {
