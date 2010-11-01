@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace globantlib.Domain
 {
     [DataContract(Namespace = "")]
-    public class BookRequest
+    public class BookRequest : IResponse
     {
         [DataMember]
         public String Title { get; set; }

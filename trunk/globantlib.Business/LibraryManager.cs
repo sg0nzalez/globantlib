@@ -45,5 +45,10 @@ namespace globantlib.Business
         {
             return data.GetBookRequests();
         }
+
+        public void SubmitBookRequest(string text)
+        {
+            data.SubmitBookRequest(text);
+        }
     }
 }
