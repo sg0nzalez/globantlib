@@ -15,18 +15,10 @@
           </div>
           <div class="device_bottom">
             <ul class="device_description">
-              <!--<li>
-                <span class="dispositive_attribute">Type: </span>
-                <xsl:value-of select="Type" />
-              </li>-->
               <li>
                 <span class="dispositive_attribute">Quantity: </span>
                 <xsl:value-of select="Quantity" />
               </li>
-              <!--<li>
-                    <span class="dispositive_attribute">Availibility: </span>
-                    <xsl:value-of select="available" />
-                  </li>-->
             </ul>
             <div class="button_div">
               <a class="dispositive_button" href="#devices/calendar/{type}">
