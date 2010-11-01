@@ -50,5 +50,10 @@ namespace globantlib.Business
         {
             data.SubmitBookRequest(text);
         }
+
+        public List<Domain.Content> GetContents(string text)
+        {
+            return data.GetContent(text);
+        }
     }
 }
