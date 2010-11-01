@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-  <xsl:template match="Reviews">
-    <!-- placeholder for tabs... someday we'll need them -->
-    <ul class="tab-buttons">
-
-    </ul>
+  <xsl:template match="/">
     <!-- .tab-buttons -->
-    <div class="tab-contents">
       <div class="reviews">
         <h2>
           Reviews <a id="w-contents-new-review-show" href="#contents/submit_review/{ID}">Submit your own review</a>
         </h2>
 
         <!-- new review form -->
-        <form id="w-contents-new-review-form" mathod="#">
+        <form id="w-contents-new-review-form" action="#">
           <div class="new-review">
             <div class="field">
               <label for="w-contents-review-title">Title:</label>
@@ -43,7 +38,7 @@
         <!-- new review form -->
 
         <ul>
-          <xsl:for-each select="Review">
+          <xsl:for-each select="Reviews/Review">
           <li>
             <div class="head">
               <img width="50" src="{User/Thumbnail}" />
@@ -67,17 +62,18 @@
           </li>
           </xsl:for-each>
         </ul>
+
+        <xsl:if test="count(Error) > 0">
+          <xsl:for-each select="Error">
+          <p id="w-contents-details-error">
+            <xsl:value-of select="Message"/>
+            <!-- No reviews just yet. -->
+          </p>
+          </xsl:for-each>
+        </xsl:if>
         
       </div>
-    </div>
     <!-- .tab-contents -->
-  </xsl:template>
-
-  <xsl:template match="Error">
-    <p id="w-contents-details-error">
-      <xsl:value-of select="Message"/>
-      <!-- No reviews just yet. -->
-    </p>
   </xsl:template>
 
 </xsl:stylesheet>

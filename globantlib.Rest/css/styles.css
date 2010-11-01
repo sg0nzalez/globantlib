@@ -130,7 +130,7 @@ div#footer-wrap {
 }
 p#loading-message {
     font-size:11px;
-    color:#333;
+    color:#505050;
     line-height:16px;
     padding-left:21px;
 }
@@ -549,12 +549,22 @@ div#w-contents-reviews h2 {
     margin-bottom:10px;
     line-height:20px;
 }
-div#w-contents-reviews h2 a {
+div#w-contents-reviews h2 a 
+{
+    margin-top:7px;
     font-size:12px;
     font-weight:normal;
     text-decoration:none;
     color:#666;
     display:block;
+    line-height:10px;
+    height:12px;
+    padding-left:17px;
+    background:url(images/add.png) no-repeat;
+}
+div#w-contents-reviews h2 a:hover
+{
+    color:#000;
 }
 div#w-contents-reviews div.head {
     float:left;
