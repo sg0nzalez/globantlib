@@ -17,7 +17,7 @@ var CONTENTS_REQUESTS = (function () {
         return !!text.val();
     }
 
-    function sendRequest() {
+    function sendRequest(e) {
         var text = $("#w-contents-request input.text"),
             valid = validate();
         if (valid) {
@@ -28,7 +28,8 @@ var CONTENTS_REQUESTS = (function () {
                 if (this.readyState === 4) {
                     text.val("");
                     hideLoading();
-                    document.location.href = "#contents/requests";
+                    document.location = "#contents/requests";
+                    PAGE_HANDLER.contentRequests();
                 }
             }
             showLoading();

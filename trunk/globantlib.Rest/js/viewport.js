@@ -4,7 +4,7 @@ var VIEWPORT = (function () {
         var headerHeight = $("#header-wrap").outerHeight(),
             footerHeight = $("#footer-wrap").outerHeight(),
             windowHeight = $(window).height(),
-            contentHeight = windowHeight - (headerHeight + footerHeight) - 100;
+            contentHeight = windowHeight - (headerHeight + footerHeight) - footerHeight;
         $("#content").css({
             'height': contentHeight
         });
