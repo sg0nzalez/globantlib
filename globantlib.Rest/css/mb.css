@@ -8,7 +8,7 @@
 
 ul.device_description
 {
-    width:200px;
+    width:225px;
     margin: 0px auto 18px;    
 }
 
@@ -134,15 +134,15 @@ li.first_li
         margin: 15px 0;    
     }
     
-    .ul_form input[type="text"]
+    .ul_form input[type="text"],.ul_form input[type="number"],.ul_form input[type="date"]
     {
-        width: 200px;
+        width: 225px;
     }
     
     textarea
     {
         vertical-align: top;
-        width:200px;
+        width:225px;
         height: 100px;
     }
     
@@ -179,6 +179,47 @@ li.first_li
         color: Gray; 
         font-style: italic;
     }
-/*
+    
+    .error_ul
+    {
+        color: Red;
+        font-size: 10px;
+        width: 250px; 
+        margin-left: 110px;
+        text-align: center;
+           
+    }
+    
+    .error_ul li
+    {
+        margin: 5px 0;    
+    }
+    
+    input.error
+    {
+        border: 1px solid red;
+    }
+    
+    .hidden
+    {
+        display: none;
+    }
+    
+    .chk_files
+    {
+        margin: 5px 0 0 125px;
+        font-size: 12px;    
+        width: 225px;
+    }
+    
+    .block
+    {
+        display: block;    
+    }
+    .ul_form input[type="checkbox"]
+    {
+        vertical-align: sub;
+    }
+    /*
 *End Administrator
 */
