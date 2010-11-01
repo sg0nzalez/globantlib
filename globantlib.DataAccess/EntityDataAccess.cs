@@ -268,5 +268,10 @@ namespace globantlib.DataAccess
         {
             return new Domain.BookRequestCollection(from r in libEntities.BookRequests select new Domain.BookRequest() { Title = r.Title, UserName = "Guest" });
         }
+
+        public void SubmitBookRequest(string text)
+        {
+            libEntities.BookRequests.AddObject(new BookRequest() { Title = text }); 
+        }
     }
 }
