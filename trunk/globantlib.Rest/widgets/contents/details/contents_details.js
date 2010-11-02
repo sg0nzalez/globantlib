@@ -11,10 +11,11 @@ var CONTENTS_DETAILS = (function () {
         var xml = '/LibraryService.mvc/' + id,
             target = document.getElementById('w-contents-details');
         target.className = 'loading';
-        XML.transformWithCallback(xml, 'widgets/contents/details/details.xsl', target, function () {
+        XML.transformWithCallback(xml, 'widgets/contents/details/details.xsl', target, function (xml) {
             callback();
             show();
             CONTENTS_REVIEWS.init(id);
+            document.title = $(xml).find("Title").text() + " @ Globant Library";
         });
     }
 

@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
   <xsl:template match="BookRequests">
-    <h2>Requested Books</h2>
+    <h2>Requested Titles</h2>
     <ul>
       <xsl:for-each select="BookRequest">
         <li>

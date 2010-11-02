@@ -13,6 +13,7 @@ var CONTENTS_LOADER = (function () {
             "overflow": "hidden"
         });
         $("loading-message").text(message);
+        document.title = "Loading contents... @ Globant Library";
     }
 
     /**
