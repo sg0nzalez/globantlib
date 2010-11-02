@@ -20,23 +20,39 @@ var CONTENTS_REQUESTS = (function () {
     }
 
     function sendRequest(e) {
-        var text = $("#w-contents-request input.text"),
-            valid = validate();
-        if (valid) {
-            var service = '/LibraryService.mvc/BookRequest?Text=' + text.val(),
-            req = XML.createXMLHttpRequest();
-            req.open("GET", service, true);
-            req.onreadystatechange = function () {
-                if (this.readyState === 4) {
-                    text.val("");
-                    hideLoading();
-                    document.location = "#contents/requests";
-                    PAGE_HANDLER.contentRequests();
+        var text = $("#w-contents-request input.text");
+        $("<div class='request-popup'/>")
+            .html("You're about to send this text: \"<b>" + text.val() + "</b>\"")
+            .dialog({
+                resizable: false,
+                modal: true,
+                draggable: false,
+                title: "Request Content",
+                buttons: {
+                    "Go ahead": function () {
+                        var valid = validate();
+                        if (valid) {
+                            var service = '/LibraryService.mvc/BookRequest?Text=' + text.val(),
+                            req = XML.createXMLHttpRequest();
+                            req.open("GET", service, true);
+                            req.onreadystatechange = function () {
+                                if (this.readyState === 4) {
+                                    text.val("");
+                                    hideLoading();
+                                    document.location = "#contents/requests";
+                                    PAGE_HANDLER.contentRequests();
+                                }
+                            }
+                            showLoading();
+                            req.send();
+                        }
+                        $(this).dialog("close");
+                    },
+                    "Nope": function () {
+                        $(this).dialog("close");
+                    }
                 }
-            }
-            showLoading();
-            req.send();
-        }
+            });
     }
 
     function show(callback) {
