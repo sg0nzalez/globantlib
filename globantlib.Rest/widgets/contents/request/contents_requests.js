@@ -57,6 +57,7 @@ var CONTENTS_REQUESTS = (function () {
             callback();
             initSidebar();
             show();
+            document.title = "Requested Titles @ Globant Library";
         });
     }
 
