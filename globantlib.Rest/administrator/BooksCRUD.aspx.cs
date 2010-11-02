@@ -13,5 +13,12 @@ namespace globantlib.Rest.administrator
         {
 
         }
+
+
+        private void add_edit_book_ServerClick(object sender, System.EventArgs e)
+        {
+            Console.WriteLine("hello");
+
+        }
     }
 }
