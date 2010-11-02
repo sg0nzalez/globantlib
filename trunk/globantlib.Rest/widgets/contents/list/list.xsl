@@ -32,7 +32,7 @@
           </h3>
 					<p class="available">
 						<xsl:if test="hasDigital = 'Yes'"><a href="#contents/details/{ID}" class="digital">Available in digital</a></xsl:if>
-						<xsl:if test="hasPhysical = 'Yes'"><a href="#contents/details/{ID}" class="physical">Available for rent</a></xsl:if>
+						<xsl:if test="hasPhysical = 'Yes'"><!--<a href="#contents/details/{ID}" class="physical">Available for rent</a>--></xsl:if>
 					</p>
 					<p class="description"><xsl:value-of select="Description" /></p>
 				</li>
