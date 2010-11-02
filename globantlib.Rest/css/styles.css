@@ -131,8 +131,10 @@ div#footer-wrap {
 p#loading-message {
     font-size:11px;
     color:#505050;
-    line-height:16px;
+    line-height:14px;
+    height:16px;
     padding-left:21px;
+    float:right;
 }
 p#loading-message.loading
 {

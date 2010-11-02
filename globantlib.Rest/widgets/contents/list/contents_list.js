@@ -16,6 +16,7 @@ var CONTENTS_LIST = (function () {
         }
         XML.transformWithCallback(xml, 'widgets/contents/list/list.xsl', target, function () {
             callback();
+            show();
         });
     }
 
