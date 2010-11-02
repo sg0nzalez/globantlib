@@ -10,51 +10,51 @@
             <li>
                 <label>
                     Title:</label>
-                <input type="text" id="title" name="title" />
+                <input type="text" form="form1" id="title" name="title" required="true" />
             </li>
             <li>
                 <label>
                     Author:</label>
-                <input type="text" id="author" name="author" />
+                <input type="text" form="form1" id="author" name="author" required="true" />
             </li>
             <li>
                 <label>
                     Release Date:</label>
-                <input type="date" id="release" name="release" />
+                <input type="date" form="form1" id="release" name="release" required="true" />
             </li>
             <li>
                 <label>
                     Pages Number:
                 </label>
-                <input type="number" id="pages" name="pages" />
+                <input type="number" form="form1" range="1" min="0" id="pages" name="pages" required="true" />
             </li>
             <li>
                 <label>
                     Publisher:
                 </label>
-                <input type="text" id="publisher" name="publisher" />
+                <input type="text" form="form1" id="publisher" name="publisher" required="true" />
             </li>
             <li>
                 <label>
                     ISBN - 10:
                 </label>
-                <input type="text" id="isbn" name="isbn" />
+                <input type="number" form="form1" id="isbn" name="isbn" required="true" range="1" max="9999999999" />
             </li>
             <li>
                 <label>
                     Description:
                 </label>
-                <textarea id="description" name="description" rows="4" cols="15"></textarea>
+                <textarea form="form1" id="description" name="description" rows="4" cols="15"></textarea>
             </li>
             <li>
                 <label>
                     Digital Content:
                 </label>
-                <input id="file_0" name="file[]" type="file" />
-                <input id="file_1" name="file[]" type="file" class="hidden" />
-                <input id="file_2" name="file[]" type="file" class="hidden" />
-                <input id="file_3" name="file[]" type="file" class="hidden" />
-                <input id="file_4" name="file[]" type="file" class="hidden" />
+                <input form="form1" id="file_0" name="file[]" type="file" />
+                <input form="form1" id="file_1" name="file[]" type="file" class="hidden" />
+                <input form="form1" id="file_2" name="file[]" type="file" class="hidden" />
+                <input form="form1" id="file_3" name="file[]" type="file" class="hidden" />
+                <input form="form1" id="file_4" name="file[]" type="file" class="hidden" />
                 <div class="chk_files" id="chk_files">
                 </div>
             </li>
@@ -64,8 +64,7 @@
                 </ul>
             </li>
             <li class="li_buttons">
-                <button id="add_edit_book">
-                    Add/Edit</button>
+                <input form="form1" type="submit" id="add_edit_book" value="Add/Edit" runat="server" onclick="return add_edit_book_onclick()" />
                 <button id="delete_book">
                     Delete</button>
             </li>
@@ -96,7 +95,7 @@
             }
 
             cleanBeforeSend();
-            
+
 
         }
 
@@ -244,15 +243,15 @@
         }
 
         function cleanBeforeSend() {
-         
+
             for (var i = 0; i < $("input[type='checkbox'][checked!='true']").length; i++) {
 
 
-                var id_to_delete = $("input[type='checkbox'][checked!='true']:eq("+i+")").attr("data");
-                
-               $("#"+id_to_delete).remove();
+                var id_to_delete = $("input[type='checkbox'][checked!='true']:eq(" + i + ")").attr("data");
+
+                $("#" + id_to_delete).remove();
             }
-            
+
         }
 
 
@@ -303,6 +302,8 @@
         }*/
 
         ///LibraryService.mvc/?Text=aasd;
-           
+
+   
+
     </script>
 </asp:Content>
