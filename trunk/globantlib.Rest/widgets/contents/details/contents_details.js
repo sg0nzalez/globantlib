@@ -12,13 +12,14 @@ var CONTENTS_DETAILS = (function () {
             target = document.getElementById('w-contents-details');
         target.className = 'loading';
         XML.transformWithCallback(xml, 'widgets/contents/details/details.xsl', target, function () {
-            CONTENTS_REVIEWS.init(id);
             callback();
+            show();
+            CONTENTS_REVIEWS.init(id);
         });
     }
 
     return {
-        "init" : init,
+        "init": init,
         "show": show,
         "hide": hide
     };

@@ -53,7 +53,11 @@ var CONTENTS_REQUESTS = (function () {
     }
 
     function init(callback) {
-        loadList(callback);
+        loadList(function () {
+            callback();
+            initSidebar();
+            show();
+        });
     }
 
     function initSidebar() {
