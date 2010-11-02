@@ -75,19 +75,16 @@
         <legend>Stored Books</legend>
         <input type="search" value="Type book title..." name="search" id="search" class="search_gray" />
         <select class="select_book" size="30" id="select_book">
-            <option>Book 1</option>
-            <option>Book B</option>
-            <option>The book</option>
-            <option>New Book</option>
+            
         </select>
     </fieldset>
     <script>
 
         $("form").submit(send_to_server)
-        $("#search").click(clearSearch).blur(restoreSearch);
+        $("#search").click(clearSearch)//.blur(restoreSearch);
         $("input[type='file']").change(hideFile);
-
-
+        $("#search").keyup(fillBooksList);
+        $('#select_book').change(fillBookInfo)
 
         function send_to_server() {
             if (!validate()) {
@@ -303,7 +300,32 @@
 
         ///LibraryService.mvc/?Text=aasd;
 
-   
+
+        function fillBooksList() {
+            var text, xml;
+            text = encodeURIComponent($(this).val());
+            xml = "/LibraryService.mvc/?Text=" + text;
+         
+            XML.transformWithCallback(xml, "/administrator/xsl/getBooks.xsl", document.getElementById("select_book"), function () { })
+
+        }
+
+
+        function fillBookInfo() {
+
+            $.get("/LibraryService.mvc/" + $(this).val(), function (data) {
+
+                $('#title').val($(data).find("Title").text());
+                $('#author').val($(data).find("Author").text());
+                $('#release').val($(data).find("Released").text());
+                $('#pages').val($(data).find("Pages").text());
+                $('#publisher').val($(data).find("Publisher").text());
+                $('#isbn').val($(data).find("ISBN").text());
+                $('#description').val($(data).find("Description").text());
+
+
+            })
+        }
 
     </script>
 </asp:Content>
