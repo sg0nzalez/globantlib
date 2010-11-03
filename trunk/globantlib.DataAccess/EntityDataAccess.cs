@@ -137,10 +137,6 @@ namespace globantlib.DataAccess
         {
             List<Domain.Device> lResult = new List<Domain.Device>();
 
-           /*var deviceTypeName = (from dt in libEntities.DeviceTypes
-                                 where dt.ID == typeID
-                                 select dt.Type);*/
-
             var devices = libEntities.Devices.Where<Device>(t => t.TypeID == typeID);
 
             foreach (var device in devices)
@@ -248,11 +244,6 @@ namespace globantlib.DataAccess
             {
                 c.Digitals.Add(new Digital() { Format = item.Format, Link = item.Link });
             }
-
-            //foreach (var item in instance.Physicals)
-            //{
-            //    c.Physicals.Add(new Physical() { Type = item.Type });
-            //}
 
             libEntities.Contents.AddObject(c);
             libEntities.SaveChanges();
