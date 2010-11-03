@@ -8,6 +8,10 @@ using System.Text;
 using globantlib.Business;
 using globantlib.Domain;
 using System.Runtime.Serialization;
+using System.Net;
+using System.Xml;
+using System.IO;
+using System.ServiceModel.Channels;
 
 namespace globantlib.Rest
 {
@@ -31,7 +35,7 @@ namespace globantlib.Rest
             libEntities = new LibraryManager();
         }
 
-        [WebGet(UriTemplate = "", ResponseFormat=WebMessageFormat.Xml)]
+        [WebGet(UriTemplate = "", ResponseFormat = WebMessageFormat.Xml)]
         public List<Content> GetCollection()
         {
             List<Content> t = libEntities.GetContents();
@@ -59,14 +63,14 @@ namespace globantlib.Rest
         }
 
         [IncludeXmlDeclaration]
-        [WebGet(UriTemplate = "Search?Text={text}&Page={page}", RequestFormat= WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle=WebMessageBodyStyle.Bare)]
+        [WebGet(UriTemplate = "Search?Text={text}&Page={page}", RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare)]
         public IResponse SearchCollection(String text, String page)
         {
             IResponse result;
             int page_size = 5;
             int actual_page, count;
-            int.TryParse(page,out actual_page);
-            
+            int.TryParse(page, out actual_page);
+
             if (actual_page == 0)
                 actual_page = 1;
 
@@ -75,14 +79,14 @@ namespace globantlib.Rest
             Response resp = new Response();
             resp.ArrayOfContents = libEntities.SearchContents(actual_page, page_size, text, out count);
             resp.Pages = new List<Page>();
-            
+
             int pages = (int)Math.Ceiling((double)(count / page_size));
             if (count % page_size != 0)
                 pages++;
 
             for (int i = 0; i < pages; i++)
             {
-                resp.Pages.Add(new Page() { number = i+1, current = false });
+                resp.Pages.Add(new Page() { number = i + 1, current = false });
             }
             if (count > 0)
             {
@@ -90,7 +94,7 @@ namespace globantlib.Rest
                 result = resp;
             }
             else
-                result = new Error() { Message = "Your query didn't generate any results." };            
+                result = new Error() { Message = "Your query didn't generate any results." };
 
             return result;
         }
@@ -140,7 +144,7 @@ namespace globantlib.Rest
         public IResponse GetReviews(String id)
         {
             IResponse result = null;
-            
+
             int i = 0;
             int.TryParse(id, out i);
             ReviewCollection reviews = new ReviewCollection(libEntities.GetReviews(i));
@@ -160,7 +164,7 @@ namespace globantlib.Rest
             IResponse result = null;
 
             int i = 0;
-            if(int.TryParse(id, out i))
+            if (int.TryParse(id, out i))
                 result = libEntities.SubmitReview(i, instance);
 
             if (result == null)
@@ -182,14 +186,64 @@ namespace globantlib.Rest
             else
                 result = bookreq;
 
+
+
             return result;
         }
 
         [IncludeXmlDeclaration]
-        [WebGet(UriTemplate = "BookRequest?Text={text}", RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare)]
+        [WebGet(UriTemplate = "BookRequest?Text={text}", RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped)]
         public void SubmitBookRequest(String text)
         {
-            libEntities.SubmitBookRequest(text);
+            libEntities.SubmitBookRequest(text);   
+        }
+
+        [IncludeXmlDeclaration]
+        [WebGet(UriTemplate = "SearchBookRequest?Text={text}", RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped)]
+        public Message SearchBookRequest(String text)
+        {
+            string result = "";
+
+            // Create the web request  
+            HttpWebRequest request = WebRequest.Create("http://books.google.com/books/feeds/volumes?q=" + text) as HttpWebRequest;
+            // Get response  
+            using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+            {
+                // Get the response stream  
+                StreamReader reader = new StreamReader(response.GetResponseStream());
+
+                // Read the whole contents and return as a string  
+                result = reader.ReadToEnd();
+            }
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.InnerXml = @"<?xml version='1.0' encoding='utf-8'?><feed><entry></entry><title></title><entry></entry><entry></entry></feed>";
+
+            xDoc.InnerXml = result;
+
+            XmlElementBodyWriter writer = new XmlElementBodyWriter(xDoc.DocumentElement);
+
+            Message msg = Message.CreateMessage(MessageVersion.None,
+                OperationContext.Current.OutgoingMessageHeaders.Action, writer);
+
+            return msg;
+        }
+    }
+
+    public class XmlElementBodyWriter : BodyWriter
+    {
+        XmlElement xmlElement;
+
+        public XmlElementBodyWriter(XmlElement xmlElement)
+            : base(true)
+        {
+            //xmlElement.Attributes.RemoveAll();
+            this.xmlElement = xmlElement;
+
+        }
+
+        protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
+        {
+            xmlElement.WriteTo(writer);
         }
     }
 }

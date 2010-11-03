@@ -8,7 +8,7 @@ var CONTENTS_DETAILS = (function () {
     }
 
     function init(id, callback) {
-        var xml = '/LibraryService.mvc/' + id,
+        var xml = './LibraryService.mvc/' + id,
             target = document.getElementById('w-contents-details');
         target.className = 'loading';
         XML.transformWithCallback(xml, 'widgets/contents/details/details.xsl', target, function (xml) {

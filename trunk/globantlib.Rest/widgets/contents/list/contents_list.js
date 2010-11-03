@@ -9,7 +9,7 @@ var CONTENTS_LIST = (function () {
 
     function init(page, query, callback) {
         var query = query ? escape(query) : "",
-            xml = '/LibraryService.mvc/Search?Text=' + query,
+            xml = './LibraryService.mvc/Search?Text=' + query,
             target = document.getElementById('w-contents-list');
         if (page) {
             xml += '&Page=' + page;

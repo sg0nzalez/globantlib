@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="administrator\BooksCRUD.aspx" />
+    <Content Include="administrator\xsl\getBooks.xsl" />
     <Content Include="bin\globantlib.Business.dll" />
     <Content Include="bin\globantlib.Business.pdb" />
     <Content Include="bin\globantlib.DataAccess.dll" />
@@ -98,7 +99,7 @@
     <Content Include="css\mb.css" />
     <Content Include="css\styles.css" />
     <Content Include="data\bookrequest.xml" />
-    <Content Include="default.htm" />
+    <Content Include="default.html" />
     <Content Include="Global.asax" />
     <Content Include="img\bck-btn-hover.png" />
     <Content Include="img\bck-btn.png" />
@@ -152,6 +153,9 @@
     <Content Include="widgets\devices\loader\devices_loader.js" />
     <Content Include="widgets\devices\ViewDevices.aspx" />
     <Content Include="widgets\devices\xsl\DevicesHire.xsl" />
+    <Content Include="default.xsl">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="administrator\adminTemplate.Master.cs">
@@ -192,6 +196,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadedBooks\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\globantlib.Business\globantlib.Business.csproj">
@@ -216,13 +221,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2642</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost/globantlib.Rest</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://local.localhost/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
