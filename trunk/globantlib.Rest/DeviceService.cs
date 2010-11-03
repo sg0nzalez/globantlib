@@ -7,12 +7,18 @@ using System.ServiceModel.Web;
 using System.Text;
 using globantlib.Business;
 using globantlib.Domain;
+using System.Runtime.Serialization;
+using System.Net;
+using System.Xml;
+using System.IO;
+using System.ServiceModel.Channels;
 
 namespace globantlib.Rest
 {
     // Start the service and browse to http://<machine_name>:<port>/Service1/help to view the service's generated help page
     // NOTE: By default, a new instance of the service is created for each call; change the InstanceContextMode to Single if you want
     // a single instance of the service to process all calls.	
+    [ServiceKnownType(typeof(DeviceType))]
     [ServiceContract]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]

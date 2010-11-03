@@ -67,7 +67,7 @@ var DEVICES_CALENDAR = (function () {
     * Initialize
     */
     function init(id, callback) {
-        var service = '',
+        var service = './DeviceService.mvc/Calendar?Id=',
             target = document.getElementById('w-devices-calendar');
         XML.transformWithCallback(service, 'widgets/devices/calendar/calendar.xsl', target, function (xml) {
             callback();
