@@ -1,5 +1,13 @@
 var CONTENTS_LOADER = (function () {
 
+    var idleTimeout = null;
+
+    function showIdle() {
+        clearTimeout(idleTimeout);
+        $("#loading-message")
+            .text("Something weird is going on... Please try again");
+    }
+
     /**
     * Shows overlay when loading
     */
@@ -14,13 +22,14 @@ var CONTENTS_LOADER = (function () {
         });
         $("loading-message").text(message);
         document.title = "Loading contents... @ Globant Library";
+        idleTimeout = setTimeout(showIdle, 5000);
     }
 
     /**
     * Hides overlay after loading
     */
     function hide() {
-        //$("#overlay_back").remove();
+        clearTimeout(idleTimeout);
         $("#w-contents-left").css({
             "opacity": 1,
             "overflow": ""
