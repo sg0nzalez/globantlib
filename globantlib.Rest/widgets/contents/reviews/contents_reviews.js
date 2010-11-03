@@ -59,7 +59,7 @@ var CONTENTS_REVIEWS = (function () {
     * Call service and populate review list
     */
     function loadList(callback) {
-        var service = '/LibraryService.mvc/Review?ContentId=' + contentId,
+        var service = './LibraryService.mvc/Review?ContentId=' + contentId,
             target = document.getElementById('w-contents-reviews');
         XML.transformWithCallback(service, 'widgets/contents/reviews/list.xsl', target, function () {
             hideForm();
@@ -105,7 +105,7 @@ var CONTENTS_REVIEWS = (function () {
         data.Rate = $("#w-contents-review-rate").val();
         data.Submitted = (day + '/' + month + '/' + year + ' ' + hours + ':' + minutes);
         data.Title = $("#w-contents-review-title").val();
-        data.User = "<Name>Milka</Name><Thumbnail>no-img.png</Thumbnail>";
+        data.User = "<Name>Guest</Name><Thumbnail>no-img.png</Thumbnail>";
         return data;
     }
     function submitReview() {
@@ -118,7 +118,7 @@ var CONTENTS_REVIEWS = (function () {
                 "data": gatherFormData(),
                 "type": "POST",
                 "root": "Review",
-                "service": '/LibraryService.mvc/SubmitReview?ContentId=' + contentId,
+                "service": './LibraryService.mvc/SubmitReview?ContentId=' + contentId,
                 "callback": function (xhr) {
                     if (xhr.readyState === 4) {
                         if (xhr.status === 200) {

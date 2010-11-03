@@ -244,6 +244,16 @@ namespace globantlib.DataAccess
                 Title = instance.Title
             };
 
+            foreach (var item in instance.Digitals)
+            {
+                c.Digitals.Add(new Digital() { Format = item.Format, Link = item.Link });
+            }
+
+            //foreach (var item in instance.Physicals)
+            //{
+            //    c.Physicals.Add(new Physical() { Type = item.Type });
+            //}
+
             libEntities.Contents.AddObject(c);
             libEntities.SaveChanges();
         }
@@ -264,8 +274,10 @@ namespace globantlib.DataAccess
                               User = new Domain.User() { Name = r.User.FirstName, Thumbnail = "img/no-user.png" }
                           };
 
+            List<Domain.Review> result = reviews.ToList<Domain.Review>();
+            result.Reverse();
 
-            return reviews.ToList<Domain.Review>();
+            return result;
         }
 
         public Domain.Review SubmitReview(int i, Domain.Review instance)

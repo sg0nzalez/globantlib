@@ -32,7 +32,7 @@ var CONTENTS_REQUESTS = (function () {
                     "Go ahead": function () {
                         var valid = validate();
                         if (valid) {
-                            var service = '/LibraryService.mvc/BookRequest?Text=' + text.val(),
+                            var service = './LibraryService.mvc/BookRequest?Text=' + text.val(),
                             req = XML.createXMLHttpRequest();
                             req.open("GET", service, true);
                             req.onreadystatechange = function () {
@@ -63,7 +63,7 @@ var CONTENTS_REQUESTS = (function () {
     }
 
     function loadList(callback) {
-        var service = '/LibraryService.mvc/BookRequests',
+        var service = './LibraryService.mvc/BookRequests',
             target = document.getElementById('w-contents-request-list');
         XML.transformWithCallback(service, 'widgets/contents/request/list.xsl', target, callback);
     }
