@@ -2,6 +2,13 @@ var CONTENTS_REQUESTS = (function () {
 
     var initiated = false;
 
+    function show(callback) {
+        $('#w-contents-request-list-ph').show();
+    }
+    function hide() {
+        $('#w-contents-request-list-ph').hide();
+    }
+
     function showLoading() {
         $("#loading-message")
             .attr('class', 'loading')
@@ -21,17 +28,17 @@ var CONTENTS_REQUESTS = (function () {
 
     function sendRequest(e) {
         var text = $("#w-contents-request input.text");
-        $("<div class='request-popup'/>")
-            .html("You're about to send this text: \"<b>" + text.val() + "</b>\"")
-            .dialog({
-                resizable: false,
-                modal: true,
-                draggable: false,
-                title: "Request Content",
-                buttons: {
-                    "Go ahead": function () {
-                        var valid = validate();
-                        if (valid) {
+        var valid = validate();
+        if (valid) {
+            $("<div class='request-popup'/>")
+                .html("You're about to send this text: \"<b>" + text.val() + "</b>\"")
+                .dialog({
+                    resizable: false,
+                    modal: true,
+                    draggable: false,
+                    title: "Request Content",
+                    buttons: {
+                        "Go ahead": function () {
                             var service = './LibraryService.mvc/BookRequest?Text=' + text.val(),
                             req = XML.createXMLHttpRequest();
                             req.open("GET", service, true);
@@ -45,26 +52,19 @@ var CONTENTS_REQUESTS = (function () {
                             }
                             showLoading();
                             req.send();
+                            $(this).dialog("close");
+                        },
+                        "Nope": function () {
+                            $(this).dialog("close");
                         }
-                        $(this).dialog("close");
-                    },
-                    "Nope": function () {
-                        $(this).dialog("close");
                     }
-                }
-            });
-    }
-
-    function show(callback) {
-        $('#w-contents-request-list').show();
-    }
-    function hide() {
-        $('#w-contents-request-list').hide();
+                });
+        }
     }
 
     function loadList(callback) {
         var service = './LibraryService.mvc/BookRequests',
-            target = document.getElementById('w-contents-request-list');
+            target = document.getElementById('w-contents-request-list-ph');
         XML.transformWithCallback(service, 'widgets/contents/request/list.xsl', target, callback);
     }
 
