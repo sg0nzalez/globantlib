@@ -310,7 +310,13 @@ namespace globantlib.DataAccess
         
         public void Delete(int i)
         {
-            libEntities.Contents.DeleteObject(libEntities.Contents.Where<Content>(c => c.ID == i).FirstOrDefault());
+            Content con = libEntities.Contents.Where<Content>(c => c.ID == i).FirstOrDefault();
+            foreach (var item in con.Digitals)
+            {
+                libEntities.Digitals.DeleteObject(item);
+            }
+            libEntities.Contents.DeleteObject(con);
+            libEntities.SaveChanges();
         }
     }
 }
