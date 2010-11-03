@@ -40,9 +40,6 @@ namespace globantlib.Rest
         public List<Device> Get(String id)
         {
             int typeID = int.Parse(id);
-            //int monthID = int.Parse(month);
-            //int yearID = int.Parse(year);
-            //List<Device> l = libEntities.GetDevicesbyType(typeID, monthID, yearID);
             List<Device> l = libEntities.GetDevicesbyType(typeID);
             return l;
         }
