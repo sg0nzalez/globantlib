@@ -54,7 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="administrator\BooksCRUD.aspx" />
-    <Content Include="administrator\xsl\getBooks.xsl" />
     <Content Include="bin\globantlib.Business.dll" />
     <Content Include="bin\globantlib.Business.pdb" />
     <Content Include="bin\globantlib.DataAccess.dll" />
@@ -99,7 +98,7 @@
     <Content Include="css\mb.css" />
     <Content Include="css\styles.css" />
     <Content Include="data\bookrequest.xml" />
-    <Content Include="default.html" />
+    <Content Include="default.htm" />
     <Content Include="Global.asax" />
     <Content Include="img\bck-btn-hover.png" />
     <Content Include="img\bck-btn.png" />
@@ -129,13 +128,14 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="widgets\calendar\calendar.xsl" />
+    <Content Include="widgets\calendar\calendar.js" />
     <Content Include="widgets\contents\details\contents_details.js" />
     <Content Include="widgets\contents\details\details.xsl">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="widgets\contents\list\contents_list.js" />
     <Content Include="widgets\contents\list\list.xsl" />
-    <Content Include="widgets\contents\loader\contents_loader.js" />
     <Content Include="widgets\contents\request\list.xsl">
       <SubType>Designer</SubType>
     </Content>
@@ -144,8 +144,6 @@
     <Content Include="widgets\contents\reviews\list.xsl" />
     <Content Include="widgets\contents\search\contents_search.js" />
     <Content Include="widgets\contents\search\search.xsl" />
-    <Content Include="widgets\devices\calendar\calendar.xsl" />
-    <Content Include="widgets\devices\calendar\devices_calendar.js" />
     <Content Include="widgets\devices\DevicesCalendar.aspx" />
     <Content Include="widgets\devices\js\devices.js" />
     <Content Include="widgets\devices\list\devices_list.js" />
@@ -153,9 +151,7 @@
     <Content Include="widgets\devices\loader\devices_loader.js" />
     <Content Include="widgets\devices\ViewDevices.aspx" />
     <Content Include="widgets\devices\xsl\DevicesHire.xsl" />
-    <Content Include="default.xsl">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="widgets\loader\loader.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="administrator\adminTemplate.Master.cs">
@@ -196,7 +192,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="UploadedBooks\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\globantlib.Business\globantlib.Business.csproj">
@@ -221,11 +216,13 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2642</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost/globantlib.Rest</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://local.localhost/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

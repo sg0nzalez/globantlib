@@ -6,10 +6,17 @@
     function contents() {
         $("#w-devices").hide();
         $("#w-contents").show();
+        $("#w-calendar").hide();
     }
     function devices() {
         $("#w-devices").show();
         $("#w-contents").hide();
+        $("#w-calendar").hide();
+    }
+    function calendar() {
+        $("#w-devices").hide();
+        $("#w-contents").hide();
+        $("#w-calendar").show();
     }
 
     /**
@@ -17,13 +24,13 @@
     */
     function contentDeactivate() {
         CONTENTS_DETAILS.hide();
-        CONTENTS_LOADER.hide();
+        LOADER.hide();
         CONTENTS_REQUESTS.hide();
         CONTENTS_LIST.hide();
     }
     function contentList(page, query) {
         contents();
-        CONTENTS_LOADER.show("Loading book list...");
+        LOADER.show("Loading book list...");
         CONTENTS_LIST.init(page, query, function () {
             contentDeactivate()
             CONTENTS_SEARCH.init(query);
@@ -32,7 +39,7 @@
     }
     function contentDetails(id) {
         contents();
-        CONTENTS_LOADER.show("Loading book details...");
+        LOADER.show("Loading book details...");
         CONTENTS_DETAILS.init(id, function () {
             contentDeactivate()
             CONTENTS_SEARCH.init();
@@ -41,33 +48,51 @@
     }
     function contentRequests() {
         contents();
-        CONTENTS_LOADER.show("Loading book requests...");
+        LOADER.show("Loading book requests...");
         CONTENTS_REQUESTS.init(function () {
             contentDeactivate()
             CONTENTS_SEARCH.init();
+        });
+    }
+    function contentCalendar(deviceId) {
+        calendar();
+        LOADER.show("Loading device booking calendar...");
+        CALENDAR.init({
+            id: deviceId,
+            service: {
+                get: "/DeviceService.mvc/",
+                book: "/DeviceService.mvc/"
+            }
+        }, function () {
+            contentDeactivate()
         });
     }
 
     /**
     * Devices
     */
-    function devicesDeactivate() {
-        DEVICES_LOADER.hide();
+    function deviceDeactivate() {
+        LOADER.hide();
         DEVICES_LIST.hide();
-        DEVICES_CALENDAR.hide();
     }
-    function deviceList(page) {
+    function deviceList() {
         devices();
-        DEVICES_LOADER.show("Loading device list...");
-        DEVICES_LIST.init(page, function () {
-            //devicesDeactivate();
+        LOADER.show("Loading device list...");
+        DEVICES_LIST.init(function () {
+            deviceDeactivate();
         });
     }
-    function deviceCalendar(id) {
-        devices();
-        DEVICES_LOADER.show("Loading device calendar...");
-        DEVICES_CALENDAR.init(id, function () {
-            devicesDeactivate();
+    function deviceCalendar(deviceId) {
+        calendar();
+        LOADER.show("Loading device booking calendar...");
+        CALENDAR.init({
+            id: deviceId,
+            service: {
+                get: "/DeviceService.mvc/",
+                book: "/DeviceService.mvc/"
+            }
+        }, function () {
+            deviceDeactivate();
         });
     }
 
@@ -75,6 +100,7 @@
         "contentList": contentList,
         "contentDetails": contentDetails,
         "contentRequests": contentRequests,
+        "contentCalendar": contentCalendar,
         "deviceList": deviceList,
         "deviceCalendar": deviceCalendar
     }
