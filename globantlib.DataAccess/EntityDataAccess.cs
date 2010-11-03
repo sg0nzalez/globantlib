@@ -57,6 +57,7 @@ namespace globantlib.DataAccess
             return new Domain.Device()
             {
                 ID = (int)d.ID,
+                Type = d.DeviceType.Type
             };
         }
 
@@ -136,6 +137,10 @@ namespace globantlib.DataAccess
         {
             List<Domain.Device> lResult = new List<Domain.Device>();
 
+           /*var deviceTypeName = (from dt in libEntities.DeviceTypes
+                                 where dt.ID == typeID
+                                 select dt.Type);*/
+
             var devices = libEntities.Devices.Where<Device>(t => t.TypeID == typeID);
 
             foreach (var device in devices)
@@ -150,6 +155,7 @@ namespace globantlib.DataAccess
                 }
                 Domain.Device d = Create(device);
                 d.Leases = lLease;
+               
                 lResult.Add(d);
             }
 

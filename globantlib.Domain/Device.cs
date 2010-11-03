@@ -15,6 +15,9 @@ namespace globantlib.Domain
         public int ID { get; set; }
 
         [DataMember]
+        public string Type { get; set; }
+
+        [DataMember]
         public List<Lease> Leases { get; set; }
     }
 }
