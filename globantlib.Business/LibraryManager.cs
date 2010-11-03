@@ -55,5 +55,10 @@ namespace globantlib.Business
         {
             return data.GetContent(text);
         }
+
+        public void Delete(int i)
+        {
+            data.Delete(i);
+        }
     }
 }

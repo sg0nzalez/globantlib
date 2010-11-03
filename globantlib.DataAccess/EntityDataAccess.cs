@@ -307,7 +307,10 @@ namespace globantlib.DataAccess
             libEntities.AddToBookRequests(BookRequest.CreateBookRequest(0, text));
             libEntities.SaveChanges();
         }
-
         
+        public void Delete(int i)
+        {
+            libEntities.Contents.DeleteObject(libEntities.Contents.Where<Content>(c => c.ID == i).FirstOrDefault());
+        }
     }
 }

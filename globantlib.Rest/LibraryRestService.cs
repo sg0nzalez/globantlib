@@ -137,6 +137,7 @@ namespace globantlib.Rest
         public void Delete(string id)
         {
             int i = int.Parse(id);
+            libEntities.Delete(i);
         }
 
         [IncludeXmlDeclaration]
