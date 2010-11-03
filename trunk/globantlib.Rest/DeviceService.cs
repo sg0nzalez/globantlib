@@ -26,7 +26,7 @@ namespace globantlib.Rest
             libEntities = new DeviceManager();
         }
 
-        [IncludeXmlDeclaration]
+        //[IncludeXmlDeclaration]
         [WebGet(UriTemplate = "", ResponseFormat = WebMessageFormat.Xml)]
         public List<DeviceType> GetCollection()
         {

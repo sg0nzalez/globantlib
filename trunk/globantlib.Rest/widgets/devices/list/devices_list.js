@@ -14,7 +14,7 @@ var DEVICES_LIST = (function () {
     * Initialize
     */
     function init(callback) {
-        var service = '/DeviceService.mvc',
+        var service = './DeviceService.mvc/',
             target = document.getElementById('w-devices-list');
         XML.transformWithCallback(service, 'widgets/devices/list/list.xsl', target, function () {
             callback();

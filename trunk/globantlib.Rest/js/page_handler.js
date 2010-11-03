@@ -60,7 +60,7 @@
         devices();
         DEVICES_LOADER.show("Loading device list...");
         DEVICES_LIST.init(page, function () {
-            devicesDeactivate();
+            //devicesDeactivate();
         });
     }
     function deviceCalendar(id) {
