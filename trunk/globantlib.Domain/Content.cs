@@ -10,6 +10,14 @@ namespace globantlib.Domain
     [DataContract(Namespace = "")]
     public class Content : IResponse
     {
+
+        public Content()
+        {
+            Digitals = new List<DigitalContent>();
+
+            Physicals = new List<PhysicalContent>();
+        }
+
         [DataMember]
         public int ID { get; set; }
         
