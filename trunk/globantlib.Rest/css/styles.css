@@ -109,7 +109,7 @@ body {
     width:100%;
 }
 .center {
-    width:960px;
+    width:800px;
     margin:auto;
 }
 
@@ -180,7 +180,7 @@ div#w-contents
 }
 div#w-contents-left {
     float:right;
-    width:700px;
+    width:540px;
     height:100%;
     overflow:auto;
     overflow-x:hidden;
@@ -342,18 +342,18 @@ div#w-contents-request-list li h4
     font-weight:normal;
     padding-left:22px;
 }
-
-
 ul#w-contents-list {
     float:left;
     width:100%;
 }
+ul#w-devices-list .device,
 ul#w-contents-list .content {
    float:left;
    width:100%;
    padding:10px 0;
    border-top:1px solid #e0e0e0;
 }
+ul#w-devices-list .thumbnail,
 ul#w-contents-list .thumbnail {
    float:left;
    display:block;
@@ -361,6 +361,7 @@ ul#w-contents-list .thumbnail {
    overflow:hidden;
    border:1px solid #e0e0e0;
 }
+ul#w-devices-list .thumbnail img,
 ul#w-contents-list .thumbnail img
 {
     display:block;
@@ -368,17 +369,23 @@ ul#w-contents-list .thumbnail img
 ul#w-contents-list .title,
 ul#w-contents-list .tagline,
 ul#w-contents-list .available,
-ul#w-contents-list .description {
+ul#w-contents-list .description,
+ul#w-devices-list .description,
+ul#w-devices-list .title,
+ul#w-devices-list ul {
    padding-left:115px;
 }
+ul#w-devices-list .title,
 ul#w-contents-list .title {
     font-size:18px;
     margin-bottom:5px;
 }
+ul#w-devices-list .title a,
 ul#w-contents-list .title a {
     text-decoration:none;
     color:#505050;
 }
+ul#w-devices-list .title a:hover,
 ul#w-contents-list .title a:hover {
     color:#000;
 }
@@ -410,9 +417,35 @@ ul#w-contents-list .available a.physical {
 ul#w-contents-list .available a.digital {
     background-image:url(images/digital.png);
 }
+ul#w-devices-list .description,
 ul#w-contents-list .description {
     font-size:12px;
+    color:#666;
+}
+ul#w-devices-list ul 
+{
+    margin-bottom:5px;
+}
+ul#w-devices-list ul li
+{
+    font-size:11px;
+    color:#777;
+    line-height:15px;
+}
+ul#w-devices-list a.view-calendar
+{
+    display:block;
+    width:150px;
+    height:20px;
+    line-height:18px;
+    background:url(images/bgbuttonlarge.png);
+    text-align:center;
+    text-decoration:none;
     color:#505050;
+}
+ul#w-devices-list a.view-calendar:hover 
+{
+    color:#000;
 }
 p#w-contents-pagination {
     float:left;
@@ -625,62 +658,54 @@ div#w-contents-reviews p {
     color:#666;
     line-height:15px;
 }
-/**
- * Devices style
- */
-    .device_item
-    {
-	    float: left;
-	    width: 300px;
-	    border: 1px solid black;
-	    margin:5px;
-	    min-height: 300px;           
-			            
-    }
-			    
-    .device_item:hover
-    {
-	    border-width: 2px;        
-    }
-			    
-    .device_thumbnail
-    {
-	    width: 100px;
-	    height: 100px;        
-    }
-			    
-    .device_description
-    {
-	    list-style: none;       
-    }
-			    
-    .device_description li
-    {
-	    margin: 3px 0;    
-    }
-			    
-    .dispositive_attribute
-    {
-	    font-weight: bold;   
-			        
-    }
-    .dispositive_button
-    {
-			            
-    }
- 
-/**
- * End Devices style
- */
- 
- #overlay_back
- {
-    position: absolute;
-    background: url("/img/overlay_background.png") top left repeat transparent;
-    z-index:4;    
- }
- 
- 
+
+div#w-calendar 
+{
+    padding:0 5px;
+}
+ul#w-calendar-month-picker li
+{
+    float:left;
+    margin-right:10px;
+    font-size:11px;
+    margin-bottom:5px;
+}
+ul#w-calendar-month-picker li a
+{
+    color:#505050;
+    display:block;
+    height:20px;
+    line-height:18px;
+    text-decoration:none;
+}
+table#w-calendar-table 
+{
+    float:left;
+    height:510px;
+}
+table#w-calendar-table th
+{
+    font-size:11px;
+    text-align:left;
+    padding:0 2px;
+    height:20px;
+    line-height:18px;
+    border:solid #e0e0e0;
+    border-width:1px 0;
+}
+table#w-calendar-table td div
+{
+    position:relative;
+    padding:5px;
+}
+table#w-calendar-table td .day-number
+{
+    position:absolute;
+    left:3px;
+    top:5px;
+    font-size:11px;
+    color:#666;
+}
  
 /**
 ** jQuery UI Override
