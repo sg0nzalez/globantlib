@@ -70,12 +70,12 @@
                 <asp:Button ID="add_edit" Text="Add/Edit" runat="server" OnClick="add_edit_Click" />
                 <%-- <input id="add_edit_book" type="submit" value="submit" runat="server" onclick="add_edit_book_ServerClick" />
                 --%>
-                <button id="delete">
-                    Delete</button>
+                <input type="button" id="delete" value="Delete"/>
             </li>
         </ul>
         <input type="hidden" value="add" id="action" name="action" runat="server" />
-        <input type="hidden" value="5" id="book_id" name="book_id" runat="server" />
+        <input type="hidden" value="" id="book_id" name="book_id" runat="server" />
+        <input type="hidden" id="digitals_to_delete" name="digitals_to_delete" runat="server" />
     </fieldset>
     <fieldset class="fs_right">
         <legend>Stored Books</legend>
@@ -98,263 +98,276 @@
         function delete_book() {
 
             var id = $('input[id$="book_id"]').val();
-            /*$.ajax({
-                url: '/LibraryService.mvc/'+id,
-                type: 'DELETE',
-                contentType: 'application/xml',
-                dataType: 'xml',
-                success: function (msg) { },
-                error: function (msg) { }
-
-            });*/
-
-            alert('/LibraryService.mvc/' + id);
-            var request = XML.createXMLHttpRequest();
-            request.open("DELETE", '/LibraryService.mvc/' + id, false);
-            request.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    alert("Deleted");
+         
+            if (id != null && id!="" &&id!="undefined") {
+              
+                var request = XML.createXMLHttpRequest();
+                request.open("DELETE", '/LibraryService.mvc/' + id, false);
+                request.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        alert("Deleted");
+                    }
                 }
+                request.setRequestHeader("Accept", "application/xml");
+                request.send();
+            } else {
+
+              alert("You must select a book");
             }
-            request.setRequestHeader("Accept", "application/xml");
-            request.send();
+
+            clearAll();
+        }
+
+
+
+
+        function send_to_server() {
             
-
-        }
-
-
-
-
-    function send_to_server() {
-        if (!validate()) {
-            return false;
-        }
-
-        if ($("#select_book").val() != null) {
-            $("input[id$='action']").val("edit");
-            $("input[id$='book_id']").val($("#select_book").val());
-        }
-        cleanBeforeSend();
-
-
-    }
-
-    function validate() {
-        var error_msg, validator;
-        error_msg = "";
-        validator = VALIDATION;
-
-        $(".error").removeClass("error");
-        if (!validator.text($("input[id$='title']").val())) {
-            error_msg += "<li>Title must not be empty</li>";
-            $("#title").addClass("error");
-        }
-
-        if (!validator.text($("input[id$='author']").val())) {
-            error_msg += "<li>Author must not be empty</li>";
-            $("#author").addClass("error");
-        }
-
-        if (!validator.date($("input[id$='release']").val())) {
-            error_msg += "<li>Release date must be a date with format mm/dd/yyyy</li>";
-            $("#release").addClass("error");
-        }
-
-        if (!validator.text($("input[id$='publisher']").val())) {
-            error_msg += "<li>Publisher must not be empty</li>";
-            $("#publisher").addClass("error");
-        }
-
-        if (!validator.number($("input[id$='pages']").val())) {
-            error_msg += "<li>Pages number must be a valid number</li>";
-            $("#pages").addClass("error");
-        }
-
-        if (!validator.isbn($("input[id$='isbn']").val())) {
-            error_msg += "<li>ISBN must be a ten digits number</li>";
-            $("#isbn").addClass("error");
-        }
-
-
-        if (error_msg != "") {
-            $('#error_ul').html("");
-            $("#error_ul").append(error_msg);
-            return false;
-        }
-
-        $('#error_ul').html("");
-        return true;
-    }
-    function clearSearch() {
-        if ($(this).val() == "Type book title...") {
-            $(this).val("").removeClass("search_gray");
-        }
-
-    }
-
-    function restoreSearch() {
-        if ($(this).val() == "") {
-            $(this).val("Type book title...").addClass("search_gray");
-        }
-    }
-
-    function clearAll() {
-        $('fieldset').find('input[type!="submit"][type!="button"]').val("");
-        $('textarea').val("");
-        $('#search').val("Type book title...");
-        $('input[id$="action"]').val("add");
-        $('#error_ul').html("");
-        resetFiles();
-    }
-
-
-
-    function showOverlay() {
-        var width, height, x, y, search_height, overlay_back, overlay_swirling;
-        width = $('#content-wrap').width();
-        height = $('#content-wrap').height();
-        x = $('#content-wrap').position().left;
-        y = $('#content-wrap').position().top;
-        overlay_back = $("<div>").attr("id", "overlay_back").css({ "width": width, "height": height, "top": y, "left": x });
-        overlay_swirling = $("<img>").attr({ "src": "/img/loading.gif", "alt": "loading", "id": "overlay_swirling" }).css({ "width": "100px", "height": "100px", "margin-left": (width - 100) / 2, "margin-top": (height - 100) / 2 });
-        overlay_back.append(overlay_swirling).prependTo($('#content-wrap'));
-
-    }
-    function hideOverlay() {
-        $("#overlay_back").fadeOut("500");
-        setTimeout("$('#overlay_back').remove();", 500);
-
-    }
-
-    var VALIDATION = (function () {
-
-        function text(text_to_validate) {
-
-            return new RegExp(".+").test(text_to_validate);
-        }
-
-        function number(number_to_validate) {
-
-            return new RegExp("^[0-9]+$").test(number_to_validate);
-        }
-
-        function date(date_to_validate) {
-            var validformat = /^\d{2}\/\d{2}\/\d{4}$/ //Basic check for format validity
-            var returnval = false
-
-            if (validformat.test(date_to_validate)) {
-                var monthfield = date_to_validate.split("/")[0]
-                var dayfield = date_to_validate.split("/")[1]
-                var yearfield = date_to_validate.split("/")[2]
-                var dayobj = new Date(yearfield, monthfield - 1, dayfield)
-                if ((dayobj.getMonth() + 1 != monthfield) || (dayobj.getDate() != dayfield) || (dayobj.getFullYear() != yearfield)) {
-
-                } else {
-                    returnval = true;
-                }
+            if (!validate()) {
+                return false;
             }
 
-            return returnval
+            if ($("input[id$='book_id']").val() != "") {
+                $("input[id$='action']").val("edit");
+                delete_digitals();
+            }
+            cleanBeforeSend();
+
+
         }
 
-        function isbn(isbn_to_validate) {
-            return number(isbn_to_validate) && (isbn_to_validate + "").length == 10;
+        function validate() {
+            var error_msg, validator;
+            error_msg = "";
+            validator = VALIDATION;
+
+            $(".error").removeClass("error");
+            if (!validator.text($("input[id$='title']").val())) {
+                error_msg += "<li>Title must not be empty</li>";
+                $("#title").addClass("error");
+            }
+
+            if (!validator.text($("input[id$='author']").val())) {
+                error_msg += "<li>Author must not be empty</li>";
+                $("#author").addClass("error");
+            }
+
+            if (!validator.date($("input[id$='release']").val())) {
+                error_msg += "<li>Release date must be a date with format mm/dd/yyyy</li>";
+                $("#release").addClass("error");
+            }
+
+            if (!validator.text($("input[id$='publisher']").val())) {
+                error_msg += "<li>Publisher must not be empty</li>";
+                $("#publisher").addClass("error");
+            }
+
+            if (!validator.number($("input[id$='pages']").val())) {
+                error_msg += "<li>Pages number must be a valid number</li>";
+                $("#pages").addClass("error");
+            }
+
+            if (!validator.isbn($("input[id$='isbn']").val())) {
+                error_msg += "<li>ISBN must be a ten digits number</li>";
+                $("#isbn").addClass("error");
+            }
+
+
+            if (error_msg != "") {
+                $('#error_ul').html("");
+                $("#error_ul").append(error_msg);
+                return false;
+            }
+
+            $('#error_ul').html("");
+            return true;
+        }
+        function clearSearch() {
+            if ($(this).val() == "Type book title...") {
+                $(this).val("").removeClass("search_gray");
+            }
 
         }
 
-        return {
-            "text": text,
-            "number": number,
-            "date": date,
-            "isbn": isbn
+        function restoreSearch() {
+            if ($(this).val() == "") {
+                $(this).val("Type book title...").addClass("search_gray");
+            }
         }
 
-    } ());
-
-    function hideFile() {
-
-        var next_to_show, next_id;
-        next_id = parseInt($(this).attr("id").substring($(this).attr("id").length - 1)) + 1;
-
-        next_to_show = "file_" + next_id;
-        $('#chk_files').append('<span class="block"><input type="checkbox" id="chk_file_' + next_id + '" name="chk_file_' + next_id + '" value="chk_file_' + next_id + '" data="' + $(this).attr("id") + '" checked="true"/>' + $(this).val() + '</span>');
-
-        if ($("input[type='file'][id$='" + next_to_show + "']").length > 0) {
-            $("input[type='file']").addClass("hidden");
-            $("input[type='file'][id$='" + next_to_show + "']").removeClass("hidden");
-        } else {
-            $(this).addClass("hidden");
-        }
-    }
-
-    function cleanBeforeSend() {
-
-        for (var i = 0; i < $("input[type='checkbox'][checked!='true']").length; i++) {
-
-
-            var id_to_delete = $("input[type='checkbox'][checked!='true']:eq(" + i + ")").attr("data");
-
-            $("#" + id_to_delete).val("");
-        }
-
-    }
-
-
-
-
-
-    function fillBooksList() {
-        var text, xml;
-        text = encodeURIComponent($(this).val());
-        xml = "/LibraryService.mvc/?Text=" + text;
-
-        XML.transformWithCallback(xml, "/administrator/xsl/getBooks.xsl", document.getElementById("select_book"), function () { })
-
-    }
-
-    function resetFiles() {
-        $('input[type="file"]').addClass("hidden").val("");
-        $('input[type="file"]:first').removeClass("hidden");
-        $('#chk_files').html("");
-    }
-
-    function setId() {
-       
-        $('input[id$="book_id"]').val($('#select_book').val());
-    }
-    function fillBookInfo() {
-
-
-
-
-        $.get("/LibraryService.mvc/" + $(this).val(), function (data) {
-            resetFiles();
-
-            $('.fs_left input[type!="submit"][type!="button"]').val("");
+        function clearAll() {
+            $('fieldset').find('input[type!="submit"][type!="button"]').val("");
             $('textarea').val("");
-            $('input[id$="title"]').val($(data).find("Title").text());
-            $('input[id$="author"]').val($(data).find("Author").text());
-            $('input[id$="release"]').val($(data).find("Released").text());
-            $('input[id$="pages"]').val($(data).find("Pages").text());
-            $('input[id$="publisher"]').val($(data).find("Publisher").text());
-            $('input[id$="isbn"]').val($(data).find("ISBN").text());
-            $('textarea[id$="description"]').val($(data).find("Description").text());
-            setId();
+            $('#search').val("Type book title...").addClass("search_gray");
+            $('#select_book').html("");
+            $('input[id$="action"]').val("add");
+            $('#error_ul').html("");
+            resetFiles();
+        }
 
-            $(data).find("Digital").each(function (x, i) {
-                var name = $(i).find("Link").text();
-                name = name.substring(name.lastIndexOf("/") + 1);
 
-                $('input[id$="file_' + x + '"]').addClass("hidden");
-                $('input[id$="file_' + (x + 1) + '"]').removeClass("hidden");
-                $('#chk_files').append('<span class="block"><input type="checkbox" id="chk_file_' + x + '" name="chk_file_' + x + '" value="chk_file_' + x + '" data="' + $('input[id$="file_' + x + '"]').attr("id") + '" checked="true"/>' + name + '</span>');
+
+        function showOverlay() {
+            var width, height, x, y, search_height, overlay_back, overlay_swirling;
+            width = $('#content-wrap').width();
+            height = $('#content-wrap').height();
+            x = $('#content-wrap').position().left;
+            y = $('#content-wrap').position().top;
+            overlay_back = $("<div>").attr("id", "overlay_back").css({ "width": width, "height": height, "top": y, "left": x });
+            overlay_swirling = $("<img>").attr({ "src": "/img/loading.gif", "alt": "loading", "id": "overlay_swirling" }).css({ "width": "100px", "height": "100px", "margin-left": (width - 100) / 2, "margin-top": (height - 100) / 2 });
+            overlay_back.append(overlay_swirling).prependTo($('#content-wrap'));
+
+        }
+        function hideOverlay() {
+            $("#overlay_back").fadeOut("500");
+            setTimeout("$('#overlay_back').remove();", 500);
+
+        }
+
+        var VALIDATION = (function () {
+
+            function text(text_to_validate) {
+
+                return new RegExp(".+").test(text_to_validate);
+            }
+
+            function number(number_to_validate) {
+
+                return new RegExp("^[0-9]+$").test(number_to_validate);
+            }
+
+            function date(date_to_validate) {
+                var validformat = /^\d{2}\/\d{2}\/\d{4}$/ //Basic check for format validity
+                var returnval = false
+
+                if (validformat.test(date_to_validate)) {
+                    var monthfield = date_to_validate.split("/")[0]
+                    var dayfield = date_to_validate.split("/")[1]
+                    var yearfield = date_to_validate.split("/")[2]
+                    var dayobj = new Date(yearfield, monthfield - 1, dayfield)
+                    if ((dayobj.getMonth() + 1 != monthfield) || (dayobj.getDate() != dayfield) || (dayobj.getFullYear() != yearfield)) {
+
+                    } else {
+                        returnval = true;
+                    }
+                }
+
+                return returnval
+            }
+
+            function isbn(isbn_to_validate) {
+                return number(isbn_to_validate) && (isbn_to_validate + "").length == 10;
+
+            }
+
+            return {
+                "text": text,
+                "number": number,
+                "date": date,
+                "isbn": isbn
+            }
+
+        } ());
+
+        function hideFile() {
+
+            var next_to_show, next_id;
+            next_id = parseInt($(this).attr("id").substring($(this).attr("id").length - 1)) + 1;
+
+            next_to_show = "file_" + next_id;
+            $('#chk_files').append('<span class="block"><input type="checkbox" id="chk_file_' + next_id + '" name="chk_file_' + next_id + '" value="chk_file_' + next_id + '" data="' + $(this).attr("id") + '" checked="true"/>' + $(this).val() + '</span>');
+
+            if ($("input[type='file'][id$='" + next_to_show + "']").length > 0) {
+                $("input[type='file']").addClass("hidden");
+                $("input[type='file'][id$='" + next_to_show + "']").removeClass("hidden");
+            } else {
+                $(this).addClass("hidden");
+            }
+        }
+
+        function cleanBeforeSend() {
+
+            for (var i = 0; i < $("input[type='checkbox'][checked!='true']").length; i++) {
+
+
+                var id_to_delete = $("input[type='checkbox'][checked!='true']:eq(" + i + ")").attr("data");
+
+                $("#" + id_to_delete).val("");
+            }
+
+        }
+
+
+
+
+
+        function fillBooksList() {
+            var text, xml;
+            text = encodeURIComponent($(this).val());
+            xml = "/LibraryService.mvc/?Text=" + text;
+
+            XML.transformWithCallback(xml, "/administrator/xsl/getBooks.xsl", document.getElementById("select_book"), function () { })
+
+        }
+
+        function resetFiles() {
+            $('input[type="file"]').addClass("hidden").val("");
+            $('input[type="file"]:first').removeClass("hidden");
+            $('#chk_files').html("");
+            $("#error_ul").html("");
+        }
+
+        function setId() {
+
+            $('input[id$="book_id"]').val($('#select_book').val());
+        }
+        function fillBookInfo() {
+
+
+
+
+            $.get("/LibraryService.mvc/" + $(this).val(), function (data) {
+                resetFiles();
+
+                $('.fs_left input[type!="submit"][type!="button"]').val("");
+                $('textarea').val("");
+                $('input[id$="title"]').val($(data).find("Title").text());
+                $('input[id$="author"]').val($(data).find("Author").text());
+                $('input[id$="release"]').val($(data).find("Released").text());
+                $('input[id$="pages"]').val($(data).find("Pages").text());
+                $('input[id$="publisher"]').val($(data).find("Publisher").text());
+                $('input[id$="isbn"]').val($(data).find("ISBN").text());
+                $('textarea[id$="description"]').val($(data).find("Description").text());
+                setId();
+
+                $(data).find("Digital").each(function (x, i) {
+                    var name = $(i).find("Link").text();
+                    name = name.substring(name.lastIndexOf("/") + 1);
+
+                    $('input[id$="file_' + x + '"]').addClass("hidden");
+                    $('input[id$="file_' + (x + 1) + '"]').removeClass("hidden");
+                    $('#chk_files').append('<span class="block"><input type="checkbox" id="chk_file_' + x + '" name="chk_file_' + x + '" value="chk_file_' + x + '" data="' + $('input[id$="file_' + x + '"]').attr("id") + '" checked="true" digital="'+$(i).find("ID").text()+'"/>' + name + '</span>');
+
+
+                })
 
 
             })
+        }
 
 
-        })
-    }
+        function delete_digitals() {
+            
+            $("input[type='checkbox'][digital!=''][checked='false']").each(function () {
+                previous_id = $("input[id$='digitals_to_delete']").val() == "" ? $("input[id$='digitals_to_delete']").val() : $("input[id$='digitals_to_delete']").val() + ",";
+                
+                $("input[id$='digitals_to_delete']").val(previous_id + $(this).attr("digital"));
+
+            })
+
+            
+        
+        }
 
         
 

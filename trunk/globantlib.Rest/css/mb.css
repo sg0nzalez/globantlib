@@ -229,8 +229,13 @@ li.first_li
     input[type="submit"]
     {
         vertical-align: top;
-    margin-bottom: 0px;
-}
+        margin-bottom: 0px;
+    }
+    
+    .center
+    {
+        width: 960px;    
+    }
     /*
 *End Administrator
 */
