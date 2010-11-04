@@ -144,11 +144,8 @@
     <Content Include="widgets\contents\reviews\list.xsl" />
     <Content Include="widgets\contents\search\contents_search.js" />
     <Content Include="widgets\contents\search\search.xsl" />
-    <Content Include="widgets\devices\js\devices.js" />
     <Content Include="widgets\devices\list\devices_list.js" />
     <Content Include="widgets\devices\list\list.xsl" />
-    <Content Include="widgets\devices\loader\devices_loader.js" />
-    <Content Include="widgets\devices\xsl\DevicesHire.xsl" />
     <Content Include="widgets\loader\loader.js" />
   </ItemGroup>
   <ItemGroup>
