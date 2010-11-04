@@ -17,7 +17,6 @@ namespace globantlib.DataAccess
 
         private Domain.Content Create(Content c)
         {
-
             if (c != null)
             {
                 return new Domain.Content()
@@ -246,6 +245,17 @@ namespace globantlib.DataAccess
             }
 
             libEntities.Contents.AddObject(c);
+            libEntities.SaveChanges();
+        }
+
+        public void Create(Domain.DeviceType instance)
+        {
+            DeviceType dt = new DeviceType()
+            {
+                Type = instance.Type,
+                image = instance.Image
+            };
+            libEntities.DeviceTypes.AddObject(dt);
             libEntities.SaveChanges();
         }
 

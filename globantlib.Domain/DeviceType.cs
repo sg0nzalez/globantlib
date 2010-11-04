@@ -9,7 +9,7 @@ namespace globantlib.Domain
 {
 
     [DataContract(Namespace = "")]
-    public class DeviceType
+    public class DeviceType : IResponse
     {
         [DataMember]
         public int ID { get; set; }

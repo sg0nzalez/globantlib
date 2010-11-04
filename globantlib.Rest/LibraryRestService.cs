@@ -58,7 +58,6 @@ namespace globantlib.Rest
             else
                 result = t;
 
-
             return result;
         }
 
