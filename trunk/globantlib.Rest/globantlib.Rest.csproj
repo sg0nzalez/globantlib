@@ -144,12 +144,10 @@
     <Content Include="widgets\contents\reviews\list.xsl" />
     <Content Include="widgets\contents\search\contents_search.js" />
     <Content Include="widgets\contents\search\search.xsl" />
-    <Content Include="widgets\devices\DevicesCalendar.aspx" />
     <Content Include="widgets\devices\js\devices.js" />
     <Content Include="widgets\devices\list\devices_list.js" />
     <Content Include="widgets\devices\list\list.xsl" />
     <Content Include="widgets\devices\loader\devices_loader.js" />
-    <Content Include="widgets\devices\ViewDevices.aspx" />
     <Content Include="widgets\devices\xsl\DevicesHire.xsl" />
     <Content Include="widgets\loader\loader.js" />
   </ItemGroup>
@@ -174,20 +172,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="widgets\devices\DevicesCalendar.aspx.cs">
-      <DependentUpon>DevicesCalendar.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="widgets\devices\DevicesCalendar.aspx.designer.cs">
-      <DependentUpon>DevicesCalendar.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="widgets\devices\ViewDevices.aspx.cs">
-      <DependentUpon>ViewDevices.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="widgets\devices\ViewDevices.aspx.designer.cs">
-      <DependentUpon>ViewDevices.aspx</DependentUpon>
-    </Compile>
     <Compile Include="XMLDeclaration.cs" />
   </ItemGroup>
   <ItemGroup>
