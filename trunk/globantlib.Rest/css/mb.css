@@ -220,6 +220,17 @@ li.first_li
     {
         vertical-align: sub;
     }
+    
+    #select_book
+    {
+        width: 250px;    
+    }
+    
+    input[type="submit"]
+    {
+        vertical-align: top;
+    margin-bottom: 0px;
+}
     /*
 *End Administrator
 */
