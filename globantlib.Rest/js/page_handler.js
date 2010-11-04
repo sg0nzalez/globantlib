@@ -54,17 +54,22 @@
             CONTENTS_SEARCH.init();
         });
     }
-    function contentCalendar(deviceId) {
+    function contentCalendar(type, month, id) {
+        var params = {
+            type: type,
+            id: id,
+            month: month,
+            routes: {
+                get: 'data/leases.xml',
+                submit: 'asd',
+                prefix: '#devices/calendar/' + type + '/',
+                postback: '#devices'
+            }
+        };
         calendar();
         LOADER.show("Loading device booking calendar...");
-        CALENDAR.init({
-            id: deviceId,
-            service: {
-                get: "/DeviceService.mvc/",
-                book: "/DeviceService.mvc/"
-            }
-        }, function () {
-            contentDeactivate()
+        CALENDAR.init(params, function () {
+            deviceDeactivate();
         });
     }
 
@@ -82,20 +87,29 @@
             deviceDeactivate();
         });
     }
-    function deviceCalendar(deviceId) {
+    function deviceCalendar(type, month, year, id) {
+        var params = {
+            type: type,
+            id: id,
+            month: month,
+            year: year,
+            routes: {
+                get: 'data/leases.xml',
+                submit: 'asd',
+                prefix: '#devices/calendar/' + type,
+                postback: '#devices'
+            }
+        };
         calendar();
         LOADER.show("Loading device booking calendar...");
-        CALENDAR.init({
-            id: deviceId,
-            service: {
-                get: "/DeviceService.mvc/",
-                book: "/DeviceService.mvc/"
-            }
-        }, function () {
+        CALENDAR.init(params, function () {
             deviceDeactivate();
         });
     }
 
+    /**
+    * Public interface
+    */
     return {
         "contentList": contentList,
         "contentDetails": contentDetails,

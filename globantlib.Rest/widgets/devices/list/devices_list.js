@@ -19,6 +19,7 @@ var DEVICES_LIST = (function () {
         XML.transformWithCallback(service, 'widgets/devices/list/list.xsl', target, function () {
             callback();
             show();
+            document.title = "Devices @ Globant Library";
         });
     }
 

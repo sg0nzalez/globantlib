@@ -18,7 +18,7 @@ time, mark, audio, video {
     vertical-align:baseline;
     background:transparent;
     list-style:none;
-    font-family:Tahoma, serif;
+    font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
 }
 
 a 
@@ -298,6 +298,7 @@ div#w-contents-request input.submit:hover
 {
     background-position:0 -20px;
 }
+div#w-devices-list-ph h2,
 div#w-contents-request-list h2
 {
     font-size:12px;
@@ -755,4 +756,92 @@ table#w-calendar-table td .day-number
 .request-popup b 
 {
     white-space:nowrap;
+}
+#w-calendar-month-picker,
+#w-calendar-items,
+#w-calendar-entries
+{
+    float:left;
+    width:100%;
+    padding-bottom:5px;
+    margin-bottom:5px;
+    border-bottom:1px solid #e0e0e0;
+}
+#w-calendar-items li 
+{
+    float:left;
+}   
+#w-calendar-items li a
+{
+    display:block;
+    width:150px;
+    height:20px;
+    text-decoration:none;
+    color:#666;
+    text-align:center;
+    font-size:12px;
+    line-height:18px;
+    margin-right:25px;
+}   
+#w-calendar-items li a.current,
+#w-calendar-items li a:hover
+{
+    color:#000;
+}
+#w-calendar-items li a.current
+{
+    background:url(images/bgbuttonlarge.png);
+}
+#w-calendar-month-picker span
+{
+    font-size:11px;
+    color:#505050;
+    display:block;
+    float:left;
+    line-height:14px;
+}
+#w-calendar-month-picker a
+{
+    display:block;
+    width:16px;
+    height:16px;
+    float:left;
+    margin-right:5px;
+    text-indent:-99999px;
+}
+#w-calendar-month-picker a.prev
+{
+    background:url(images/prev.png);
+}
+#w-calendar-month-picker a.next
+{
+    background:url(images/next.png);
+}
+#w-calendar-entries .month h3
+{
+    font-size:12px;
+    color:#505050;
+    margin:10px 0;    
+}
+#w-calendar-entries .date
+{
+    margin-top:-1px;
+    border:solid #f0f0f0;
+    border-width:1px 0;
+    padding:10px 25px;
+    position:relative;
+    height:20px;
+}
+#w-calendar-entries .date span.number
+{
+    position:absolute;
+    left:5px;
+    top:5px;
+    font-size:11px;
+    color:#999;
+}
+#w-calendar-entries .date span.user
+{
+    font-size:12px;
+    color:#505050;
 }
