@@ -129,6 +129,7 @@ namespace globantlib.Rest
             //foreach (var propName in propertyNameList)
             //    stateEntry.SetModifiedProperty(propName);
             //libEntities.SaveChanges();
+            libEntities.Update(instance);
             return null;
         }
 
