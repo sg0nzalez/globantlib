@@ -13,8 +13,8 @@
     };
 
     // content calendar
-    devices.calendar = function (id) {
-        PAGE_HANDLER.deviceCalendar(id);
+    devices.calendar = function (type, month, year, id) {
+        PAGE_HANDLER.deviceCalendar(type, month, year, id);
     };
 
     // contents list first page
@@ -38,8 +38,8 @@
     };
 
     // content calendar
-    contents.calendar = function (id) {
-        PAGE_HANDLER.contentCalendar(id);
+    contents.calendar = function (type, month, year, id) {
+        PAGE_HANDLER.contentCalendar(type, month, year, id);
     };
 
     /**
