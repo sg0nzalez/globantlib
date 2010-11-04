@@ -61,6 +61,17 @@ namespace globantlib.Rest.administrator
             if (action.Value == "edit")
             {
                 content.ID = int.Parse(book_id.Value);
+                string values = digitals_to_delete.Value;
+                if (values != "")
+                {
+                    string[] contents_to_delete = values.Split(',');
+                    foreach (string s in contents_to_delete)
+                    {
+                        libMgr.DeleteDigital(int.Parse(s));
+
+                    }
+                }
+                libMgr.Update(content);
                 
             }
             if (action.Value == "add") {
