@@ -9,12 +9,14 @@
             <xsl:when test="Current = 'Yes'">
               <a class="current" href="#{ID}">
                 <xsl:value-of select="Type"/>
+                <xsl:text> </xsl:text>
                 <xsl:value-of select="ID"/>
               </a>
             </xsl:when>
             <xsl:otherwise>
               <a href="#{ID}">
                 <xsl:value-of select="Type"/>
+                <xsl:text> </xsl:text>
                 <xsl:value-of select="ID"/>
               </a>
             </xsl:otherwise>          
@@ -36,14 +38,26 @@
               <xsl:value-of select="Name"/>
             </h3>
             <xsl:for-each select="Date">
-              <div class="date">
-                <span class="number">
-                  <xsl:value-of select="Number"/>
-                </span>
-                <span class="user">
-                  <xsl:value-of select="Username"/>
-                </span>
-              </div>
+
+              <xsl:choose>
+                <xsl:when test="Username != ''">
+                  <div class="date">
+                    <span class="number">
+                      <xsl:value-of select="Number"/>
+                    </span>
+                      <xsl:value-of select="Username"/>
+                  </div>
+                </xsl:when>
+                <xsl:otherwise>
+                  <div class="date free">
+                    <span class="number">
+                      <xsl:value-of select="Number"/>
+                    </span>
+                  </div>
+                </xsl:otherwise>
+              </xsl:choose>
+              
+              
             </xsl:for-each>
             </div>
           </xsl:for-each>

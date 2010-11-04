@@ -831,17 +831,29 @@ table#w-calendar-table td .day-number
     padding:10px 25px;
     position:relative;
     height:20px;
+    line-height:19px;
+    font-size:12px;
+    color:#505050;
+    background:#f6f6f6;
+}
+#w-calendar-entries .date.free
+{
+    background:#fff;
+}
+#w-calendar-entries .date.free:hover
+{
+    background:#f0f0f0;
+    cursor:pointer;
+}
+#w-calendar-entries .date.free:hover span.number
+{
+    color:#505050;
 }
 #w-calendar-entries .date span.number
 {
     position:absolute;
-    left:5px;
-    top:5px;
+    left:6px;
+    top:1px;
     font-size:11px;
     color:#999;
-}
-#w-calendar-entries .date span.user
-{
-    font-size:12px;
-    color:#505050;
 }
