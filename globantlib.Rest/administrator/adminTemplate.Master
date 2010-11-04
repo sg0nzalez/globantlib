@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/jqueryui/jqueryui.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script src="/js/modernizr.js"></script>
+    <script src="/widgets/loader/loader.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -43,7 +44,7 @@
     <!-- #content-wrap -->
     <div id="footer-wrap" class="full">
         <footer id="footer" class="center">
-				<p id="copyright">&copy; tremendo!</p> <!-- #copyright -->
+				<p id="loading-message"></p> <!-- #copyright -->
 			</footer>
         <!-- #footer -->
     </div>

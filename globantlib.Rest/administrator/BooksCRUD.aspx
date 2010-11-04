@@ -61,10 +61,11 @@
                 <div class="chk_files" id="chk_files">
                 </div>
             </li>
-            <li></li>
+            
             <li class="error_li">
                 <ul class="error_ul" id="error_ul">
-                </ul>
+                
+            </ul>
             </li>
             <li class="li_buttons">
                 <asp:Button ID="add_edit" Text="Add/Edit" runat="server" OnClick="add_edit_Click" />
@@ -305,8 +306,8 @@
             var text, xml;
             text = encodeURIComponent($(this).val());
             xml = "/LibraryService.mvc/?Text=" + text;
-
-            XML.transformWithCallback(xml, "/administrator/xsl/getBooks.xsl", document.getElementById("select_book"), function () { })
+            LOADER.show("Loading...");
+            XML.transformWithCallback(xml, "/administrator/xsl/getBooks.xsl", document.getElementById("select_book"), function () { LOADER.hide(); })
 
         }
 
@@ -325,7 +326,7 @@
 
 
 
-
+            
             $.get("/LibraryService.mvc/" + $(this).val(), function (data) {
                 resetFiles();
 
@@ -353,6 +354,7 @@
 
 
             })
+           
         }
 
 
