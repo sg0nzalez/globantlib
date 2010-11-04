@@ -206,7 +206,6 @@ namespace globantlib.DataAccess
             return lResult;
         }
 
-
         public bool checkAvailability(DateTime date, Decimal itemID)
         {
             foreach (var device in libEntities.Devices.Where(d => d.TypeID == itemID))
@@ -326,12 +325,14 @@ namespace globantlib.DataAccess
             {
                 libEntities.Digitals.DeleteObject(con.Digitals.First());
             }
-
-            //foreach (var item in con.Digitals)
-            //{
-            //    libEntities.Digitals.DeleteObject(item);
-            //}
             libEntities.Contents.DeleteObject(con);
+            libEntities.SaveChanges();
+        }
+
+        public void DeleteDigital(int i)
+        {
+            Digital con = libEntities.Digitals.Where<Digital>(c => c.ID == i).FirstOrDefault();
+            libEntities.Digitals.DeleteObject(con);
             libEntities.SaveChanges();
         }
     }
