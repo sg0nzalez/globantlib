@@ -14,7 +14,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
+   
     <div id="header-wrap" class="full">
         <header id="header" class="center">
 				<a href="" id="logo">Globant Library</a> <!-- #logo -->
@@ -50,7 +50,7 @@
     <!-- #footer-wrap -->
     <div>
     </div>
-    </form>
+
 </body>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
