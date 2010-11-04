@@ -349,6 +349,11 @@ namespace globantlib.DataAccess
                 con.Released = DateTime.Parse(instance.Released);
                 con.Title = instance.Title;
 
+                foreach (var item in instance.Digitals)
+                {
+                    libEntities.Digitals.AddObject(new Digital() { Content = con, Link = item.Link, Format = item.Format });
+                }
+
                 libEntities.SaveChanges();
             }
         }
