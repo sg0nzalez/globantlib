@@ -65,5 +65,10 @@ namespace globantlib.Business
         {
             data.DeleteDigital(i);
         }
+
+        public void Update(Domain.Content instance)
+        {
+            data.Update(instance);
+        }
     }
 }

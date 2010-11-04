@@ -335,5 +335,22 @@ namespace globantlib.DataAccess
             libEntities.Digitals.DeleteObject(con);
             libEntities.SaveChanges();
         }
+
+        public void Update(Domain.Content instance)
+        {
+            Content con = libEntities.Contents.Where<Content>(c => c.ID == instance.ID).FirstOrDefault();
+            if (con != null)
+            {
+                con.Author = instance.Author;
+                con.Description = instance.Description;
+                con.ISBN = instance.ISBN;
+                con.Pages = instance.Pages;
+                con.Publisher = instance.Publisher;
+                con.Released = DateTime.Parse(instance.Released);
+                con.Title = instance.Title;
+
+                libEntities.SaveChanges();
+            }
+        }
     }
 }
