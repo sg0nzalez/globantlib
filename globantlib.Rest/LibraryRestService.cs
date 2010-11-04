@@ -139,6 +139,13 @@ namespace globantlib.Rest
             libEntities.Delete(i);
         }
 
+        [WebInvoke(UriTemplate = "Digitals/{id}", Method = "DELETE")]
+        public void DeleteDigital(string id)
+        {
+            int i = int.Parse(id);
+            libEntities.DeleteDigital(i);
+        }
+
         [IncludeXmlDeclaration]
         [WebGet(UriTemplate = "Review?ContentId={id}", RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare)]
         public IResponse GetReviews(String id)

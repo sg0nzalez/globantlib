@@ -60,5 +60,10 @@ namespace globantlib.Business
         {
             data.Delete(i);
         }
+
+        public void DeleteDigital(int i)
+        {
+            data.DeleteDigital(i);
+        }
     }
 }
