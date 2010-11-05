@@ -40,11 +40,18 @@ namespace globantlib.Rest
         }
 
         [IncludeXmlDeclaration]
-        [WebGet(UriTemplate = "{id}")]
-        public List<Device> Get(String id)
+        [WebGet(UriTemplate = "/Calendar?Type={typeID}&Id={id}&Month={month}&Year={year}")]
+        public List<Domain.Types> Get(String typeID, String id, String month, String year)
         {
-            int typeID = int.Parse(id);
-            List<Device> l = libEntities.GetDevicesbyType(typeID);
+            int  TypeID = 0;
+            int.TryParse(typeID, out TypeID);
+            int  Id = 0;
+            int.TryParse(id, out Id);
+            int  Month = 0;
+            int.TryParse(month, out Month);
+            int  Year = 0;
+            int.TryParse(year, out Year);
+            List<Domain.Types> l = libEntities.GetDevicesbyType(TypeID, Id, Month, Year);
             return l;
         }
 
@@ -56,6 +63,15 @@ namespace globantlib.Rest
             return instance;
         }
 
+        [IncludeXmlDeclaration]
+        [WebInvoke(UriTemplate = "/Device", Method = "POST")]
+        public IResponse CreateDevice(Device instance)
+        {
+            libEntities.Create(instance);
+            return instance;
+        }
+
+        
         [WebInvoke(UriTemplate = "{id}", Method = "PUT")]
         public Device Update(string id, Device instance)
         {

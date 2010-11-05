@@ -9,11 +9,8 @@ namespace globantlib.Domain
 {
 
     [DataContract(Namespace = "")]
-    public class Device : IResponse
+    public class Item : IResponse
     {
-        [DataMember]
-        public int TypeID { get; set; }
-        
         [DataMember]
         public int ID { get; set; }
 
@@ -27,6 +24,6 @@ namespace globantlib.Domain
 
         [DataMember]
         public List<Month> Lease;
- 
+
     }
 }

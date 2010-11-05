@@ -9,6 +9,7 @@ namespace globantlib.DataAccess
     public class EntityDataAccess
     {
         GlobantLibEntities libEntities;
+        private List<Domain.Date> dates;
 
         public EntityDataAccess()
         {
@@ -51,12 +52,31 @@ namespace globantlib.DataAccess
             };
         }
 
-        private Domain.Device Create(Device d)
+        private Domain.Date Create(int number, string username)
+        {
+            return new Domain.Date()
+            {
+                Number = number,
+                Username = username,
+            };
+        }
+
+        /*private Domain.Device Create(Device d)
         {
             return new Domain.Device()
             {
                 ID = (int)d.ID,
-                Type = d.DeviceType.Type
+                Type = d.DeviceType.Type,
+                TypeID = (int)d.DeviceType.ID
+            };
+        }*/
+
+        private Domain.Item Create(Device d)
+        {
+            return new Domain.Item()
+            {
+                ID = (int)d.ID,
+                Type = d.DeviceType.Type,
             };
         }
 
@@ -132,7 +152,7 @@ namespace globantlib.DataAccess
             return Create(libEntities.Contents.Include("Digitals").Include("Physicals").Where<Content>(c => c.ID == id).FirstOrDefault());
         }
 
-        public List<Domain.Device> GetDevicesByType(int typeID)
+        /*public List<Domain.Device> GetDevicesByType(int typeID, int id, int month, int year)
         {
             List<Domain.Device> lResult = new List<Domain.Device>();
 
@@ -155,6 +175,71 @@ namespace globantlib.DataAccess
             }
 
             return lResult;
+        }*/
+
+        public List<Domain.Types> GetDevicesByType(int typeID, int id, int month, int year)
+        {
+            List<Domain.Item> lResult = new List<Domain.Item>();
+
+            var devices = libEntities.Devices.Where<Device>(t => t.TypeID == typeID);
+
+            foreach (var device in devices)
+            {
+                Domain.Item d = Create(device);
+
+                if(device.ID == id) 
+                {
+                    d.Current = true;
+                    {
+                        var date = new DateTime(year, month, 1);
+                        var days = DateTime.DaysInMonth(year, month);
+                        List<Domain.Date> dates = new List<Domain.Date>();
+                        int i = 1;
+                        while (i <= days)
+                        {
+                            dates.Add(Create(i,checkOwner(date, device.ID)));
+                            i++;
+                            date.AddDays(1);
+                        }
+
+                        List<Domain.Month> leases = new List<Domain.Month>();
+                        Domain.Month leasesMonth = new Domain.Month();
+                        leasesMonth.Name = date.ToString("MMMM");
+                        leasesMonth.Date = dates;
+                        leases.Add(leasesMonth);
+                        d.Lease = leases;
+                    }
+                }
+                lResult.Add(d);
+            }
+
+            Domain.Types type = new Domain.Types();
+            type.Items = lResult;
+            type.ID = typeID;
+            List<Domain.Types> lType = new List<Domain.Types>();
+            lType.Add(type);
+            return lType;
+        }
+
+        public string checkOwner (DateTime date, Decimal deviceID)
+        {
+            var owner = (from l in libEntities.Leases
+                            join x in libEntities.Leasables on l.LeasableID equals x.ID
+                            join d in libEntities.Devices on x.ID equals d.LeasableID
+                            join u in libEntities.Users on l.User equals u.ID
+                            where (l.StartDate == date || l.EndDate == date
+                            || (l.StartDate < date && date < l.EndDate))
+                            && (d.ID == deviceID)
+                            select u.UserName);
+
+            if (owner.SingleOrDefault() == null)
+                return "";
+            else
+                return owner.SingleOrDefault();
+
+
+
+
         }
 
         public List<Domain.Content> GetContent()
@@ -255,6 +340,28 @@ namespace globantlib.DataAccess
                 image = instance.Image
             };
             libEntities.DeviceTypes.AddObject(dt);
+            libEntities.SaveChanges();
+        }
+
+        public void Create(Domain.Device instance)
+        {
+            Leasable l = new Leasable()
+            {
+                Type = "Device"
+            };
+            libEntities.Leasables.AddObject(l);
+            
+            DeviceType dt = libEntities.DeviceTypes.Where<DeviceType>(t => t.Type == instance.Type).FirstOrDefault();
+
+            Device d = new Device()
+            {
+                DeviceType = dt,
+                Leasable = l,
+                //Name = instance.Name
+            };
+
+            libEntities.Devices.AddObject(d);
+
             libEntities.SaveChanges();
         }
 
