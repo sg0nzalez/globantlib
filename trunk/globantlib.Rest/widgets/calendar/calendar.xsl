@@ -2,12 +2,13 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   
   <xsl:template match="Calendar">
+    <h2>Click on the calendar to make a reservation.</h2>
     <ul id="w-calendar-items">
       <xsl:for-each select="Type/Item">
         <li>
           <xsl:choose>
             <xsl:when test="Current = 'Yes'">
-              <a class="current" href="#{ID}">
+              <a deviceid="{ID}" class="current" href="#{ID}">
                 <xsl:value-of select="Type"/>
                 <xsl:text> </xsl:text>
                 <xsl:value-of select="ID"/>
@@ -30,10 +31,13 @@
         <span class="month-name"></span>
     </p>
     <div id="w-calendar-entries">
+      <p id="w-calendar-helper">Select ending date <a class="calendar-reset" href="">Cancel</a></p>
+      <form id="w-calendar-form">
+        <input id="w-calendar-email" />
+      </form>
       <xsl:for-each select="Type/Item">
         <xsl:if test="Current = 'Yes'">
           <xsl:for-each select="Leases/Month">
-          <div class="month">
             <h3>
               <xsl:value-of select="Name"/>
             </h3>
@@ -41,7 +45,7 @@
 
               <xsl:choose>
                 <xsl:when test="Username != ''">
-                  <div class="date">
+                  <div class="date used">
                     <span class="number">
                       <xsl:value-of select="Number"/>
                     </span>
@@ -59,7 +63,6 @@
               
               
             </xsl:for-each>
-            </div>
           </xsl:for-each>
         </xsl:if>
       </xsl:for-each>

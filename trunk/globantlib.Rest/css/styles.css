@@ -299,6 +299,7 @@ div#w-contents-request input.submit:hover
     background-position:0 -20px;
 }
 div#w-devices-list-ph h2,
+div#w-calendar h2,
 div#w-contents-request-list h2
 {
     font-size:12px;
@@ -660,10 +661,6 @@ div#w-contents-reviews p {
     line-height:15px;
 }
 
-div#w-calendar 
-{
-    padding:0 5px;
-}
 ul#w-calendar-month-picker li
 {
     float:left;
@@ -817,9 +814,9 @@ table#w-calendar-table td .day-number
 {
     background:url(images/next.png);
 }
-#w-calendar-entries .month h3
+#w-calendar-entries h3
 {
-    font-size:12px;
+    font-size:11px;
     color:#505050;
     margin:10px 0;    
 }
@@ -834,7 +831,7 @@ table#w-calendar-table td .day-number
     line-height:19px;
     font-size:12px;
     color:#505050;
-    background:#f6f6f6;
+    background:#f0f0f0;
 }
 #w-calendar-entries .date.free
 {
@@ -842,8 +839,11 @@ table#w-calendar-table td .day-number
 }
 #w-calendar-entries .date.free:hover
 {
-    background:#f0f0f0;
-    cursor:pointer;
+    background:#f6f6f6;
+}
+#w-calendar-entries .date.hovered 
+{
+    background:#e0e0e0 !important;
 }
 #w-calendar-entries .date.free:hover span.number
 {
@@ -856,4 +856,26 @@ table#w-calendar-table td .day-number
     top:1px;
     font-size:11px;
     color:#999;
+}
+#w-calendar h2
+{
+    border-bottom:1px solid #e0e0e0;
+    margin-bottom:5px;
+}
+#w-calendar-helper 
+{
+    display:none;
+    background:none repeat scroll 0 0 #E6E6E6;
+    border:1px solid #E0E0E0;
+    font-size:11px;
+    padding:5px;
+}
+#w-calendar-form
+{
+    display:none;
+}
+#w-calendar-email
+{
+    width:99%;
+    border:1px solid #e0e0e0;
 }

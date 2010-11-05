@@ -62,8 +62,7 @@
             routes: {
                 get: 'data/leases.xml',
                 submit: 'asd',
-                prefix: '#devices/calendar/' + type + '/',
-                postback: '#devices'
+                prefix: '#contents/calendar/' + type + '/'
             }
         };
         calendar();
