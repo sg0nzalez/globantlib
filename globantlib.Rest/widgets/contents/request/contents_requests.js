@@ -46,8 +46,7 @@ var CONTENTS_REQUESTS = (function () {
                                 if (this.readyState === 4) {
                                     text.val("");
                                     hideLoading();
-                                    document.location = "#contents/requests";
-                                    PAGE_HANDLER.contentRequests();
+                                    document.location.href = "#contents/requests";
                                 }
                             }
                             showLoading();

@@ -97,16 +97,19 @@
     * Flattens the object to XML
     */
     function flatten(obj, root) {
-        var str = "";
-        for (i in obj) {
-            if (typeof obj[i] === 'string') {
-                str += "<" + i + ">" + obj[i] + "</" + i + ">";
+        function flattenObj(obj) {
+            var str = "";
+            for (i in obj) {
+                if (typeof obj[i] !== 'object') {
+                    str += "<" + i + ">" + obj[i] + "</" + i + ">";
+                }
+                else {
+                    str += flattenObj(obj[i], i);
+                }
             }
-            else {
-                str += flatten(obj[i]);
-            }
+            return str;
         }
-        return "<?xml version='1.0' encoding='UTF-8'?><" + root + ">" + str + "</" + root + ">";
+        return "<?xml version='1.0' encoding='UTF-8'?><" + root + ">" + flattenObj(obj) + "</" + root + ">";
     }
 
     /**

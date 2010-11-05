@@ -4,7 +4,8 @@
  */
 var HASH_READER = (function () {
 
-    var router = ROUTER; // object containing routes
+    var oldHash = '',
+        router = ROUTER; // object containing routes
 
     /**
     * Evaluate hash value
@@ -14,7 +15,8 @@ var HASH_READER = (function () {
         if (!hash) { // if no hash
             router.main(); // call main page
         }
-        else { // if there's hash
+        else if (hash !== oldHash) { // if there's hash
+            oldHash = hash;
             hash = hash.substring(1); // remove # char
             calls = hash.split('/'); // get call stack
             var i, max = calls.length, // for variables
@@ -36,8 +38,13 @@ var HASH_READER = (function () {
     * Initialization
     */
     function init() {
-        window.onhashchange = checkHash;
-        checkHash();
+        if (onhashchange in window) {
+            window.onhashchange = checkHash;
+            checkHash();
+        }
+        else {
+            setInterval(checkHash, 1000);
+        }
     }
 
     /**

@@ -98,6 +98,7 @@
     <Content Include="css\mb.css" />
     <Content Include="css\styles.css" />
     <Content Include="data\bookrequest.xml" />
+    <Content Include="data\leases.xml" />
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
     <Content Include="img\bck-btn-hover.png" />
