@@ -16,12 +16,17 @@ namespace globantlib.Business
             return data.GetDeviceTypes();
         }
 
-        public List<Domain.Device> GetDevicesbyType(int typeID)
+        public List<Domain.Types> GetDevicesbyType(int typeID, int id, int month, int year)
         {
-            return data.GetDevicesByType(typeID);
+            return data.GetDevicesByType(typeID, id, month, year);
         }
 
         public void Create(Domain.DeviceType instance)
+        {
+            data.Create(instance);
+        }
+
+        public void Create(Domain.Device instance)
         {
             data.Create(instance);
         }

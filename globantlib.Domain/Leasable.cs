@@ -9,24 +9,14 @@ namespace globantlib.Domain
 {
 
     [DataContract(Namespace = "")]
-    public class Device : IResponse
+    public class Leasable
     {
-        [DataMember]
-        public int TypeID { get; set; }
         
         [DataMember]
         public int ID { get; set; }
-
+        
         [DataMember]
-        public string Type { get; set; }
+        public String Type { get; set; }
 
-        [DataMember]
-        public bool Current;
-
-        public string Name { get; set; }
-
-        [DataMember]
-        public List<Month> Lease;
- 
     }
 }
