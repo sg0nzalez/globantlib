@@ -12,10 +12,7 @@ var HASH_READER = (function () {
     */
     function checkHash() {
         var hash = document.location.hash;
-        if (!hash) { // if no hash
-            router.main(); // call main page
-        }
-        else if (hash !== oldHash) { // if there's hash
+        if (hash !== oldHash) { // if there's hash
             oldHash = hash;
             hash = hash.substring(1); // remove # char
             calls = hash.split('/'); // get call stack
@@ -43,7 +40,7 @@ var HASH_READER = (function () {
             checkHash();
         }
         else {
-            setInterval(checkHash, 1000);
+            setInterval(checkHash, 100);
         }
     }
 

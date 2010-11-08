@@ -87,11 +87,12 @@ var CALENDAR = (function () {
             });
     }
     function sendReservation(startDiv, endDiv) {
-        var data = {};
+        var dates = $('#w-calendar-entries .date'),
+            data = {}
         data.Year = currentDate.getFullYear();
         data.Month = currentDate.getMonth() + 1;
         data.StartDate = startDiv.find('span.number').html();
-        data.EndDate = endDiv.find('span.number').html();
+        data.Length = dates.index(endDiv) - dates.index(startDiv);
         data.Email = $('#w-calendar-email').val();
         data.ID = currentId;
         $('#w-calendar-form').css('opacity', 0.2);
@@ -103,7 +104,9 @@ var CALENDAR = (function () {
             "callback": function (xhr) {
                 if (xhr.readyState === 4) {
                     $('#w-calendar-form').dialog('destroy');
-                    calendarStartOver();
+                    loadLeases(function () {
+                        calendarStartOver();
+                    });
                 }
             }
         });
@@ -113,7 +116,7 @@ var CALENDAR = (function () {
     * Load current reservations
     */
     function loadLeases(callback) {
-        var service = routes.get + '?type=' + currentType + '&month=' + (currentDate.getMonth() + 1) + '&year=' + currentDate.getFullYear() + '&id=' + currentId,
+        var service = routes.get + '?type=' + currentType + '&month=' + currentDate.getMonth() + '&year=' + currentDate.getFullYear() + '&id=' + currentId,
         target = document.getElementById('w-calendar');
         XML.transformWithCallback(service, 'widgets/calendar/calendar.xsl', target, function (xml) {
             initControls();
@@ -171,7 +174,7 @@ var CALENDAR = (function () {
         routes = params.routes;
         currentType = params.type;
         currentDate = new Date();
-        currentId = params.id || 0;
+        currentId = params.id || '';
         if (params.year) {
             currentDate.setFullYear(params.year);
         }
@@ -179,7 +182,7 @@ var CALENDAR = (function () {
             currentDate.setMonth(params.month - 1);
         }
         loadLeases(function () {
-            currentId = $('#w-calendar-items a.current').attr('deviceid');
+            currentId = params.id || $('#w-calendar-items a.current').attr('deviceid');
             callback();
         });
     }

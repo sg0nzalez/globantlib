@@ -174,25 +174,15 @@ nav#main-nav li a:hover
 /**
  * Contents style
  */
-div#w-contents 
-{
-    height:100%;
-}
 div#w-contents-left {
     float:right;
     width:540px;
-    height:100%;
-    overflow:auto;
-    overflow-x:hidden;
+    padding-left:16px;
+    border-left:1px solid #e0e0e0;
 }
 div#w-contents-right {
     float:left;
     width:230px;
-    height:100%;
-    border-right:1px solid #e0e0e0;
-    padding-right:16px;
-    overflow:auto;
-    overflow-x:hidden;
 }
 p#w-contents-search-error 
 {
@@ -818,20 +808,22 @@ table#w-calendar-table td .day-number
 {
     font-size:11px;
     color:#505050;
-    margin:10px 0;    
+    margin:10px 0;
+    float:left;
+    width:100%;
 }
 #w-calendar-entries .date
 {
     margin-top:-1px;
     border:solid #f0f0f0;
     border-width:1px 0;
-    padding:10px 25px;
+    padding:5px 25px;
+    height:12px;
+    line-height:11px;
     position:relative;
-    height:0px;
-    width:220px;
     float:left;
-    line-height:19px;
-    font-size:12px;
+    width:220px;
+    font-size:11px;
     color:#505050;
     background:#f0f0f0;
 }
@@ -842,6 +834,7 @@ table#w-calendar-table td .day-number
 #w-calendar-entries .date.free:hover
 {
     background:#f6f6f6;
+    cursor:pointer;
 }
 #w-calendar-entries .date.hovered 
 {
@@ -858,6 +851,9 @@ table#w-calendar-table td .day-number
     top:0;
     font-size:11px;
     color:#999;
+    padding:5px 0;
+    height:12px;
+    line-height:11px;
 }
 #w-calendar h2
 {
