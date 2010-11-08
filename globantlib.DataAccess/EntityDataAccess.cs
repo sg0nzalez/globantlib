@@ -9,7 +9,7 @@ namespace globantlib.DataAccess
     public class EntityDataAccess
     {
         GlobantLibEntities libEntities;
-        private List<Domain.Date> dates;
+       
 
         public EntityDataAccess()
         {
@@ -187,29 +187,40 @@ namespace globantlib.DataAccess
             {
                 Domain.Item d = Create(device);
 
+                if (id == 0) {
+                    id = (int)device.ID;
+                }
+                
                 if(device.ID == id) 
                 {
                     d.Current = true;
                     {
-                        var date = new DateTime(year, month, 1);
-                        var days = DateTime.DaysInMonth(year, month);
-                        List<Domain.Date> dates = new List<Domain.Date>();
-                        int i = 1;
-                        while (i <= days)
-                        {
-                            dates.Add(Create(i,checkOwner(date, device.ID)));
-                            i++;
-                            date.AddDays(1);
-                        }
-
                         List<Domain.Month> leases = new List<Domain.Month>();
                         Domain.Month leasesMonth = new Domain.Month();
-                        leasesMonth.Name = date.ToString("MMMM");
-                        leasesMonth.Date = dates;
+                        leasesMonth.Name = new DateTime(year, month, 1).ToString("MMMM");
+                        leasesMonth.Dates = checkDays(year, month, (int)device.ID);
                         leases.Add(leasesMonth);
-                        d.Lease = leases;
+
+                        leasesMonth = new Domain.Month();
+
+                        if (month == 12)
+                        {
+                            leasesMonth.Name = new DateTime((year + 1), 1, 1).ToString("MMMM");
+                            leasesMonth.Dates = checkDays((year + 1), 1, (int)device.ID);
+                        }
+                        else
+                        {
+                            leasesMonth.Name = new DateTime(year, (month + 1), 1).ToString("MMMM");
+                            leasesMonth.Dates = checkDays(year, (month + 1), (int)device.ID);
+                        }
+
+                        leases.Add(leasesMonth);
+                        
+                         d.Lease = leases;
                     }
                 }
+
+
                 lResult.Add(d);
             }
 
@@ -219,6 +230,21 @@ namespace globantlib.DataAccess
             List<Domain.Types> lType = new List<Domain.Types>();
             lType.Add(type);
             return lType;
+        }
+
+        public List<Domain.Date> checkDays(int year, int month, int deviceID)
+        {
+            var date = new DateTime(year, month, 1);
+            var days = DateTime.DaysInMonth(year, month);
+            List<Domain.Date> dates = new List<Domain.Date>();
+            int i = 1;
+            while (i <= days)
+            {
+                dates.Add(Create(i, checkOwner(date, deviceID)));
+                i++;
+                date.AddDays(1);
+            }
+            return dates;
         }
 
         public string checkOwner (DateTime date, Decimal deviceID)

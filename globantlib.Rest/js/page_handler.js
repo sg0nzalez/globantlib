@@ -60,7 +60,7 @@
             id: id,
             month: month,
             routes: {
-                get: 'data/leases.xml',
+                get: '/DeviceService.mvc/',
                 submit: 'asd',
                 prefix: '#contents/calendar/' + type + '/'
             }
@@ -93,8 +93,8 @@
             month: month,
             year: year,
             routes: {
-                get: 'data/leases.xml',
-                submit: 'asd',
+                get: "/DeviceService.mvc/DeviceCalendar",
+                submit: '/DeviceService.mvc/LeaseSubmit',
                 prefix: '#devices/calendar/' + type,
                 postback: '#devices'
             }
