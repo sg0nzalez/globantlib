@@ -40,7 +40,7 @@ namespace globantlib.Rest
         }
 
         [IncludeXmlDeclaration]
-        [WebGet(UriTemplate = "/Calendar?Type={typeID}&Id={id}&Month={month}&Year={year}")]
+        [WebGet(UriTemplate = "/DeviceCalendar?Type={typeID}&Id={id}&Month={month}&Year={year}")]
         public List<Domain.Types> Get(String typeID, String id, String month, String year)
         {
             int  TypeID = 0;
@@ -56,7 +56,7 @@ namespace globantlib.Rest
         }
 
         [IncludeXmlDeclaration]
-        [WebInvoke(UriTemplate = "/DeviceType", Method = "POST")]
+        [WebInvoke(UriTemplate = "/LeaseSubmit", Method = "POST")]
         public IResponse Create(DeviceType instance)
         {
             libEntities.Create(instance);

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   
-  <xsl:template match="Calendar">
+  <xsl:template match="ArrayOfTypes">
     <h2>Click on the calendar to make a reservation.</h2>
     <ul id="w-calendar-items">
-      <xsl:for-each select="Type/Item">
+      <xsl:for-each select="Types/Items/Item">
         <li>
           <xsl:choose>
-            <xsl:when test="Current = 'Yes'">
+            <xsl:when test="Current = 'true'">
               <a deviceid="{ID}" class="current" href="#{ID}">
                 <xsl:value-of select="Type"/>
                 <xsl:text> </xsl:text>
@@ -35,13 +35,13 @@
       <form id="w-calendar-form">
         <input id="w-calendar-email" />
       </form>
-      <xsl:for-each select="Type/Item">
-        <xsl:if test="Current = 'Yes'">
-          <xsl:for-each select="Leases/Month">
+      <xsl:for-each select="Types/Items/Item">
+        <xsl:if test="Current = 'true'">
+          <xsl:for-each select="Lease/Month">
             <h3>
               <xsl:value-of select="Name"/>
             </h3>
-            <xsl:for-each select="Date">
+            <xsl:for-each select="Dates/Date">
 
               <xsl:choose>
                 <xsl:when test="Username != ''">

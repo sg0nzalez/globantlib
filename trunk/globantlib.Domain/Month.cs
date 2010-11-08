@@ -14,7 +14,7 @@ namespace globantlib.Domain
         public string Name;
 
         [DataMember]
-        public List<Date> Date;
+        public List<Date> Dates;
 
     }
 }
