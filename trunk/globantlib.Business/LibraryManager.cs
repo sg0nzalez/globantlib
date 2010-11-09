@@ -25,7 +25,7 @@ namespace globantlib.Business
         {
             return data.GetContent();
         }
-
+        //
         public void Create(Domain.Content instance)
         {
             data.Create(instance);

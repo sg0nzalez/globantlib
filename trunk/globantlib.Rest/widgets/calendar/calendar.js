@@ -89,12 +89,12 @@ var CALENDAR = (function () {
     function sendReservation(startDiv, endDiv) {
         var dates = $('#w-calendar-entries .date'),
             data = {}
-        data.Year = currentDate.getFullYear();
+        data.Email = $('#w-calendar-email').val();
+        data.EndDate = dates.index(endDiv) - dates.index(startDiv);
+        data.ID = currentId;
         data.Month = currentDate.getMonth() + 1;
         data.StartDate = startDiv.find('span.number').html();
-        data.Length = dates.index(endDiv) - dates.index(startDiv);
-        data.Email = $('#w-calendar-email').val();
-        data.ID = currentId;
+        data.Year = currentDate.getFullYear();
         $('#w-calendar-form').css('opacity', 0.2);
         XML.sendAsXML({
             "data": data,

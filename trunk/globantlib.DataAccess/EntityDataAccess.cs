@@ -84,8 +84,8 @@ namespace globantlib.DataAccess
         {
             return new Domain.Lease()
             {
-                StartDate = l.StartDate,
-                EndDate = l.EndDate
+
+                
             };
         }
 
@@ -219,8 +219,6 @@ namespace globantlib.DataAccess
                          d.Lease = leases;
                     }
                 }
-
-
                 lResult.Add(d);
             }
 
@@ -256,16 +254,12 @@ namespace globantlib.DataAccess
                             where (l.StartDate == date || l.EndDate == date
                             || (l.StartDate < date && date < l.EndDate))
                             && (d.ID == deviceID)
-                            select u.UserName);
+                         select u.UserName).SingleOrDefault();
 
-            if (owner.SingleOrDefault() == null)
+            if (owner == null)
                 return "";
             else
-                return owner.SingleOrDefault();
-
-
-
-
+                return owner;
         }
 
         public List<Domain.Content> GetContent()
@@ -369,6 +363,42 @@ namespace globantlib.DataAccess
             libEntities.SaveChanges();
         }
 
+        public Domain.Lease Create(Domain.Lease instance)
+        {
+            Device d = libEntities.Devices.Where<Device>(dt => dt.ID == instance.ID).FirstOrDefault();
+
+            User u = libEntities.Users.Where<User>(ut => ut.UserName == instance.Email).FirstOrDefault();
+            
+            if (d != null)
+            {
+                if (u == null)
+                {
+                    User user = new User()
+                    {
+                        UserName = instance.Email
+                    };
+                    libEntities.Users.AddObject(user);
+                    u = user;
+                }
+            }
+
+            var startDate = new DateTime((int)instance.Year, (int)instance.Month, (int)instance.StartDate);
+
+            var endDate = startDate.AddDays((int)instance.EndDate);
+
+            Lease lease = new Lease()
+            {
+                Leasable = d.Leasable,
+                User1 = u,
+                StartDate = startDate,
+                EndDate = endDate
+            };
+            libEntities.Leases.AddObject(lease);
+            libEntities.SaveChanges();
+
+            return new Domain.Lease();
+        }
+
         public void Create(Domain.Device instance)
         {
             Leasable l = new Leasable()
@@ -383,7 +413,6 @@ namespace globantlib.DataAccess
             {
                 DeviceType = dt,
                 Leasable = l,
-                //Name = instance.Name
             };
 
             libEntities.Devices.AddObject(d);

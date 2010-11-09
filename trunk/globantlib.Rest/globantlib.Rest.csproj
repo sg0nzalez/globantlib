@@ -129,7 +129,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="widgets\calendar\calendar.xsl" />
+    <Content Include="widgets\calendar\calendar.xsl">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="widgets\calendar\calendar.js" />
     <Content Include="widgets\contents\details\contents_details.js" />
     <Content Include="widgets\contents\details\details.xsl">

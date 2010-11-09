@@ -57,7 +57,7 @@ namespace globantlib.Rest
 
         [IncludeXmlDeclaration]
         [WebInvoke(UriTemplate = "/LeaseSubmit", Method = "POST")]
-        public IResponse Create(DeviceType instance)
+        public IResponse Create(Lease instance)
         {
             libEntities.Create(instance);
             return instance;
