@@ -26,6 +26,7 @@ namespace globantlib.Domain
             // Add any types to include here.
             knownTypes.Add(typeof(Response));
             knownTypes.Add(typeof(Error));
+            knownTypes.Add(typeof(Lease));
             return knownTypes;
         }
     }

@@ -63,36 +63,42 @@ var CALENDAR = (function () {
         $('#w-calendar-email').val('');
         $('#w-calendar-form')
             .css('opacity', 1)
-            .submit(function (e) {
+            .unbind("submit")
+            .bind("submit", function (e) {
                 var email = $(this).find('input[type=text]').val();
-                if (email && email.indexOf('@globant.com') != -1) {
+                if (email && email.indexOf('@globant.com') != -1) { // val
                     sendReservation(startDiv, endDiv);
-                    e.preventDefault();
                 }
+                e.preventDefault();
             })
             .dialog({
                 modal: true,
                 resizable: false,
                 draggable: false,
                 title: 'Enter your Globant email address',
+                close: function () {
+                    $(this).dialog('destroy');
+                    calendarStartOver();
+                },
                 buttons: {
                     'Send': function () {
                         $(this).submit();
                     },
                     'Cancel': function () {
-                        $(this).dialog('destroy');
-                        calendarStartOver();
+                        $(this).dialog('close');
                     }
                 }
             });
     }
     function sendReservation(startDiv, endDiv) {
         var dates = $('#w-calendar-entries .date'),
-            data = {}
+            months = $("#w-calendar-entries .month"),
+            monthOffset = months.index(startDiv.parent()),
+            data = {};
         data.Email = $('#w-calendar-email').val();
         data.EndDate = dates.index(endDiv) - dates.index(startDiv);
         data.ID = currentId;
-        data.Month = currentDate.getMonth() + 1;
+        data.Month = currentDate.getMonth() + 1 + monthOffset;
         data.StartDate = startDiv.find('span.number').html();
         data.Year = currentDate.getFullYear();
         $('#w-calendar-form').css('opacity', 0.2);
@@ -103,7 +109,9 @@ var CALENDAR = (function () {
             "service": routes.submit,
             "callback": function (xhr) {
                 if (xhr.readyState === 4) {
-                    $('#w-calendar-form').dialog('destroy');
+                    $('#w-calendar-form')
+                        .dialog('destroy')
+                        .remove();
                     loadLeases(function () {
                         calendarStartOver();
                     });

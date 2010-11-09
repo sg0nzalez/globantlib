@@ -240,7 +240,7 @@ namespace globantlib.DataAccess
             {
                 dates.Add(Create(i, checkOwner(date, deviceID)));
                 i++;
-                date.AddDays(1);
+                date = date.AddDays(1);
             }
             return dates;
         }
@@ -254,7 +254,7 @@ namespace globantlib.DataAccess
                             where (l.StartDate == date || l.EndDate == date
                             || (l.StartDate < date && date < l.EndDate))
                             && (d.ID == deviceID)
-                         select u.UserName).SingleOrDefault();
+                         select u.UserName).FirstOrDefault();
 
             if (owner == null)
                 return "";

@@ -19,6 +19,7 @@ namespace globantlib.Rest
     // NOTE: By default, a new instance of the service is created for each call; change the InstanceContextMode to Single if you want
     // a single instance of the service to process all calls.	
     [ServiceKnownType(typeof(DeviceType))]
+    [ServiceKnownType(typeof(Lease))]
     [ServiceContract]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
