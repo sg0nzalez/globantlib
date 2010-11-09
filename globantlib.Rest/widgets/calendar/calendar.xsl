@@ -38,31 +38,33 @@
       <xsl:for-each select="Types/Items/Item">
         <xsl:if test="Current = 'true'">
           <xsl:for-each select="Lease/Month">
-            <h3>
-              <xsl:value-of select="Name"/>
-            </h3>
-            <xsl:for-each select="Dates/Date">
+            <div class="month">
+              <h3>
+                <xsl:value-of select="Name"/>
+              </h3>
+              <xsl:for-each select="Dates/Date">
 
-              <xsl:choose>
-                <xsl:when test="Username != ''">
-                  <div class="date used">
-                    <span class="number">
-                      <xsl:value-of select="Number"/>
-                    </span>
-                      <xsl:value-of select="Username"/>
-                  </div>
-                </xsl:when>
-                <xsl:otherwise>
-                  <div class="date free">
-                    <span class="number">
-                      <xsl:value-of select="Number"/>
-                    </span>
-                  </div>
-                </xsl:otherwise>
-              </xsl:choose>
+                <xsl:choose>
+                  <xsl:when test="Username != ''">
+                    <div class="date used">
+                      <span class="number">
+                        <xsl:value-of select="Number"/>
+                      </span>
+                        <xsl:value-of select="Username"/>
+                    </div>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <div class="date free">
+                      <span class="number">
+                        <xsl:value-of select="Number"/>
+                      </span>
+                    </div>
+                  </xsl:otherwise>
+                </xsl:choose>
               
               
-            </xsl:for-each>
+              </xsl:for-each>
+            </div>
           </xsl:for-each>
         </xsl:if>
       </xsl:for-each>
