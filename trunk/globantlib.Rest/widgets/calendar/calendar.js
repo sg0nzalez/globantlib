@@ -116,7 +116,7 @@ var CALENDAR = (function () {
     * Load current reservations
     */
     function loadLeases(callback) {
-        var service = routes.get + '?type=' + currentType + '&month=' + currentDate.getMonth() + '&year=' + currentDate.getFullYear() + '&id=' + currentId,
+        var service = routes.get + '?type=' + currentType + '&month=' + (currentDate.getMonth() + 1) + '&year=' + currentDate.getFullYear() + '&id=' + currentId,
         target = document.getElementById('w-calendar');
         XML.transformWithCallback(service, 'widgets/calendar/calendar.xsl', target, function (xml) {
             initControls();
