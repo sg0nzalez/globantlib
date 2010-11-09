@@ -21,7 +21,7 @@ namespace globantlib.Business
             return data.GetDevicesByType(typeID, id, month, year);
         }
 
-        public void Create(Domain.DeviceType instance)
+        public void Create(Domain.Lease instance)
         {
             data.Create(instance);
         }
