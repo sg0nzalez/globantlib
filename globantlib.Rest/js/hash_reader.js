@@ -4,7 +4,7 @@
  */
 var HASH_READER = (function () {
 
-    var oldHash = '',
+    var oldHash = 'DUMMYHASHTOBESETASCHANGEDTHEFIRSTTIMETHEPAGELOADS',
         router = ROUTER; // object containing routes
 
     /**
@@ -17,17 +17,17 @@ var HASH_READER = (function () {
             hash = hash.substring(1); // remove # char
             calls = hash.split('/'); // get call stack
             var i, max = calls.length, // for variables
-				obj = router, // iteration root
+				func = router, // iteration root
 				params = []; // params list
             for (i = 0; i < max; i += 1) {
-                if (calls[i] in obj) {
-                    obj = obj[calls[i]];
+                if (calls[i] in func) {
+                    func = func[calls[i]];
                 }
                 else {
                     params.push(calls[i]);
                 }
             }
-            obj.apply(window, params);
+            func.apply(window, params);
         }
     }
 
