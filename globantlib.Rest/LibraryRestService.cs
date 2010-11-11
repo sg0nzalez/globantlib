@@ -20,6 +20,7 @@ namespace globantlib.Rest
     [ServiceKnownType(typeof(Error))]
     [ServiceKnownType(typeof(ReviewCollection))]
     [ServiceKnownType(typeof(Review))]
+    [ServiceKnownType(typeof(Lease))]
     [ServiceKnownType(typeof(BookRequestCollection))]
     [ServiceKnownType(typeof(BookRequest))]
     [ServiceKnownType(typeof(User))]
@@ -59,6 +60,18 @@ namespace globantlib.Rest
                 result = t;
 
             return result;
+        }
+
+        [IncludeXmlDeclaration]
+        [WebInvoke(UriTemplate = "/LeaseSubmit", Method = "POST")]
+        public IResponse CreateLease(Lease instance)
+        {
+            Lease result = libEntities.CreateLease(instance);
+
+            if (result == null)
+                return new Error() { Message = "Error" };
+
+            return instance;
         }
 
         [IncludeXmlDeclaration]

@@ -75,5 +75,10 @@ namespace globantlib.Business
         {
             data.Update(instance);
         }
+
+        public Domain.Lease CreateLease(Domain.Lease instance)
+        {
+            return data.CreateLease(instance);
+        }
     }
 }

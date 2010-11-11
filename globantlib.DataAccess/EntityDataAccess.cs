@@ -262,7 +262,7 @@ namespace globantlib.DataAccess
                         List<Domain.Month> leases = new List<Domain.Month>();
                         Domain.Month leasesMonth = new Domain.Month();
                         leasesMonth.Name = new DateTime(year, month, 1).ToString("MMMM");
-                        leasesMonth.Dates = checkDays(year, month, (int)physical.ID);
+                        leasesMonth.Dates = checkDaysContent(year, month, (int)physical.ID);
                         leases.Add(leasesMonth);
 
                         leasesMonth = new Domain.Month();
@@ -270,12 +270,12 @@ namespace globantlib.DataAccess
                         if (month == 12)
                         {
                             leasesMonth.Name = new DateTime((year + 1), 1, 1).ToString("MMMM");
-                            leasesMonth.Dates = checkDays((year + 1), 1, (int)physical.ID);
+                            leasesMonth.Dates = checkDaysContent((year + 1), 1, (int)physical.ID);
                         }
                         else
                         {
                             leasesMonth.Name = new DateTime(year, (month + 1), 1).ToString("MMMM");
-                            leasesMonth.Dates = checkDays(year, (month + 1), (int)physical.ID);
+                            leasesMonth.Dates = checkDaysContent(year, (month + 1), (int)physical.ID);
                         }
 
                         leases.Add(leasesMonth);
@@ -309,6 +309,21 @@ namespace globantlib.DataAccess
             return dates;
         }
 
+        public List<Domain.Date> checkDaysContent(int year, int month, int contentID)
+        {
+            var date = new DateTime(year, month, 1);
+            var days = DateTime.DaysInMonth(year, month);
+            List<Domain.Date> dates = new List<Domain.Date>();
+            int i = 1;
+            while (i <= days)
+            {
+                dates.Add(Create(i, checkOwnerContent(date, contentID)));
+                i++;
+                date = date.AddDays(1);
+            }
+            return dates;
+        }
+
         public string checkOwner (DateTime date, Decimal deviceID)
         {
             var owner = (from l in libEntities.Leases
@@ -318,6 +333,23 @@ namespace globantlib.DataAccess
                             where (l.StartDate == date || l.EndDate == date
                             || (l.StartDate < date && date < l.EndDate))
                             && (d.ID == deviceID)
+                         select u.UserName).FirstOrDefault();
+
+            if (owner == null)
+                return "";
+            else
+                return owner;
+        }
+
+        public string checkOwnerContent(DateTime date, Decimal contentID)
+        {
+            var owner = (from l in libEntities.Leases
+                         join x in libEntities.Leasables on l.LeasableID equals x.ID
+                         join d in libEntities.Physicals on x.ID equals d.LeasableID
+                         join u in libEntities.Users on l.User equals u.ID
+                         where (l.StartDate == date || l.EndDate == date
+                         || (l.StartDate < date && date < l.EndDate))
+                         && (d.ID == contentID)
                          select u.UserName).FirstOrDefault();
 
             if (owner == null)
@@ -455,6 +487,49 @@ namespace globantlib.DataAccess
                 Lease lease = new Lease()
                 {
                     Leasable = d.Leasable,
+                    User1 = u,
+                    StartDate = startDate,
+                    EndDate = endDate
+                };
+                libEntities.Leases.AddObject(lease);
+                libEntities.SaveChanges();
+
+                return new Domain.Lease();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public Domain.Lease CreateLease(Domain.Lease instance)
+        {
+            Physical p = libEntities.Physicals.Where<Physical>(dt => dt.ID == instance.ID).FirstOrDefault();
+
+            User u = libEntities.Users.Where<User>(ut => ut.UserName == instance.Email).FirstOrDefault();
+
+            if (p != null)
+            {
+                if (u == null)
+                {
+                    User user = new User()
+                    {
+                        UserName = instance.Email
+                    };
+                    libEntities.Users.AddObject(user);
+                    u = user;
+                }
+            }
+
+            var startDate = new DateTime((int)instance.Year, (int)instance.Month, (int)instance.StartDate);
+
+            var endDate = startDate.AddDays((int)instance.EndDate);
+
+            if (CheckRangePossibility(startDate, endDate, p.ID))
+            {
+                Lease lease = new Lease()
+                {
+                    Leasable = p.Leasable,
                     User1 = u,
                     StartDate = startDate,
                     EndDate = endDate
