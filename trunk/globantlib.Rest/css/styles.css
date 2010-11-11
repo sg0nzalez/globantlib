@@ -317,6 +317,7 @@ div#w-contents-request-list li h3
     padding-left:22px;
     line-height:14px;
     height:16px;
+    overflow:hidden;
 }
 div#w-contents-request-list li h3 a
 {
@@ -567,10 +568,10 @@ p#w-contents-reviews-error
     font-weight:bold;
 }
 input#w-contents-review-title {
-    width:560px;
+    width:435px;
 }
 textarea#w-contents-review-text {
-    width:560px;
+    width:435px;
     height:100px;
 }
 div#w-contents-reviews {
