@@ -41,6 +41,11 @@ namespace globantlib.Business
             return data.SubmitReview(i, instance);
         }
 
+        public List<Domain.Types> GetPhysicals(int ContentID, int Id, int Month, int Year)
+        {
+            return data.GetPhysicals(ContentID, Id, Month, Year);
+        }
+
         public Domain.BookRequestCollection GetBookRequests()
         {
             return data.GetBookRequests();

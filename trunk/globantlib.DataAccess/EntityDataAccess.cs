@@ -80,6 +80,15 @@ namespace globantlib.DataAccess
             };
         }
 
+        private Domain.Item CreateItem(Physical p)
+        {
+            return new Domain.Item()
+            {
+                ID = (int)p.ID,
+                Type = p.Content.Title,
+            };
+        }
+
         private Domain.Lease Create(Lease l)
         {
             return new Domain.Lease()
@@ -187,6 +196,7 @@ namespace globantlib.DataAccess
             {
                 Domain.Item d = Create(device);
 
+
                 if (id == 0) {
                     id = (int)device.ID;
                 }
@@ -225,6 +235,60 @@ namespace globantlib.DataAccess
             Domain.Types type = new Domain.Types();
             type.Items = lResult;
             type.ID = typeID;
+            List<Domain.Types> lType = new List<Domain.Types>();
+            lType.Add(type);
+            return lType;
+        }
+
+        public List<Domain.Types> GetPhysicals(int contentID, int id, int month, int year)
+        {
+            List<Domain.Item> lResult = new List<Domain.Item>();
+
+            var physicals = libEntities.Physicals.Where<Physical>(t => t.ContentID == contentID);
+
+            foreach (var physical in physicals)
+            {
+                Domain.Item d = CreateItem(physical);
+
+                if (id == 0)
+                {
+                    id = (int)physical.ID;
+                }
+
+                if (physical.ID == id)
+                {
+                    d.Current = true;
+                    {
+                        List<Domain.Month> leases = new List<Domain.Month>();
+                        Domain.Month leasesMonth = new Domain.Month();
+                        leasesMonth.Name = new DateTime(year, month, 1).ToString("MMMM");
+                        leasesMonth.Dates = checkDays(year, month, (int)physical.ID);
+                        leases.Add(leasesMonth);
+
+                        leasesMonth = new Domain.Month();
+
+                        if (month == 12)
+                        {
+                            leasesMonth.Name = new DateTime((year + 1), 1, 1).ToString("MMMM");
+                            leasesMonth.Dates = checkDays((year + 1), 1, (int)physical.ID);
+                        }
+                        else
+                        {
+                            leasesMonth.Name = new DateTime(year, (month + 1), 1).ToString("MMMM");
+                            leasesMonth.Dates = checkDays(year, (month + 1), (int)physical.ID);
+                        }
+
+                        leases.Add(leasesMonth);
+
+                        d.Lease = leases;
+                    }
+                }
+                lResult.Add(d);
+            }
+
+            Domain.Types type = new Domain.Types();
+            type.Items = lResult;
+            type.ID = contentID;
             List<Domain.Types> lType = new List<Domain.Types>();
             lType.Add(type);
             return lType;
@@ -386,17 +450,38 @@ namespace globantlib.DataAccess
 
             var endDate = startDate.AddDays((int)instance.EndDate);
 
-            Lease lease = new Lease()
+            if (CheckRangePossibility(startDate, endDate, d.ID))
             {
-                Leasable = d.Leasable,
-                User1 = u,
-                StartDate = startDate,
-                EndDate = endDate
-            };
-            libEntities.Leases.AddObject(lease);
-            libEntities.SaveChanges();
+                Lease lease = new Lease()
+                {
+                    Leasable = d.Leasable,
+                    User1 = u,
+                    StartDate = startDate,
+                    EndDate = endDate
+                };
+                libEntities.Leases.AddObject(lease);
+                libEntities.SaveChanges();
 
-            return new Domain.Lease();
+                return new Domain.Lease();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public bool CheckRangePossibility(DateTime startDate, DateTime endDate, Decimal itemID)
+        {
+            var date = new DateTime();
+            date = startDate;
+            while (date < endDate)
+            {
+                if (checkOwner(date, itemID) != "")
+                    return false;
+                else
+                    date = date.AddDays(1);
+            }
+            return true;
         }
 
         public void Create(Domain.Device instance)
@@ -416,7 +501,6 @@ namespace globantlib.DataAccess
             };
 
             libEntities.Devices.AddObject(d);
-
             libEntities.SaveChanges();
         }
 
