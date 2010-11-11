@@ -2272,7 +2272,7 @@ namespace globantlib.DataAccess
             {
                 OnPasswordChanging(value);
                 ReportPropertyChanging("Password");
-                _Password = StructuralObject.SetValidValue(value, true);
+                _Password = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Password");
                 OnPasswordChanged();
             }

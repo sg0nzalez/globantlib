@@ -62,6 +62,22 @@ namespace globantlib.Rest
         }
 
         [IncludeXmlDeclaration]
+        [WebGet(UriTemplate = "/ContentCalendar?Type={typeID}&Id={id}&Month={month}&Year={year}")]
+        public List<Domain.Types> GetContentCalendar(String typeID, String id, String month, String year)
+        {
+            int Id = 0;
+            int.TryParse(id, out Id);
+            int Month = 0;
+            int.TryParse(month, out Month);
+            int Year = 0;
+            int.TryParse(year, out Year);
+            int ContentID = 0;
+            int.TryParse(typeID, out ContentID);
+            List<Domain.Types> l = libEntities.GetPhysicals(ContentID, Id, Month, Year);
+            return l;
+        }
+
+        [IncludeXmlDeclaration]
         [WebGet(UriTemplate = "Search?Text={text}&Page={page}", RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare)]
         public IResponse SearchCollection(String text, String page)
         {

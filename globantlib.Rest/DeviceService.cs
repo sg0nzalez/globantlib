@@ -20,6 +20,7 @@ namespace globantlib.Rest
     // a single instance of the service to process all calls.	
     [ServiceKnownType(typeof(DeviceType))]
     [ServiceKnownType(typeof(Lease))]
+    [ServiceKnownType(typeof(Error))]
     [ServiceContract]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
@@ -56,11 +57,17 @@ namespace globantlib.Rest
             return l;
         }
 
+ 
+
         [IncludeXmlDeclaration]
         [WebInvoke(UriTemplate = "/LeaseSubmit", Method = "POST")]
         public IResponse Create(Lease instance)
         {
-            libEntities.Create(instance);
+            Lease result = libEntities.Create(instance);
+
+            if (result == null)
+                return new Error() { Message = "Error" };
+            
             return instance;
         }
 
