@@ -5,7 +5,7 @@
 
     <div id="w-contents-request-list">
       <h2>Requested Titles</h2>
-      <p>Click on the items to run a search of them on Google.</p>
+      <p>Click on an item to run a search about it on Google.</p>
       <ul>
         <xsl:for-each select="BookRequest">
           <li>

@@ -29,45 +29,47 @@
         CONTENTS_LIST.hide();
     }
     function contentList(page, query) {
-        contents();
         LOADER.show("Loading book list...");
         CONTENTS_LIST.init(page, query, function () {
+            contents();
             contentDeactivate()
             CONTENTS_SEARCH.init(query);
             CONTENTS_REQUESTS.initSidebar();
         });
     }
     function contentDetails(id) {
-        contents();
         LOADER.show("Loading book details...");
         CONTENTS_DETAILS.init(id, function () {
+            contents();
             contentDeactivate()
             CONTENTS_SEARCH.init();
             CONTENTS_REQUESTS.initSidebar();
         });
     }
     function contentRequests() {
-        contents();
         LOADER.show("Loading book requests...");
         CONTENTS_REQUESTS.init(function () {
+            contents();
             contentDeactivate()
             CONTENTS_SEARCH.init();
         });
     }
-    function contentCalendar(type, month, id) {
+    function contentCalendar(type, month, year, id) {
         var params = {
             type: type,
             id: id,
             month: month,
+            year: year,
             routes: {
-                get: '/DeviceService.mvc/',
-                submit: 'asd',
-                prefix: '#contents/calendar/' + type + '/'
+                get: "/LibraryService.mvc/ContentCalendar",
+                submit: '/LibraryService.mvc/LeaseSubmit',
+                prefix: '#contents/calendar/' + type,
+                postback: '#contents'
             }
         };
-        calendar();
         LOADER.show("Loading device booking calendar...");
         CALENDAR.init(params, function () {
+            calendar();
             deviceDeactivate();
         });
     }
@@ -80,9 +82,9 @@
         DEVICES_LIST.hide();
     }
     function deviceList() {
-        devices();
         LOADER.show("Loading device list...");
         DEVICES_LIST.init(function () {
+            devices();
             deviceDeactivate();
         });
     }
@@ -99,9 +101,9 @@
                 postback: '#devices'
             }
         };
-        calendar();
         LOADER.show("Loading device booking calendar...");
         CALENDAR.init(params, function () {
+            calendar();
             deviceDeactivate();
         });
     }
