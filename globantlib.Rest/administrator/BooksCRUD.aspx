@@ -259,8 +259,13 @@
                 return returnval
             }
 
+            function alphaNumeric(alphaNumeric_to_validate) {
+                
+                return (new RegExp(/^[a-zA-Z0-9]+$/)).test(alphaNumeric_to_validate);
+            }
+
             function isbn(isbn_to_validate) {
-                return number(isbn_to_validate) && (isbn_to_validate + "").length == 10;
+                return alphaNumeric(isbn_to_validate) && (isbn_to_validate + "").length == 10;
 
             }
 
@@ -268,7 +273,8 @@
                 "text": text,
                 "number": number,
                 "date": date,
-                "isbn": isbn
+                "isbn": isbn,
+                "alphaNumeric": alphaNumeric
             }
 
         } ());
