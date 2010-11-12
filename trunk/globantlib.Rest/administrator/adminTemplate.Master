@@ -11,6 +11,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script src="/js/modernizr.js"></script>
     <script src="/widgets/loader/loader.js"></script>
+    <script src="/js/xml.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -51,9 +52,10 @@
     <!-- #footer-wrap -->
     <div>
     </div>
-
+    <asp:ContentPlaceHolder Id="overlay_placeHolder" runat="server"></asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="scripts_placeHolder" runat="server"></asp:ContentPlaceHolder>
 </body>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
-<script src="/js/xml.js"></script>
+
 </html>
