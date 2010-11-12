@@ -9,7 +9,7 @@
         <legend>Book Information</legend>
         <ul class="ul_form">
             <li>
-                <label runat="server" id="label_title">
+                <label>
                     Title:</label>
                 <input type="text" form="form1" id="title" name="title" required="true" runat="server" />
             </li>
@@ -85,6 +85,9 @@
         </select>
     </fieldset>
     </form>
+    
+</asp:Content>
+<asp:Content ContentPlaceHolderID="scripts_placeHolder" runat="server">
     <script>
 
         $("#form1").submit(send_to_server)
@@ -99,9 +102,9 @@
         function delete_book() {
 
             var id = $('input[id$="book_id"]').val();
-         
-            if (id != null && id!="" &&id!="undefined") {
-              
+
+            if (id != null && id != "" && id != "undefined") {
+
                 var request = XML.createXMLHttpRequest();
                 request.open("DELETE", '/LibraryService.mvc/' + id, false);
                 request.onreadystatechange = function () {
@@ -113,7 +116,7 @@
                 request.send();
             } else {
 
-              alert("You must select a book");
+                alert("You must select a book");
             }
 
             clearAll();
@@ -123,7 +126,7 @@
 
 
         function send_to_server() {
-            
+
             if (!validate()) {
                 return false;
             }
@@ -153,7 +156,7 @@
                 $("#author").addClass("error");
             }
 
-            if (!validator.date($("input[id$='release']").val())) {
+            if (!validator.text($("input[id$='release']").val())) {
                 error_msg += "<li>Release date must be a date with format mm/dd/yyyy</li>";
                 $("#release").addClass("error");
             }
@@ -326,7 +329,7 @@
 
 
 
-            
+
             $.get("/LibraryService.mvc/" + $(this).val(), function (data) {
                 resetFiles();
 
@@ -347,31 +350,32 @@
 
                     $('input[id$="file_' + x + '"]').addClass("hidden");
                     $('input[id$="file_' + (x + 1) + '"]').removeClass("hidden");
-                    $('#chk_files').append('<span class="block"><input type="checkbox" id="chk_file_' + x + '" name="chk_file_' + x + '" value="chk_file_' + x + '" data="' + $('input[id$="file_' + x + '"]').attr("id") + '" checked="true" digital="'+$(i).find("ID").text()+'"/>' + name + '</span>');
+                    $('#chk_files').append('<span class="block"><input type="checkbox" id="chk_file_' + x + '" name="chk_file_' + x + '" value="chk_file_' + x + '" data="' + $('input[id$="file_' + x + '"]').attr("id") + '" checked="true" digital="' + $(i).find("ID").text() + '"/>' + name + '</span>');
 
 
                 })
 
 
             })
-           
+
         }
 
 
         function delete_digitals() {
-            
+
             $("input[type='checkbox'][digital!=''][checked='false']").each(function () {
                 previous_id = $("input[id$='digitals_to_delete']").val() == "" ? $("input[id$='digitals_to_delete']").val() : $("input[id$='digitals_to_delete']").val() + ",";
-                
+
                 $("input[id$='digitals_to_delete']").val(previous_id + $(this).attr("digital"));
 
             })
 
-            
-        
+
+
         }
 
         
 
     </script>
+
 </asp:Content>
