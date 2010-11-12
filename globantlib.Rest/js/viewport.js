@@ -11,8 +11,8 @@ var VIEWPORT = (function () {
     }
 
     function init() {
-        /*window.onresize = adapt;
-        adapt();*/
+        window.onresize = adapt;
+        adapt();
     }
 
     return {

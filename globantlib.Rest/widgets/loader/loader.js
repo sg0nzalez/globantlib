@@ -22,7 +22,7 @@ var LOADER = (function () {
         });
         $("loading-message").text(message);
         document.title = message + " @ Globant Library";
-        idleTimeout = setTimeout(showIdle, 5000);
+        idleTimeout = setTimeout(showIdle, 7000);
     }
 
     /**
